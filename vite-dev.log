@@ -1,0 +1,62 @@
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////
+/////////////////  /////////////////[1G[16A[40CSnghosh kulkarni@LAPTOP-IEVJ2J9S
+[40C--------------------------------
+[40COS: Windows 11 Home Single Language x86_64
+[40CHost: ASUS TUF Gaming F15 FX507ZV4_FX507ZV4 (1.0)
+[40CKernel: WIN32_NT 10.0.26200.8246 (25H2)
+[40CUptime: 1 hour, 22 mins
+[40CPackages: 3 (scoop)
+[40CShell: CMD 10.0.26100.8115
+[40CDisplay (NE156FHM-NX6): 1920x1080 @ 60 Hz (as 1536x864) in 16" [Built-in]
+[40CDE: Fluent
+[40CWM: Desktop Window Manager 10.0.26100.8115
+[40CWM Theme: Custom - Blue (System: Dark, Apps: Dark)
+[40CIcons: Recycle Bin
+[40CFont: Segoe UI (12pt) [Caption / Menu / Message / Status]
+[40CCursor: Windows Aero (32px)
+[40CTerminal: Windows Console 10.0.26100.8115
+[40CCPU: 12th Gen Intel(R) Core(TM) i7-12700H (20) @ 4.70 GHz
+[40CGPU 1: Intel(R) Iris(R) Xe Graphics @ 1.40 GHz (128.00 MiB) [Integrated]
+[40CGPU 2: NVIDIA GeForce RTX 4060 Laptop GPU @ 3.10 GHz (7.77 GiB) [Discrete]
+[40CMemory: 11.85 GiB / 15.64 GiB (76%)
+[40CSwap: Disabled
+[40CDisk (C:\): 198.48 GiB / 209.94 GiB (95%) - NTFS
+[40CDisk (X:\): 82.41 GiB / 200.00 GiB (41%) - NTFS
+[40CLocal IP (Wi-Fi): 192.168.1.35/24
+[40CBattery: 55% (1 hour, 5 mins remaining) [Discharging]
+[40CLocale: en-IN
+[40C
+[40C[40m   [41m   [42m   [43m   [44m   [45m   [46m   [47m   [m
+[40C[100m   [101m   [102m   [103m   [104m   [105m   [106m   [107m   [m
+
+> nutbutter-react@1.0.0 dev
+> vite --host 127.0.0.1
+
+Port 5173 is in use, trying another one...
+
+  [32m[1mVITE[22m v8.0.10[39m  [2mready in [0m[1m426[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5174[22m/[39m
+[2m1:02:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
+[2m1:02:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/global.css, /src/components/Header.tsx[22m
+[2m1:10:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
+[2m1:16:24 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
+[2m1:22:54 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
+[2m1:29:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
+[2m1:29:05 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/global.css, /src/pages/ProductPage.jsx, /src/pages/ShopPage.jsx, /src/pages/HomePage.jsx, /src/components/Footer.tsx, /src/components/Header.tsx[22m
+[2m1:34:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/styles/global.css[22m
