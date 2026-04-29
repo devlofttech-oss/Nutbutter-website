@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
+import HeroCarousel from '../components/HeroCarousel.jsx'
 import ProductCard from '../components/ProductCard.tsx'
 import { PRODUCTS, TESTIMONIALS } from '../data/constants.js'
 
@@ -12,41 +13,7 @@ export default function HomePage() {
       <Header />
 
       {/* 1. Hero */}
-      <section className="relative overflow-hidden pt-xl pb-lg">
-        <div className="max-w-7xl mx-auto px-margin flex flex-col lg:flex-row items-center gap-lg">
-          <div className="flex-1 space-y-md">
-            <span className="text-sm text-secondary uppercase tracking-widest font-semibold">
-              Handcrafted in Small Batches
-            </span>
-            <h1 className="font-serif text-headline-xl text-primary max-w-lg">
-              The Purest Expression of Nature's Bounty.
-            </h1>
-            <p className="text-body-lg text-on-surface-variant max-w-md font-serif">
-              Stone-ground, organic nuts transformed into silky, nutrient-dense butters for the modern epicurean.
-            </p>
-            <div className="pt-sm flex flex-col sm:flex-row gap-sm">
-              <Link to="/shop">
-                <button className="bg-primary-container text-on-primary px-lg py-sm rounded-lg text-sm font-semibold tracking-wide transition-all hover:opacity-90 active:scale-95">
-                  Shop Now
-                </button>
-              </Link>
-              <Link to="/shop#bundles">
-                <button className="border border-primary text-primary px-lg py-sm rounded-lg text-sm font-semibold tracking-wide transition-all hover:bg-surface-container active:scale-95">
-                  View Combo Packs
-                </button>
-              </Link>
-            </div>
-          </div>
-          <div className="flex-1 relative">
-            <div className="absolute inset-0 bg-secondary-container opacity-20 blur-3xl rounded-full" />
-            <img
-              src={PRODUCTS[0].image}
-              alt="Artisan Nut Butter Jar"
-              className="relative z-10 rounded-lg shadow-2xl w-full max-w-lg mx-auto"
-            />
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* 2. Featured Products */}
       <section className="bg-surface py-xl">
