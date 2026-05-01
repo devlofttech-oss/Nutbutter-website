@@ -23,11 +23,16 @@ export default function App() {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/:slug" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+        <Route path="/refund-policy" element={<RefundPolicyPage />} />
         <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/policies/terms" element={<TermsPage />} />
         <Route path="/policies/shipping" element={<ShippingPolicyPage />} />

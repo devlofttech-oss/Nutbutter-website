@@ -9,6 +9,8 @@ const CATEGORIES = ['All Spreads', 'Classic Butters', 'Exotic Blends']
 const DIET_TAGS = ['Vegan', 'Keto', 'Organic']
 const SORT_OPTIONS = ['Best Selling', 'New Arrivals', 'Price: Low to High', 'Price: High to Low']
 
+const getNumericPrice = (price) => Number(String(price).replace(/[^\d]/g, ''))
+
 export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Spreads')
   const [texture, setTexture] = useState('')
@@ -17,6 +19,26 @@ export default function ShopPage() {
 
   const toggleDiet = (tag) =>
     setActiveDiet((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag])
+
+  const filteredProducts = PRODUCTS
+    .filter((product) => {
+      const categoryMatches = selectedCategory === 'All Spreads'
+        || product.category === selectedCategory
+        || (selectedCategory === 'Classic Butters' && product.category === 'Classic Butter')
+      const textureMatches = !texture
+        || (texture === 'Smooth' && !product.description.toLowerCase().includes('crunchy'))
+        || (texture === 'Crunchy' && product.description.toLowerCase().includes('crunchy'))
+      const dietMatches = activeDiet.length === 0
+        || activeDiet.some((tag) => `${product.badge ?? ''} ${product.description}`.toLowerCase().includes(tag.toLowerCase()))
+
+      return categoryMatches && textureMatches && dietMatches
+    })
+    .sort((a, b) => {
+      if (sort === 'Price: Low to High') return getNumericPrice(a.price) - getNumericPrice(b.price)
+      if (sort === 'Price: High to Low') return getNumericPrice(b.price) - getNumericPrice(a.price)
+      if (sort === 'New Arrivals') return b.id - a.id
+      return Number(b.rating) - Number(a.rating)
+    })
 
   return (
     <div className="bg-background text-on-surface">
@@ -133,7 +155,9 @@ export default function ShopPage() {
             <div style={{ flex: 1, minWidth: 0 }}>
               {/* Sort bar */}
               <div className="flex justify-between items-center mb-lg">
-                <p className="font-serif text-base text-on-surface-variant">Showing 1–6 of 24 products</p>
+                <p className="font-serif text-base text-on-surface-variant">
+                  Showing {filteredProducts.length} of {PRODUCTS.length} products
+                </p>
                 <div className="relative inline-block">
                   <select
                     value={sort}
@@ -150,7 +174,7 @@ export default function ShopPage() {
 
               {/* Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-md">
-                {PRODUCTS.map((p) => <ProductCard key={p.id} product={p} />)}
+                {filteredProducts.map((p) => <ProductCard key={p.id} product={p} />)}
               </div>
 
               {/* Pagination */}

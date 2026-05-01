@@ -1,14 +1,16 @@
 export const NAV_LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'Shop', href: '/shop' },
-  { label: 'Our Story', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Recipes', href: '/blog' },
-  { label: 'Bundles', href: '/shop#bundles' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Why Choose Us', href: '/#why-choose-us' },
 ]
 
 export const PRODUCTS = [
   {
     id: 1,
+    slug: 'almond-butter',
     name: 'Almond Butter',
     category: 'Classic Butter',
     price: '₹549',
@@ -21,6 +23,7 @@ export const PRODUCTS = [
   },
   {
     id: 2,
+    slug: 'cashew-butter',
     name: 'Cashew Butter',
     category: 'Smooth Spreads',
     price: '₹699',
@@ -33,6 +36,7 @@ export const PRODUCTS = [
   },
   {
     id: 3,
+    slug: 'peanut-butter',
     name: 'Peanut Butter',
     category: 'Classic Butter',
     price: '₹349',
@@ -45,6 +49,7 @@ export const PRODUCTS = [
   },
   {
     id: 4,
+    slug: 'pistachio-butter',
     name: 'Pistachio Butter',
     category: 'Exotic Blends',
     price: '₹1,249',
@@ -57,6 +62,7 @@ export const PRODUCTS = [
   },
   {
     id: 5,
+    slug: 'walnut-butter',
     name: 'Walnut Butter',
     category: 'Exotic Blends',
     price: '₹899',
@@ -68,6 +74,7 @@ export const PRODUCTS = [
   },
   {
     id: 6,
+    slug: 'hazelnut-butter',
     name: 'Hazelnut Butter',
     category: 'Classic Butter',
     price: '₹799',
@@ -117,9 +124,9 @@ export const FOOTER_LINKS = {
     { label: 'FAQs', href: '/faq' },
   ],
   Policies: [
-    { label: 'Shipping Policy', href: '/policies/shipping' },
-    { label: 'Refund Policy', href: '/policies/refund' },
-    { label: 'Privacy Policy', href: '/policies/privacy' },
-    { label: 'Terms & Conditions', href: '/policies/terms' },
+    { label: 'Shipping Policy', href: '/shipping-policy' },
+    { label: 'Refund Policy', href: '/refund-policy' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms & Conditions', href: '/terms' },
   ],
 }

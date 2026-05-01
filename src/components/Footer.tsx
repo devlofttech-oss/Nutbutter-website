@@ -3,36 +3,36 @@ import { FOOTER_LINKS } from '../data/constants.js'
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-[#E6D5B8] bg-[#F5EFE6]">
-      <div className="max-w-7xl mx-auto px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          {/* Brand */}
-          <div>
-            <div className="text-xl font-serif font-bold text-[#4B3621] mb-4">Artisan Nut Co.</div>
-            <p className="text-sm text-stone-500 font-serif">
-              Stone-ground nut butters crafted with love and no compromises.
+    <footer className="w-full border-t border-[#eadfd2] bg-[#f4e9dc]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
+          <div className="md:pr-8">
+            <div className="text-xl font-serif font-bold tracking-[0.12em] uppercase text-[#4B3621] mb-5">
+              Artisan Nut Co.
+            </div>
+            <p className="text-sm text-stone-600 font-serif leading-7">
+              Premium stone-ground nut butters made in small batches with clean ingredients, patient craft, and a naturally luxurious finish.
             </p>
             <Link
               to="/contact"
-              className="mt-4 inline-flex items-center gap-2 text-sm text-[#4B3621] font-serif font-bold hover:text-[#A67B5B] transition-colors"
+              className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#4B3621] font-bold hover:text-[#A67B5B] transition-colors"
             >
               <span className="material-symbols-outlined text-base">chat</span>
-              Chat on WhatsApp
+              Contact Care
             </Link>
           </div>
 
-          {/* Link columns */}
           {Object.entries(FOOTER_LINKS).map(([section, links]) => (
             <div key={section}>
-              <h5 className="font-serif font-bold text-[#4B3621] uppercase tracking-widest text-sm mb-4">
+              <h5 className="font-bold text-[#4B3621] uppercase tracking-[0.22em] text-xs mb-5">
                 {section}
               </h5>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="font-serif text-sm text-stone-500 hover:text-[#A67B5B] transition-colors"
+                      className="font-serif text-sm text-stone-600 hover:text-[#8C7355] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -43,9 +43,12 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-[#E6D5B8] pt-8 text-center">
-          <p className="text-[#4B3621] font-serif text-sm uppercase tracking-widest opacity-80">
-            © 2024 Artisan Nut Co. Crafted for the slow pace.
+        <div className="border-t border-[#decdb8] pt-8 flex flex-col md:flex-row justify-between gap-4 text-center md:text-left">
+          <p className="text-[#4B3621] text-xs uppercase tracking-[0.2em] opacity-80">
+            (c) 2024 Artisan Nut Co. Crafted for the slow pace.
+          </p>
+          <p className="text-stone-500 text-xs uppercase tracking-[0.2em]">
+            Pure Ingredients / No Palm Oil / Small Batch
           </p>
         </div>
       </div>

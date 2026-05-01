@@ -1,7 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
+import FaqAccordion from '../components/FaqAccordion.jsx'
 import ProductCard from '../components/ProductCard.tsx'
+import { FAQ_SECTIONS } from '../data/faqData.js'
 import { PRODUCTS } from '../data/constants.js'
 
 const productImages = [
@@ -79,18 +82,24 @@ const reviews = [
 
 export default function ProductPage() {
   const navigate = useNavigate()
-  const relatedProducts = PRODUCTS.filter((product) => product.id !== 1).slice(0, 4)
+  const { slug } = useParams()
+  const product = useMemo(() => {
+    if (!slug) return PRODUCTS[0]
+    return PRODUCTS.find((item) => item.slug === slug || String(item.id) === slug) ?? PRODUCTS[0]
+  }, [slug])
+  const relatedProducts = PRODUCTS.filter((item) => item.id !== product.id).slice(0, 4)
 
   return (
     <div className="bg-background text-on-surface">
       <Header />
 
       <main className="max-w-7xl mx-auto px-8 md:px-12 py-xl">
-        <Breadcrumbs />
-        <ProductHero onAddToCart={() => navigate('/cart')} />
+        <Breadcrumbs productName={product.name} />
+        <ProductHero product={product} onAddToCart={() => navigate('/cart')} />
         <TasteAndNutrition />
         <WellnessSection />
         <RitualsSection />
+        <ProductFaqSection />
         <ReviewsSection />
 
         <section className="py-xl">
@@ -110,38 +119,72 @@ export default function ProductPage() {
   )
 }
 
-function Breadcrumbs() {
+function ProductFaqSection() {
+  return (
+    <section className="py-xl border-t border-outline-variant">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+        <div className="lg:col-span-4">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-secondary mb-3">
+            Product Care
+          </p>
+          <h2 className="font-serif text-headline-lg text-primary mb-sm">Frequently Asked Questions</h2>
+          <p className="text-body-md text-on-surface-variant leading-7">
+            Everything you need to know about ingredients, shelf life, storage, and delivery before adding a jar to your pantry.
+          </p>
+        </div>
+        <div className="lg:col-span-8">
+          <FaqAccordion section={FAQ_SECTIONS[0]} />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Breadcrumbs({ productName }) {
   return (
     <nav className="flex items-center gap-xs text-label-sm text-[#4B3621]/60 mb-md uppercase tracking-widest">
       <Link className="hover:text-primary transition-colors" to="/">Home</Link>
       <span className="material-symbols-outlined text-sm">chevron_right</span>
       <Link className="hover:text-primary transition-colors" to="/shop">Shop</Link>
       <span className="material-symbols-outlined text-sm">chevron_right</span>
-      <span className="text-primary">Classic Almond Butter</span>
+      <span className="text-primary">{productName}</span>
     </nav>
   )
 }
 
-function ProductHero({ onAddToCart }) {
+function ProductHero({ product, onAddToCart }) {
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [selectedSize, setSelectedSize] = useState(sizes[0])
+  const [quantity, setQuantity] = useState(1)
+  const gallery = [
+    { src: product.image, alt: `${product.name} jar` },
+    ...productImages,
+  ]
+
+  const updateQuantity = (amount) => {
+    setQuantity((currentQuantity) => Math.max(1, currentQuantity + amount))
+  }
+
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
       <div className="lg:col-span-7 flex flex-col md:flex-row-reverse gap-md">
         <div className="flex-1 overflow-hidden rounded-lg bg-surface-container-low">
           <img
             className="w-full h-[420px] md:h-[600px] object-cover"
-            src={productImages[0].src}
-            alt={productImages[0].alt}
+            src={gallery[selectedImage].src}
+            alt={gallery[selectedImage].alt}
           />
         </div>
         <div className="flex flex-row md:flex-col gap-sm w-full md:w-24 overflow-x-auto md:overflow-visible">
-          {productImages.slice(1).map((image, index) => (
+          {gallery.map((image, index) => (
             <button
               key={image.src}
               className={`w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 transition-opacity ${
-                index === 0 ? 'border-2 border-primary' : 'border border-outline-variant opacity-70 hover:opacity-100'
+                selectedImage === index ? 'border-2 border-primary' : 'border border-outline-variant opacity-70 hover:opacity-100'
               }`}
               type="button"
               aria-label={`View ${image.alt}`}
+              onClick={() => setSelectedImage(index)}
             >
               <img className="w-full h-full object-cover" src={image.src} alt={image.alt} />
             </button>
@@ -151,30 +194,31 @@ function ProductHero({ onAddToCart }) {
 
       <div className="lg:col-span-5 space-y-md">
         <div className="space-y-xs">
-          <h1 className="font-serif text-headline-xl text-primary">Classic Almond Butter</h1>
+          <h1 className="font-serif text-headline-xl text-primary">{product.name}</h1>
           <div className="flex items-center gap-sm">
             <StarRating />
-            <button className="text-body-md text-[#4B3621]/70 underline" type="button">124 reviews</button>
+            <button className="text-body-md text-[#4B3621]/70 underline" type="button">{product.reviews} reviews</button>
           </div>
         </div>
 
-        <p className="font-serif text-headline-md text-primary">₹549</p>
+        <p className="font-serif text-headline-md text-primary">{product.price}</p>
         <p className="font-serif text-body-lg text-[#4B3621]/80">
-          Stone-ground, pure nutrition. A silky-smooth texture with the deep, earthy flavor of California almonds.
+          {product.description} A clean, slow-crafted spread made for breakfast rituals, post-workout fuel, and small everyday treats.
         </p>
 
         <div className="space-y-sm">
           <p className="text-label-sm font-semibold uppercase tracking-widest text-primary">Select Size</p>
           <div className="flex gap-sm flex-wrap">
-            {sizes.map((size, index) => (
+            {sizes.map((size) => (
               <button
                 key={size}
                 className={`px-md py-sm rounded-lg transition-colors ${
-                  index === 0
+                  selectedSize === size
                     ? 'border-2 border-primary text-primary font-semibold hover:bg-surface-container'
                     : 'border border-outline-variant text-[#4B3621]/70 hover:border-primary'
                 }`}
                 type="button"
+                onClick={() => setSelectedSize(size)}
               >
                 {size}
               </button>
@@ -184,16 +228,16 @@ function ProductHero({ onAddToCart }) {
 
         <div className="flex gap-sm pt-md">
           <div className="flex items-center border border-outline-variant rounded-lg">
-            <button className="px-md py-sm hover:bg-surface-container" type="button">-</button>
-            <span className="px-md font-semibold">1</span>
-            <button className="px-md py-sm hover:bg-surface-container" type="button">+</button>
+            <button className="px-md py-sm hover:bg-surface-container" type="button" onClick={() => updateQuantity(-1)}>-</button>
+            <span className="px-md font-semibold">{quantity}</span>
+            <button className="px-md py-sm hover:bg-surface-container" type="button" onClick={() => updateQuantity(1)}>+</button>
           </div>
           <button
             className="flex-1 bg-primary-container text-on-primary py-md rounded-lg font-bold text-lg hover:bg-primary transition-all active:scale-95"
             type="button"
             onClick={onAddToCart}
           >
-            Add to Cart
+            Add {quantity} to Cart
           </button>
         </div>
 

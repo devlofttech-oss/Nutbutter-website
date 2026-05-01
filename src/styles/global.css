@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body {
-  font-family: 'Noto Serif', serif;
+  font-family: 'Inter', sans-serif;
   background-color: #fff9ef;
   color: #1d1b16;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif {
+  letter-spacing: 0;
 }
 
 .material-symbols-outlined {

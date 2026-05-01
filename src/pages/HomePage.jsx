@@ -16,7 +16,7 @@ export default function HomePage() {
       <HeroCarousel />
 
       {/* 2. Featured Products */}
-      <section className="bg-surface py-xl">
+      <section className="bg-surface py-[112px]">
         <div className="max-w-7xl mx-auto px-margin">
           <div className="flex justify-between items-end mb-lg">
             <div className="space-y-xs">
@@ -41,7 +41,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Why Choose Us */}
-      <section className="py-xl">
+      <section id="why-choose-us" className="py-[112px] bg-[#fffdf8]">
         <div className="max-w-7xl mx-auto px-margin">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-lg text-center">
             {[
@@ -49,11 +49,11 @@ export default function HomePage() {
               { icon: 'eco', title: 'Zero Additives', desc: 'No palm oil, refined sugars, or preservatives. Just pure, slow-roasted nuts.' },
               { icon: 'precision_manufacturing', title: 'Small Batch Mills', desc: 'Stone-ground for over 24 hours to achieve an incomparable velvet texture.' },
             ].map((item) => (
-              <div key={item.title} className="space-y-sm">
-                <div className="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center mx-auto text-primary">
+              <div key={item.title} className="space-y-sm rounded-[28px] border border-[#eadfd2] bg-white p-8 shadow-[0_20px_60px_rgba(115,91,66,0.06)]">
+                <div className="w-16 h-16 bg-[#f2e8df] rounded-full flex items-center justify-center mx-auto text-primary">
                   <span className="material-symbols-outlined text-3xl">{item.icon}</span>
                 </div>
-                <h4 className="font-serif text-2xl font-semibold">{item.title}</h4>
+                <h4 className="font-serif text-2xl font-semibold text-primary">{item.title}</h4>
                 <p className="text-body-md text-on-surface-variant">{item.desc}</p>
               </div>
             ))}

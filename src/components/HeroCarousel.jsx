@@ -56,7 +56,7 @@ export default function HeroCarousel() {
   return (
     <section
       aria-label="Featured nut butter carousel"
-      className="relative h-[72vh] min-h-[560px] max-h-[820px] overflow-hidden bg-surface-container-low"
+      className="relative h-[78vh] min-h-[600px] max-h-[860px] overflow-hidden bg-surface-container-low"
       onFocus={() => setIsPaused(true)}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -79,24 +79,24 @@ export default function HeroCarousel() {
               className="h-full w-full object-cover"
               src={slide.image}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/25 via-[#F5EFE6]/25 to-[#fff9ef]/80" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-[#F5EFE6]/20 to-[#fff9ef]/85" />
             <div className="absolute inset-0 bg-primary/5" />
           </div>
         )
       })}
 
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <p className="mb-sm text-label-md font-semibold uppercase tracking-[0.25em] text-secondary">
+        <p className="mb-sm text-xs font-bold uppercase tracking-[0.32em] text-secondary">
           {HERO_SLIDES[activeIndex].name}
         </p>
-        <h1 className="font-serif text-[42px] leading-tight md:text-headline-xl text-primary mb-md max-w-3xl">
-          Stone Ground Nut Butters
+        <h1 className="font-serif text-[46px] leading-[1.05] md:text-[72px] text-primary mb-md max-w-4xl">
+          Stone-Ground Nut Butters
         </h1>
-        <p className="text-body-lg text-on-surface-variant mb-lg tracking-wide">
-          Pure Ingredients &bull; No Junk &bull; Premium Nutrition
+        <p className="text-body-lg text-on-surface-variant mb-lg tracking-wide max-w-2xl">
+          Pure ingredients, pastel pantry rituals, and a richer small-batch texture made for modern nourishment.
         </p>
         <Link to="/shop">
-          <button className="bg-[#C2A38E] text-white px-xl py-sm rounded-full text-label-md font-semibold uppercase tracking-widest hover:shadow-lg hover:-translate-y-1 transition-all duration-500 active:scale-95">
+          <button className="bg-[#3b2a18] text-white px-xl py-sm rounded-full text-label-md font-bold uppercase tracking-[0.18em] hover:bg-[#8C7355] hover:shadow-[0_18px_35px_rgba(75,54,33,0.22)] hover:-translate-y-1 transition-all duration-500 active:scale-95">
             Shop Now
           </button>
         </Link>
