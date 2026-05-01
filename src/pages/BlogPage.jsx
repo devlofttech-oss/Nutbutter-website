@@ -1,59 +1,58 @@
-import { useMemo, useState } from 'react'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
-import BlogHero from '../components/BlogHero.jsx'
-import CategoryTabs from '../components/CategoryTabs.jsx'
-import BlogCard from '../components/BlogCard.jsx'
-import FeaturedArticle from '../components/FeaturedArticle.jsx'
-import { BLOG_CATEGORIES, BLOG_POSTS } from '../data/blogData.js'
+
+const recipes = [
+  ['Power Toast with Almond Butter', 'Breakfast', '5 min', 'A classic morning ritual with berries, seeds, and a generous almond butter layer.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCAdmQXEyO5EVCpsvYQI3AIGPe2NAYKzGGS8qpCNVMNO-B75637yEXU8piT8xhJOLDOju4Nt3BLX4eQcHJEr7DzEGialIU_VFHQjEEyF08N6Cz9Mo-yWpkPIyNilF0MMpnHA9iX-FTaFDtzqI6twD_Rgx_Uo1qhW4urKI7p-krFMH_flOuecYg4df8eAOj-xP0yW3RWdeFVNA4siPSRbnrbEvqR5ooDXXc8OZDRgcGH9UYG8-Tmb-aymXtJU60ASAE34NzbFxl9nDs'],
+  ['Green Protein Smoothie', 'Fitness', '8 min', 'Blend greens, banana, and cashew butter for a creamy, plant-powered boost.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDfwNgtHDMo9NBcaew5nQpiCxfaoctvA5NRwsOzuIITafNGoHPNM3iaGpDGqYR1r_446Ein3ifdELZmEkskFUfFxwe5yrjKDTixuSILc4zHRzVpE8SAJcwm2VdN6CRxs6MHHDUNlUBrbiX1nkNkQjtSdqJfWPACs0lNa6tz31ewx8aEKbLLXq81jMUNQEnNR1lyER7SqBis3Py8a_SpjeedEW95_LFxXZh0KGOnWwRs9ZUpV9yok1VTQ8lx3xMyFf1lGLV4ORkuhO0'],
+  ['Apple Almond Snack Plate', 'Snack', '4 min', 'Crisp apple slices with silky nut butter and a touch of cinnamon.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAK8Rl8T9uwOPMwVZM9jG0BFTScqrPdKksPdWJbCKpc_dnZjN0-Lw9-LMgrqvbRfvf8PXMR1-9zg1JdFWUeONyFAwkKPnYK-VGpCyho1mrt-x-nsy41pxvfYxdtD05AHP5qC1agDZUDIe0vA6qJ2MFDmtjbLEzFxVcq1LsklU3b3zXS3uumx_eGyOXXqqAMo6E3nSYITda7aW0og94Olc0rcUE6pld21ChfkXSnkAIYhCCniFv88hvQUOz-aAWjtS1gYFiuiLU4ZjQ'],
+  ['Cacao Hazelnut Brownies', 'Dessert', '35 min', 'A rich, refined-sugar-light dessert with deep cacao notes.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCuCR6snnEX7Mp5WGE9FP6oq0spQ5FfBrHmdDEBgt_h4yecLPryYKnqeeCwn3PdZ32f-V7aRG44V4BED8d4ZhaFoMV1h2rICQGoPmv9zyH7OwdF08zOi0VdojjNFia-ftMF1QbEMcJBpWAskDNvZODa6-RUutq0AErfbWkhZIBArx9or49WiynCREd64PdyZRJQhjaBkiiU6HClT_7_ZId7CRQnNasogrJATZeboS3xMqiP09UHuqpcOHEuoeeli611G4aVZGuOrYA'],
+  ['Satay Peanut Noodles', 'Lunch', '20 min', 'Creamy peanut butter becomes a savory sauce for quick weeknight noodles.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAEGCoxOEZYTV53s1I415g9iHPVWUoJYW86velImRkjdIL1ZqD2-IXRiauQhpQIdETgD9ybqcU1Uxlb7LHZOO_xPXFVuaaS3dmH3TdpXr4xgTVKz4iloJCOGMtQy1roD-pQRVLXTfpi1DJxpkDGA4PUbkxCNpgorcM0oHcNgxg78E5j_4bxBbQ3aLA02HT8oYc49VjHOcFgbUuQ_dkcbo-q6hw9W55uxYU8tgOcqbfvbJrMku6IgcRAxvb02Sd3ml18tEKVjEAd7kY'],
+  ['Overnight Oats with Seed Butter', 'Meal Prep', 'Overnight', 'A prepared breakfast that is simple, satisfying, and naturally rich.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCXus-xMZcZT4NEqt21Ur2jY-VS0zu9PoANZbtZ0bremy-ggSld08e-SKZ1LLyoo-iwNBo_9lWKdSdiR3hPuNp0URLaDX1UaWq5QoJXS4GUxIRk2c0d-80r9MYugCiEm4KaNqzfQUEXkbVYcT5ipilkPXjjQzs0vHsa2TERHVlbo9SgJBokCaC7NKz9duJGzq60qS_RfgX5NBUzS5nMg7yPC4jEQmpGoUMmwJtX5FkSH--ovbW7LqodoqG_5kcuUL-sRNNpAl6DyaA'],
+]
 
 export default function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const filteredPosts = useMemo(() => {
-    const normalizedSearch = searchTerm.trim().toLowerCase()
-    return BLOG_POSTS.filter((post) => {
-      const matchesCategory = activeCategory === 'All' || post.category === activeCategory
-      const matchesSearch = !normalizedSearch
-        || post.title.toLowerCase().includes(normalizedSearch)
-        || post.excerpt.toLowerCase().includes(normalizedSearch)
-        || post.category.toLowerCase().includes(normalizedSearch)
-
-      return matchesCategory && matchesSearch
-    })
-  }, [activeCategory, searchTerm])
-
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <Header />
-      <main className="max-w-7xl mx-auto">
-        <BlogHero searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-        <CategoryTabs
-          categories={BLOG_CATEGORIES}
-          activeCategory={activeCategory}
-          onSelectCategory={setActiveCategory}
-        />
-
-        <section className="px-8 md:px-12 mb-xl">
-          {filteredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-              {filteredPosts.map((post) => (
-                <BlogCard key={post.id} post={post} />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-surface-container rounded-xl border border-outline-variant p-xl text-center">
-              <span className="material-symbols-outlined text-5xl text-secondary mb-md">search_off</span>
-              <h2 className="font-serif text-headline-md text-primary mb-sm">No recipes found</h2>
-              <p className="text-body-md text-on-surface-variant">
-                Try a different category or search term.
-              </p>
-            </div>
-          )}
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 text-center">
+          <h1 className="font-serif text-[48px] md:text-[64px] leading-tight text-on-surface mb-6">Healthy Recipes</h1>
+          <p className="text-lg leading-8 text-on-surface-variant max-w-2xl mx-auto">
+            Simple, nourishing ways to enjoy our stone-ground nut butters every day.
+          </p>
         </section>
 
-        <FeaturedArticle />
+        {/* Recipe Grid */}
+        <section className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {recipes.map(([title, tag, time, body, image], index) => (
+            <article key={title} className={`bg-white rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)] flex flex-col ${index === 0 ? 'lg:col-span-2' : ''}`}>
+              <div className="aspect-[4/3] overflow-hidden">
+                <img alt={title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src={image} />
+              </div>
+              <div className="p-8 flex-grow flex flex-col">
+                <div className="flex gap-2 mb-4">
+                  <span className="px-3 py-1 bg-tertiary-fixed/30 text-on-tertiary-fixed-variant text-xs font-bold rounded-full">{tag}</span>
+                  <span className="px-3 py-1 bg-secondary-fixed/50 text-on-secondary-fixed-variant text-xs font-bold rounded-full">{time}</span>
+                </div>
+                <h3 className="font-serif text-2xl text-on-surface mb-3">{title}</h3>
+                <p className="text-on-surface-variant mb-8 flex-grow leading-7">{body}</p>
+                <button className="w-full py-4 bg-primary text-on-primary text-xs font-bold tracking-[0.18em] uppercase rounded-full hover:bg-primary/90 transition-colors" type="button">View Recipe</button>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        {/* Call to Action Section */}
+        <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-[120px] bg-secondary-container/20 text-center rounded-[32px] my-16">
+          <h2 className="font-serif text-4xl text-on-surface mb-6">Share Your Creations</h2>
+          <p className="text-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
+            We love seeing how you use Artisan Nut Co. Tag us in your kitchen moments for a chance to be featured.
+          </p>
+          <a className="inline-flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-[0.18em] border-b-2 border-primary pb-1 hover:gap-5 transition-all" href="https://instagram.com">
+            Follow us on Instagram <span className="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </section>
       </main>
       <Footer />
     </div>
