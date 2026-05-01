@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
+import { createContactMessage } from '../api/adminApi.js'
+import { useToast } from '../providers/ToastProvider.jsx'
 
 const details = [
   ['mail', 'Email', 'hello@heritagebutters.com'],
@@ -8,6 +11,37 @@ const details = [
 ]
 
 export default function ContactPage() {
+  const [values, setValues] = useState({ name: '', email: '', message: '' })
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { showToast } = useToast()
+
+  const updateValue = (name, value) => setValues((current) => ({ ...current, [name]: value }))
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const nextErrors = {}
+
+    if (!values.name.trim()) nextErrors.name = 'Name is required'
+    if (!values.email.trim()) nextErrors.email = 'Email is required'
+    if (!values.message.trim()) nextErrors.message = 'Message is required'
+
+    setErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) return
+
+    setIsSubmitting(true)
+
+    try {
+      await createContactMessage(values)
+      setValues({ name: '', email: '', message: '' })
+      showToast('Message sent')
+    } catch (error) {
+      showToast(error.message, 'error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <Header />
@@ -50,15 +84,16 @@ export default function ContactPage() {
 
             {/* Right Column: Form */}
             <div className="bg-surface-container-low p-10 lg:p-12 rounded-[28px] shadow-[0_20px_50px_rgba(140,115,85,0.08)] border border-surface-container-highest/30">
-              <form className="space-y-8" onSubmit={(event) => event.preventDefault()}>
-                <Field label="Name" placeholder="Your full name" type="text" />
-                <Field label="Email Address" placeholder="hello@example.com" type="email" />
+              <form className="space-y-8" onSubmit={handleSubmit}>
+                <Field error={errors.name} label="Name" placeholder="Your full name" type="text" value={values.name} onChange={(value) => updateValue('name', value)} />
+                <Field error={errors.email} label="Email Address" placeholder="hello@example.com" type="email" value={values.email} onChange={(value) => updateValue('email', value)} />
                 <label className="space-y-2 block">
                   <span className="text-xs font-bold text-primary uppercase tracking-[0.18em] ml-1">Your Message</span>
-                  <textarea className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-on-surface placeholder:text-outline-variant resize-none" placeholder="How can we help you?" rows="4" />
+                  <textarea className={`w-full bg-transparent border-0 border-b focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-on-surface placeholder:text-outline-variant resize-none ${errors.message ? 'border-error' : 'border-outline-variant'}`} placeholder="How can we help you?" rows="4" value={values.message} onChange={(event) => updateValue('message', event.target.value)} />
+                  {errors.message && <span className="block text-label-sm text-error">{errors.message}</span>}
                 </label>
-                <button className="w-full mt-4 bg-primary text-on-primary py-5 px-8 text-xs font-bold uppercase tracking-[0.18em] rounded-full hover:bg-primary-container transition-all duration-300 shadow-md flex justify-center items-center gap-2" type="submit">
-                  Send Message
+                <button className="w-full mt-4 bg-primary text-on-primary py-5 px-8 text-xs font-bold uppercase tracking-[0.18em] rounded-full hover:bg-primary-container transition-all duration-300 shadow-md flex justify-center items-center gap-2 disabled:opacity-60" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                   <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
               </form>
@@ -84,11 +119,12 @@ export default function ContactPage() {
   )
 }
 
-function Field({ label, placeholder, type }) {
+function Field({ label, placeholder, type, value, error, onChange }) {
   return (
     <label className="space-y-2 block">
       <span className="text-xs font-bold text-primary uppercase tracking-[0.18em] ml-1">{label}</span>
-      <input className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-on-surface placeholder:text-outline-variant" placeholder={placeholder} type={type} />
+      <input className={`w-full bg-transparent border-0 border-b focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-on-surface placeholder:text-outline-variant ${error ? 'border-error' : 'border-outline-variant'}`} placeholder={placeholder} type={type} value={value} onChange={(event) => onChange(event.target.value)} />
+      {error && <span className="block text-label-sm text-error">{error}</span>}
     </label>
   )
 }

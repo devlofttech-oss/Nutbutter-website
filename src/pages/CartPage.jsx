@@ -1,37 +1,18 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import CartItem from '../components/CartItem.jsx'
 import CartSummary from '../components/CartSummary.jsx'
-import { INITIAL_CART_ITEMS } from '../data/cartData.js'
+import { useCart } from '../providers/CartProvider.jsx'
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState(INITIAL_CART_ITEMS)
+  const { items: cartItems, isLoading, error, subtotal, itemCount, setItemQuantity, removeFromCart } = useCart()
   const [coupon, setCoupon] = useState('')
   const [discount, setDiscount] = useState(0)
 
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = useMemo(
-    () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-    [cartItems],
-  )
   const tax = Math.round((subtotal - discount) * 0.05)
   const total = Math.max(subtotal - discount + tax, 0)
-
-  const updateQuantity = (id, direction) => {
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + direction) }
-          : item,
-      ),
-    )
-  }
-
-  const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item.id !== id))
-  }
 
   const applyCoupon = () => {
     const normalizedCoupon = coupon.trim().toLowerCase()
@@ -55,16 +36,18 @@ export default function CartPage() {
           </p>
         </section>
 
-        {cartItems.length > 0 ? (
+        {isLoading && <CartState message="Loading your cart..." />}
+        {!isLoading && error && <CartState message="Your cart could not be loaded right now." />}
+        {!isLoading && !error && cartItems.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
             <section className="lg:col-span-8 space-y-md">
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id}
                   item={item}
-                  onIncrease={(id) => updateQuantity(id, 1)}
-                  onDecrease={(id) => updateQuantity(id, -1)}
-                  onRemove={removeItem}
+                  onIncrease={(id) => setItemQuantity(id, item.quantity + 1)}
+                  onDecrease={(id) => setItemQuantity(id, item.quantity - 1)}
+                  onRemove={removeFromCart}
                 />
               ))}
 
@@ -81,13 +64,22 @@ export default function CartPage() {
               onApplyCoupon={applyCoupon}
             />
           </div>
-        ) : (
+        ) : null}
+        {!isLoading && !error && cartItems.length === 0 && (
           <EmptyCart />
         )}
       </main>
 
       <Footer />
     </div>
+  )
+}
+
+function CartState({ message }) {
+  return (
+    <section className="bg-surface-container rounded-xl border border-outline-variant p-xl text-center text-on-surface-variant">
+      {message}
+    </section>
   )
 }
 

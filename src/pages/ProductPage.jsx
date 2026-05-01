@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
-import { PRODUCTS } from '../data/constants.js'
+import { fetchProductBySlugOrId, fetchProductReviews, fetchProducts, fetchRelatedProducts } from '../api/productApi.js'
+import { useCart } from '../providers/CartProvider.jsx'
 
 const benefits = [
   ['eco', 'No Sugar'],
@@ -18,19 +19,91 @@ const useIdeas = [
   ['The Mid-Day Snack', 'Perfect paired with crisp seasonal fruit slices.', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAK8Rl8T9uwOPMwVZM9jG0BFTScqrPdKksPdWJbCKpc_dnZjN0-Lw9-LMgrqvbRfvf8PXMR1-9zg1JdFWUeONyFAwkKPnYK-VGpCyho1mrt-x-nsy41pxvfYxdtD05AHP5qC1agDZUDIe0vA6qJ2MFDmtjbLEzFxVcq1LsklU3b3zXS3uumx_eGyOXXqqAMo6E3nSYITda7aW0og94Olc0rcUE6pld21ChfkXSnkAIYhCCniFv88hvQUOz-aAWjtS1gYFiuiLU4ZjQ'],
 ]
 
-const reviews = [
-  ['Elena R.', 'Verified Buyer', 'I have tried dozens of almond butters, but Artisan Nut Co. is in a league of its own. The stone-ground difference is real.'],
-  ['Marcus Thorne', 'Verified Buyer', 'Pure ingredients and an incredible roast profile. You can taste the quality of the almonds.'],
-  ['Sarah Jenkins', 'Verified Buyer', 'Finally a butter that does not use palm oil but stays creamy. Shipping was fast and the packaging was beautiful too.'],
-]
-
 export default function ProductPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
   const [size, setSize] = useState('250g')
-  const product = useMemo(() => PRODUCTS.find((item) => item.slug === slug || String(item.id) === slug) ?? PRODUCTS[0], [slug])
-  const relatedProducts = PRODUCTS.filter((item) => item.id !== product.id).slice(0, 3)
+  const [product, setProduct] = useState(null)
+  const [relatedProducts, setRelatedProducts] = useState([])
+  const [reviews, setReviews] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAddingToCart, setIsAddingToCart] = useState(false)
+  const [error, setError] = useState('')
+  const { addToCart } = useCart()
+
+  useEffect(() => {
+    let isMounted = true
+
+    setIsLoading(true)
+    setError('')
+
+    const productRequest = slug
+      ? fetchProductBySlugOrId(slug)
+      : fetchProducts({ sort: 'featured', range: { from: 0, to: 0 } }).then(({ data }) => data[0] ?? null)
+
+    productRequest
+      .then(async (productData) => {
+        if (!isMounted) return
+
+        if (!productData) {
+          setProduct(null)
+          setRelatedProducts([])
+          setReviews([])
+          return
+        }
+
+        setProduct(productData)
+        const [relatedResult, reviewData] = await Promise.all([
+          fetchRelatedProducts(productData, 3),
+          fetchProductReviews(productData.id),
+        ])
+
+        if (!isMounted) return
+        setRelatedProducts(relatedResult.data)
+        setReviews(reviewData)
+      })
+      .catch((fetchError) => {
+        if (!isMounted) return
+        setError(fetchError.message)
+        setProduct(null)
+        setRelatedProducts([])
+        setReviews([])
+      })
+      .finally(() => {
+        if (isMounted) setIsLoading(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [slug])
+
+  if (isLoading) {
+    return <ProductPageState message="Loading product..." />
+  }
+
+  if (error) {
+    return <ProductPageState message="This product could not be loaded right now." />
+  }
+
+  if (!product) {
+    return <ProductPageState message="Product not found." />
+  }
+
+  const nutrition = product.nutrition ?? {}
+  const ingredients = product.ingredients?.length ? product.ingredients.join(', ') : 'Slow-Roasted Heirloom Nuts, Himalayan Sea Salt.'
+
+  const handleAddToCart = async () => {
+    setIsAddingToCart(true)
+
+    try {
+      await addToCart(product, quantity, size)
+      navigate('/cart')
+    } finally {
+      setIsAddingToCart(false)
+    }
+  }
 
   return (
     <div className="bg-background text-on-background">
@@ -56,7 +129,7 @@ export default function ProductPage() {
             <div className="border-b border-outline-variant pb-8">
               <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] mb-4 block">100% Natural Nut Butter</span>
               <h1 className="font-serif text-[48px] md:text-[64px] leading-tight text-on-background mb-4">{product.name}</h1>
-              <p className="text-2xl text-primary">{product.price}</p>
+              <p className="text-2xl text-primary">{product.priceLabel}</p>
             </div>
             <div className="flex flex-col gap-6">
               <div>
@@ -78,8 +151,8 @@ export default function ProductPage() {
                 </div>
               </div>
             </div>
-            <button className="w-full bg-primary text-on-primary py-5 rounded-full font-serif text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.12)] hover:bg-primary-container active:scale-[0.98] transition-all" type="button" onClick={() => navigate('/cart')}>
-              Add to Cart
+            <button className="w-full bg-primary text-on-primary py-5 rounded-full font-serif text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.12)] hover:bg-primary-container active:scale-[0.98] transition-all" type="button" onClick={handleAddToCart} disabled={isAddingToCart}>
+              {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
             </button>
             <div className="mt-4 flex flex-wrap gap-4">
               {['NO ADDED SUGAR', 'NO PALM OIL'].map((label) => (
@@ -107,22 +180,22 @@ export default function ProductPage() {
             <div>
               <h2 className="font-serif text-4xl mb-6">Artisanal Craftsmanship</h2>
               <p className="text-lg leading-8 text-on-surface-variant max-w-2xl">
-                Our {product.name} is stone-ground for over 24 hours to achieve an unparalleled silky texture. We source the finest nuts, lightly roasting them in small batches to preserve their natural oils and deep profile.
+                {product.description}
               </p>
             </div>
             <div>
               <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-on-background mb-4">Ingredients</h3>
-              <p className="text-2xl text-primary">Slow-Roasted Heirloom Nuts, Himalayan Sea Salt.</p>
+              <p className="text-2xl text-primary">{ingredients}</p>
             </div>
           </div>
           <div className="bg-surface-container rounded-[28px] p-8 shadow-[0_20px_60px_rgba(111,88,60,0.08)] self-start">
             <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-on-background mb-8">Nutrition Information</h3>
             <div className="flex flex-col gap-4">
               {[
-                ['Protein', '6g'],
-                ['Healthy Fats', '14g'],
-                ['Fiber', '4g'],
-                ['Calories', '190'],
+                ['Protein', nutrition.protein ?? '6g'],
+                ['Healthy Fats', nutrition.healthy_fats ?? '14g'],
+                ['Fiber', nutrition.fiber ?? '4g'],
+                ['Calories', nutrition.calories ?? '190'],
               ].map(([label, value]) => {
                 return (
                   <div key={label} className="flex justify-between items-center border-b border-outline-variant pb-2">
@@ -159,31 +232,53 @@ export default function ProductPage() {
               <h2 className="font-serif text-4xl mb-2">Customer Reflections</h2>
               <div className="flex items-center gap-2">
                 <div className="flex text-primary">{Array.from({ length: 5 }).map((_, index) => <span key={index} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}</div>
-                <span className="text-2xl">4.9</span>
-                <span className="text-on-surface-variant">(124 reviews)</span>
+                <span className="text-2xl">{product.rating}</span>
+                <span className="text-on-surface-variant">({product.reviews} reviews)</span>
               </div>
             </div>
             <button className="border border-primary text-primary px-8 py-3 rounded-full hover:bg-primary hover:text-on-primary transition-all" type="button">Write a Review</button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {reviews.map(([name, role, text]) => (
-              <div key={name} className="bg-white p-10 rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high">
-                <div className="flex justify-between items-center mb-4 gap-4">
-                  <span className="font-bold text-on-background">{name}</span>
-                  <span className="text-on-surface-variant text-sm">{role}</span>
+          {reviews.length === 0 ? (
+            <div className="bg-white p-10 rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high text-on-surface-variant">
+              No reviews have been published for this product yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {reviews.map((review) => (
+                <div key={review.id} className="bg-white p-10 rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high">
+                  <div className="flex justify-between items-center mb-4 gap-4">
+                    <span className="font-bold text-on-background">{review.customer_name}</span>
+                    <span className="text-on-surface-variant text-sm">{review.is_verified_purchase ? 'Verified Buyer' : 'Customer'}</span>
+                  </div>
+                  <p className="text-on-surface-variant italic">{review.body}</p>
                 </div>
-                <p className="text-on-surface-variant italic">{text}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Related Products */}
-        <div>
-          <h2 className="font-serif text-4xl mb-12">Complete Your Pantry</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}
+        {relatedProducts.length > 0 && (
+          <div>
+            <h2 className="font-serif text-4xl mb-12">Complete Your Pantry</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}
+            </div>
           </div>
+        )}
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+function ProductPageState({ message }) {
+  return (
+    <div className="bg-background text-on-background min-h-screen">
+      <Header />
+      <main className="pt-16 pb-32 max-w-[1280px] mx-auto px-6 md:px-16">
+        <div className="rounded-[28px] border border-outline-variant bg-surface-container-low px-8 py-16 text-center text-on-surface-variant">
+          {message}
         </div>
       </main>
       <Footer />

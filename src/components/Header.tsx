@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/constants.js'
+import { useAuthSession } from '../providers/AuthSessionProvider.jsx'
+import { useCart } from '../providers/CartProvider.jsx'
 
-export default function Header({ cartCount = 0 }) {
+export default function Header({ cartCount }) {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { itemCount } = useCart()
+  const { isAuthenticated, signOut } = useAuthSession()
+  const displayedCartCount = cartCount ?? itemCount
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#eadfd2]/80 bg-white/85 shadow-[0_18px_45px_rgba(115,91,66,0.06)] backdrop-blur-xl">
@@ -43,17 +48,28 @@ export default function Header({ cartCount = 0 }) {
             <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform">
               shopping_bag
             </button>
-            {cartCount > 0 && (
+            {displayedCartCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-primary-container text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
-                {cartCount}
+                {displayedCartCount}
               </span>
             )}
           </Link>
-          <Link to="/checkout">
-            <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform">
-              person
+          {isAuthenticated ? (
+            <button
+              className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform"
+              type="button"
+              aria-label="Logout"
+              onClick={() => signOut()}
+            >
+              logout
             </button>
-          </Link>
+          ) : (
+            <Link to="/login" aria-label="Login">
+              <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform">
+                person
+              </button>
+            </Link>
+          )}
           <button
             className="lg:hidden material-symbols-outlined text-[#4B3621]"
             type="button"

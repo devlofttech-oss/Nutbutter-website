@@ -1,0 +1,15 @@
+export const SUPABASE_TABLES = {
+  profiles: 'profiles',
+  products: 'products',
+  categories: 'categories',
+  cartItems: 'cart_items',
+  orders: 'orders',
+  orderItems: 'order_items',
+  payments: 'payments',
+  addresses: 'addresses',
+  reviews: 'reviews',
+  contactMessages: 'contact_messages',
+  newsletterSubscribers: 'newsletter_subscribers',
+  adminRoles: 'admin_roles',
+  coupons: 'coupons',
+}

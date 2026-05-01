@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
-import { PRODUCTS } from '../data/constants.js'
+import { fetchFeaturedProducts } from '../api/productApi.js'
 
 const benefits = [
   ['eco', '100% Natural'],
@@ -25,6 +26,35 @@ const testimonials = [
 ]
 
 export default function HomePage() {
+  const [featuredProducts, setFeaturedProducts] = useState([])
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
+  const [productsError, setProductsError] = useState('')
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchFeaturedProducts(4)
+      .then(({ data }) => {
+        if (!isMounted) return
+        setFeaturedProducts(data)
+        setProductsError('')
+      })
+      .catch((error) => {
+        if (!isMounted) return
+        setProductsError(error.message)
+        setFeaturedProducts([])
+      })
+      .finally(() => {
+        if (isMounted) setIsLoadingProducts(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const heroImage = featuredProducts[0]?.image ?? 'https://lh3.googleusercontent.com/aida-public/AB6AXuBQgoGqWY-as-IvbVBnMObJNMACBB3_HRIHRasjORwlM2d3Sp8DhNL5OCpNOKcQ-u4osRRfwOcnYBvANNQniUbYYSVYXi4KZ-f1eaKnovVPPNaWmZ1MTQM53aI5eh_id7Fk_lYfhK4y4nKjas4JcNy5I6rDjDQHN6x3Rd8r6EuD4JNnKNJQV7eysGTrUQ-N1ARwRtBP1dcIFewniX7vBSlqHEmMfhBA2sQQimuv8JtKIvuw5IuTly3sGGGRrpJ_ORMw-Yo0Gj-NhHk'
+
   return (
     <div className="bg-background text-on-surface">
       <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant py-2 text-center text-[11px] font-bold uppercase tracking-[0.18em] border-b border-outline-variant/30">
@@ -57,7 +87,7 @@ export default function HomePage() {
               <img
                 alt="Artisanal Nut Butter Jar"
                 className="relative z-10 w-full max-w-md rounded-[32px] shadow-[0_35px_80px_rgba(111,88,60,0.18)] transition-transform duration-700 hover:scale-105"
-                src={PRODUCTS[0].image}
+                src={heroImage}
               />
             </div>
           </div>
@@ -86,11 +116,16 @@ export default function HomePage() {
               View All
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PRODUCTS.slice(0, 4).map((product) => (
+          {isLoadingProducts && <ProductGridMessage message="Loading curated products..." />}
+          {!isLoadingProducts && productsError && <ProductGridMessage message="Products could not be loaded right now." />}
+          {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No featured products are available yet." />}
+          {!isLoadingProducts && !productsError && featuredProducts.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Video Section */}
@@ -171,6 +206,14 @@ export default function HomePage() {
       </main>
 
       <Footer />
+    </div>
+  )
+}
+
+function ProductGridMessage({ message }) {
+  return (
+    <div className="rounded-[28px] border border-outline-variant bg-surface-container-low px-8 py-12 text-center text-on-surface-variant">
+      {message}
     </div>
   )
 }

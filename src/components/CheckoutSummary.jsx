@@ -1,4 +1,4 @@
-export default function CheckoutSummary({ items, subtotal, shipping, total, onPlaceOrder, orderPlaced }) {
+export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, error = '' }) {
   return (
     <aside className="lg:w-[400px] flex-shrink-0">
       <div className="sticky top-24 space-y-md p-lg bg-surface-container-low rounded-xl border border-outline-variant">
@@ -27,6 +27,8 @@ export default function CheckoutSummary({ items, subtotal, shipping, total, onPl
         <div className="space-y-sm pt-md border-t border-outline-variant">
           <SummaryRow label="Subtotal" value={formatCurrency(subtotal)} />
           <SummaryRow label="Shipping" value={formatCurrency(shipping)} />
+          {discount > 0 && <SummaryRow label="Discount" value={`-${formatCurrency(discount)}`} />}
+          <SummaryRow label="Estimated Tax" value={formatCurrency(tax)} />
           <div className="flex justify-between font-serif text-headline-md text-primary pt-sm">
             <span>Total</span>
             <span>{formatCurrency(total)}</span>
@@ -37,10 +39,16 @@ export default function CheckoutSummary({ items, subtotal, shipping, total, onPl
           className="w-full bg-primary-container text-on-primary py-md rounded-lg text-label-md font-semibold uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all mt-lg"
           type="button"
           onClick={onPlaceOrder}
+          disabled={isSubmitting}
         >
-          Place Order
+          {isSubmitting ? 'Redirecting...' : 'Place Order'}
         </button>
 
+        {error && (
+          <p className="text-center text-label-sm text-error font-semibold">
+            {error}
+          </p>
+        )}
         {orderPlaced && (
           <p className="text-center text-label-sm text-secondary font-semibold">
             Order details captured. We will confirm shortly.

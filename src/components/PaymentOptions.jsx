@@ -1,4 +1,10 @@
-import { PAYMENT_OPTIONS } from '../data/checkoutData.js'
+const PAYMENT_OPTIONS = [
+  {
+    id: 'phonepe',
+    title: 'PhonePe Secure Checkout',
+    icon: 'account_balance_wallet',
+  },
+]
 
 export default function PaymentOptions({ selectedPayment, onChange }) {
   return (
