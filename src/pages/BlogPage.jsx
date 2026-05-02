@@ -14,28 +14,28 @@ export default function BlogPage() {
   return (
     <div className="bg-background text-on-surface min-h-screen">
       <Header />
-      <main className="pt-20">
+      <main className="pt-10 md:pt-20">
         {/* Hero Section */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 text-center">
-          <h1 className="font-serif text-[48px] md:text-[64px] leading-tight text-on-surface mb-6">Healthy Recipes</h1>
-          <p className="text-lg leading-8 text-on-surface-variant max-w-2xl mx-auto">
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 py-14 md:py-24 text-center">
+          <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-on-surface mb-5 md:mb-6">Healthy Recipes</h1>
+          <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant max-w-2xl mx-auto">
             Simple, nourishing ways to enjoy our stone-ground nut butters every day.
           </p>
         </section>
 
         {/* Recipe Grid */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recipes.map(([title, tag, time, body, image], index) => (
-            <article key={title} className={`bg-white rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)] flex flex-col ${index === 0 ? 'lg:col-span-2' : ''}`}>
+            <article key={title} className={`bg-white rounded-[22px] md:rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)] flex flex-col ${index === 0 ? 'lg:col-span-2' : ''}`}>
               <div className="aspect-[4/3] overflow-hidden">
                 <img alt={title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src={image} />
               </div>
-              <div className="p-8 flex-grow flex flex-col">
-                <div className="flex gap-2 mb-4">
+              <div className="p-5 md:p-8 flex-grow flex flex-col">
+                <div className="flex flex-wrap gap-2 mb-4">
                   <span className="px-3 py-1 bg-tertiary-fixed/30 text-on-tertiary-fixed-variant text-xs font-bold rounded-full">{tag}</span>
                   <span className="px-3 py-1 bg-secondary-fixed/50 text-on-secondary-fixed-variant text-xs font-bold rounded-full">{time}</span>
                 </div>
-                <h3 className="font-serif text-2xl text-on-surface mb-3">{title}</h3>
+                <h3 className="font-serif text-xl md:text-2xl text-on-surface mb-3">{title}</h3>
                 <p className="text-on-surface-variant mb-8 flex-grow leading-7">{body}</p>
                 <button className="w-full py-4 bg-primary text-on-primary text-xs font-bold tracking-[0.18em] uppercase rounded-full hover:bg-primary/90 transition-colors" type="button">View Recipe</button>
               </div>
@@ -44,9 +44,9 @@ export default function BlogPage() {
         </section>
 
         {/* Call to Action Section */}
-        <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-[120px] bg-secondary-container/20 text-center rounded-[32px] my-16">
-          <h2 className="font-serif text-4xl text-on-surface mb-6">Share Your Creations</h2>
-          <p className="text-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
+        <section className="max-w-[1440px] mx-4 sm:mx-6 md:mx-auto px-5 md:px-12 py-16 md:py-[120px] bg-secondary-container/20 text-center rounded-[24px] md:rounded-[32px] my-12 md:my-16">
+          <h2 className="font-serif text-3xl md:text-4xl text-on-surface mb-5 md:mb-6">Share Your Creations</h2>
+          <p className="text-base md:text-lg leading-7 text-on-surface-variant mb-8 md:mb-10 max-w-xl mx-auto">
             We love seeing how you use Satvegik. Tag us in your kitchen moments for a chance to be featured.
           </p>
           <a className="inline-flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-[0.18em] border-b-2 border-primary pb-1 hover:gap-5 transition-all" href="https://instagram.com">

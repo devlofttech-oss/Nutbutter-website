@@ -109,9 +109,9 @@ export default function ProductPage() {
   return (
     <div className="bg-background text-on-background">
       <Header />
-      <main className="pt-16 pb-32 max-w-[1280px] mx-auto px-6 md:px-16">
+      <main className="pt-8 md:pt-16 pb-16 md:pb-32 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 mb-12 text-on-surface-variant text-xs font-bold uppercase tracking-[0.18em]">
+        <nav className="flex items-center gap-2 mb-8 md:mb-12 text-on-surface-variant text-[11px] md:text-xs font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] overflow-x-auto whitespace-nowrap pb-1">
           <Link className="hover:text-primary transition-colors" to="/">Home</Link>
           <span className="material-symbols-outlined text-[14px]">chevron_right</span>
           <Link className="hover:text-primary transition-colors" to="/shop">Shop</Link>
@@ -120,24 +120,24 @@ export default function ProductPage() {
         </nav>
 
         {/* Product Gallery & Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-[120px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start mb-16 md:mb-[120px]">
           <div className="relative group">
-            <div className="aspect-[4/5] bg-surface-container-low rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)]">
+            <div className="aspect-[4/5] bg-surface-container-low rounded-[22px] md:rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)]">
               <img alt={`${product.name} Product Image`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={product.image} />
             </div>
           </div>
-          <div className="flex flex-col gap-8">
-            <div className="border-b border-outline-variant pb-8">
+          <div className="flex flex-col gap-6 md:gap-8">
+            <div className="border-b border-outline-variant pb-6 md:pb-8">
               <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] mb-4 block">100% Natural Nut Butter</span>
-              <h1 className="font-serif text-[48px] md:text-[64px] leading-tight text-on-background mb-4">{product.name}</h1>
-              <p className="text-2xl text-primary">{product.priceLabel}</p>
+              <h1 className="font-serif text-[36px] sm:text-[42px] md:text-[64px] leading-tight text-on-background mb-4">{product.name}</h1>
+              <p className="text-xl md:text-2xl text-primary">{product.priceLabel}</p>
             </div>
             <div className="flex flex-col gap-6">
               <div>
                 <span className="text-on-surface text-xs font-bold uppercase tracking-[0.18em] block mb-4">Select Size</span>
-                <div className="flex gap-4">
+                <div className="flex gap-3 md:gap-4">
                   {['250g', '500g'].map((option) => (
-                    <button key={option} className={`px-8 py-3 rounded-full border-2 transition-all ${size === option ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant text-on-surface hover:border-primary'}`} type="button" onClick={() => setSize(option)}>
+                    <button key={option} className={`min-h-11 px-6 md:px-8 py-3 rounded-full border-2 transition-all ${size === option ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant text-on-surface hover:border-primary'}`} type="button" onClick={() => setSize(option)}>
                       {option}
                     </button>
                   ))}
@@ -152,7 +152,7 @@ export default function ProductPage() {
                 </div>
               </div>
             </div>
-            <button className="w-full bg-primary text-on-primary py-5 rounded-full font-serif text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.12)] hover:bg-primary-container active:scale-[0.98] transition-all" type="button" onClick={handleAddToCart} disabled={isAddingToCart}>
+            <button className="w-full bg-primary text-on-primary py-4 md:py-5 rounded-full font-serif text-xl md:text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.12)] hover:bg-primary-container active:scale-[0.98] transition-all" type="button" onClick={handleAddToCart} disabled={isAddingToCart}>
               {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
             </button>
             <div className="mt-4 flex flex-wrap gap-4">
@@ -166,7 +166,7 @@ export default function ProductPage() {
         </div>
 
         {/* Key Benefits Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-y border-outline-variant mb-[120px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-10 md:py-16 border-y border-outline-variant mb-16 md:mb-[120px]">
           {benefits.map(([icon, label]) => (
             <div key={label} className="flex flex-col items-center text-center gap-3">
               <span className="material-symbols-outlined text-4xl text-primary">{icon}</span>
@@ -176,20 +176,20 @@ export default function ProductPage() {
         </div>
 
         {/* Description & Ingredients & Nutrition */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-[120px]">
-          <div className="lg:col-span-2 flex flex-col gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-16 mb-16 md:mb-[120px]">
+          <div className="lg:col-span-2 flex flex-col gap-8 md:gap-12">
             <div>
-              <h2 className="font-serif text-4xl mb-6">Artisanal Craftsmanship</h2>
-              <p className="text-lg leading-8 text-on-surface-variant max-w-2xl">
+              <h2 className="font-serif text-3xl md:text-4xl mb-5 md:mb-6">Artisanal Craftsmanship</h2>
+              <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant max-w-2xl">
                 {product.description}
               </p>
             </div>
             <div>
               <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-on-background mb-4">Ingredients</h3>
-              <p className="text-2xl text-primary">{ingredients}</p>
+              <p className="text-xl md:text-2xl text-primary">{ingredients}</p>
             </div>
           </div>
-          <div className="bg-surface-container rounded-[28px] p-8 shadow-[0_20px_60px_rgba(111,88,60,0.08)] self-start">
+          <div className="bg-surface-container rounded-[22px] md:rounded-[28px] p-5 md:p-8 shadow-[0_20px_60px_rgba(111,88,60,0.08)] self-start">
             <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-on-background mb-8">Nutrition Information</h3>
             <div className="flex flex-col gap-4">
               {[
@@ -211,8 +211,8 @@ export default function ProductPage() {
         </div>
 
         {/* How To Use */}
-        <div className="mb-[120px]">
-          <h2 className="font-serif text-[48px] md:text-[64px] leading-tight text-center mb-16">The Ritual of Use</h2>
+        <div className="mb-16 md:mb-[120px]">
+          <h2 className="font-serif text-[34px] md:text-[64px] leading-tight text-center mb-10 md:mb-16">The Ritual of Use</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {useIdeas.map(([title, body, image]) => (
               <div key={title} className="group cursor-pointer">
@@ -227,26 +227,26 @@ export default function ProductPage() {
         </div>
 
         {/* Reviews */}
-        <div className="mb-[120px]">
-          <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-16">
+        <div className="mb-16 md:mb-[120px]">
+          <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-10 md:mb-16">
             <div>
-              <h2 className="font-serif text-4xl mb-2">Customer Reflections</h2>
+              <h2 className="font-serif text-3xl md:text-4xl mb-2">Customer Reflections</h2>
               <div className="flex items-center gap-2">
                 <div className="flex text-primary">{Array.from({ length: 5 }).map((_, index) => <span key={index} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>)}</div>
-                <span className="text-2xl">{product.rating}</span>
+                <span className="text-xl md:text-2xl">{product.rating}</span>
                 <span className="text-on-surface-variant">({product.reviews} reviews)</span>
               </div>
             </div>
             <button className="border border-primary text-primary px-8 py-3 rounded-full hover:bg-primary hover:text-on-primary transition-all" type="button">Write a Review</button>
           </div>
           {reviews.length === 0 ? (
-            <div className="bg-white p-10 rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high text-on-surface-variant">
+            <div className="bg-white p-6 md:p-10 rounded-[22px] md:rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high text-on-surface-variant">
               No reviews have been published for this product yet.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {reviews.map((review) => (
-                <div key={review.id} className="bg-white p-10 rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high">
+                <div key={review.id} className="bg-white p-6 md:p-10 rounded-[22px] md:rounded-[28px] shadow-[0_20px_60px_rgba(111,88,60,0.08)] border border-surface-container-high">
                   <div className="flex justify-between items-center mb-4 gap-4">
                     <span className="font-bold text-on-background">{review.customer_name}</span>
                     <span className="text-on-surface-variant text-sm">{review.is_verified_purchase ? 'Verified Buyer' : 'Customer'}</span>
@@ -260,8 +260,8 @@ export default function ProductPage() {
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mb-[120px]">
-            <h2 className="font-serif text-4xl mb-12">Complete Your Pantry</h2>
+          <div className="mb-16 md:mb-[120px]">
+            <h2 className="font-serif text-3xl md:text-4xl mb-8 md:mb-12">Complete Your Pantry</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}
             </div>
@@ -278,8 +278,8 @@ function ProductPageState({ message }) {
   return (
     <div className="bg-background text-on-background min-h-screen">
       <Header />
-      <main className="pt-16 pb-32 max-w-[1280px] mx-auto px-6 md:px-16">
-        <div className="rounded-[28px] border border-outline-variant bg-surface-container-low px-8 py-16 text-center text-on-surface-variant">
+      <main className="pt-8 md:pt-16 pb-16 md:pb-32 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16">
+        <div className="rounded-[22px] md:rounded-[28px] border border-outline-variant bg-surface-container-low px-5 md:px-8 py-12 md:py-16 text-center text-on-surface-variant">
           {message}
         </div>
       </main>

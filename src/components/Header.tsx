@@ -14,14 +14,14 @@ export default function Header({ cartCount }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#eadfd2]/80 bg-white/85 shadow-[0_18px_45px_rgba(115,91,66,0.06)] backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-12 h-20 flex justify-between items-center w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 xl:px-12 h-16 md:h-20 flex justify-between items-center w-full">
         <Link
           to="/"
-          className="flex items-center gap-3 text-xl md:text-2xl font-serif font-bold tracking-[0.12em] uppercase text-[#4B3621]"
+          className="flex min-w-0 items-center gap-2.5 md:gap-3 text-lg sm:text-xl md:text-2xl font-serif font-bold tracking-[0.08em] md:tracking-[0.12em] uppercase text-[#4B3621]"
           onClick={() => setMenuOpen(false)}
         >
-          <img className="h-12 w-12 rounded-full object-cover shadow-[0_8px_22px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik logo" />
-          <span>Satvegik</span>
+          <img className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shadow-[0_8px_22px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik logo" />
+          <span className="truncate">Satvegik</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
@@ -45,9 +45,9 @@ export default function Header({ cartCount }) {
           })}
         </nav>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-5 md:gap-6">
           <Link to="/cart" className="relative" aria-label="View cart">
-            <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform">
+            <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform p-1" type="button">
               shopping_bag
             </button>
             {displayedCartCount > 0 && (
@@ -67,13 +67,13 @@ export default function Header({ cartCount }) {
             </button>
           ) : (
             <Link to="/login" aria-label="Login">
-              <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform">
+              <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform p-1" type="button">
                 person
               </button>
             </Link>
           )}
           <button
-            className="lg:hidden material-symbols-outlined text-[#4B3621]"
+            className="lg:hidden material-symbols-outlined text-[#4B3621] p-1 active:scale-95 transition-transform"
             type="button"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
@@ -83,8 +83,8 @@ export default function Header({ cartCount }) {
           </button>
         </div>
       </div>
-      {menuOpen && (
-        <nav className="lg:hidden border-t border-[#E6D5B8] bg-white/95 px-6 py-5 space-y-2 shadow-[0_24px_40px_rgba(75,54,33,0.08)]">
+      <div className={`lg:hidden overflow-hidden border-t border-[#E6D5B8] bg-white/95 shadow-[0_24px_40px_rgba(75,54,33,0.08)] transition-all duration-300 ease-out ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <nav className="px-4 sm:px-6 py-4 space-y-2">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href || (link.href === '/shop' && pathname.startsWith('/shop'))
             return (
@@ -101,7 +101,7 @@ export default function Header({ cartCount }) {
             )
           })}
         </nav>
-      )}
+      </div>
     </header>
   )
 }

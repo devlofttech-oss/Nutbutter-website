@@ -57,27 +57,27 @@ export default function HomePage() {
 
   return (
     <div className="bg-background text-on-surface">
-      <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant py-2 text-center text-[11px] font-bold uppercase tracking-[0.18em] border-b border-outline-variant/30">
+      <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant px-4 py-2 text-center text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] border-b border-outline-variant/30">
         Join the heritage club and receive 10% off your first order
       </div>
       <Header />
 
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-[112px] md:py-[150px] bg-background">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 items-center gap-16">
-            <div className="space-y-8">
-              <h1 className="font-serif text-[48px] md:text-[72px] leading-[1.04] text-on-surface">
+        <section className="relative overflow-hidden py-16 md:py-[150px] bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 items-center gap-10 md:gap-16">
+            <div className="space-y-6 md:space-y-8">
+              <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
                 Pure. Natural. <br /><span className="italic font-normal">Delicious Nut Butters.</span>
               </h1>
-              <p className="text-on-surface-variant text-lg leading-8 max-w-lg">
+              <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
                 Hand-crafted in small batches using premium, stone-ground heritage nuts. No additives, just the honest taste of nature's finest ingredients.
               </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link to="/shop" className="bg-primary text-on-primary px-10 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary-container transition-colors shadow-lg shadow-primary/10">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 md:pt-4">
+                <Link to="/shop" className="w-full sm:w-auto text-center bg-primary text-on-primary px-8 md:px-10 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-primary-container transition-colors shadow-lg shadow-primary/10">
                   Shop Now
                 </Link>
-                <Link to="/about" className="border border-primary text-primary px-10 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all">
+                <Link to="/about" className="w-full sm:w-auto text-center border border-primary text-primary px-8 md:px-10 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-primary hover:text-on-primary transition-all">
                   Explore
                 </Link>
               </div>
@@ -86,7 +86,7 @@ export default function HomePage() {
               <div className="absolute -inset-10 bg-tertiary/5 rounded-full blur-3xl opacity-70" />
               <img
                 alt="Artisanal Nut Butter Jar"
-                className="relative z-10 w-full max-w-md rounded-[32px] shadow-[0_35px_80px_rgba(111,88,60,0.18)] transition-transform duration-700 hover:scale-105"
+                className="relative z-10 w-full max-w-sm md:max-w-md rounded-[24px] md:rounded-[32px] shadow-[0_35px_80px_rgba(111,88,60,0.18)] transition-transform duration-700 hover:scale-105"
                 src={heroImage}
               />
             </div>
@@ -94,8 +94,8 @@ export default function HomePage() {
         </section>
 
         {/* Benefits Strip */}
-        <section className="bg-surface-container py-12">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-wrap justify-between gap-8 md:gap-16">
+        <section className="bg-surface-container py-8 md:py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-2 lg:flex lg:flex-wrap lg:justify-between gap-5 md:gap-16">
             {benefits.map(([icon, label]) => (
               <div key={label} className="flex items-center gap-4 group">
                 <span className="material-symbols-outlined text-tertiary bg-tertiary/10 p-3 rounded-full">{icon}</span>
@@ -106,11 +106,11 @@ export default function HomePage() {
         </section>
 
         {/* Featured Products */}
-        <section className="py-[120px] max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex justify-between items-end mb-16 gap-6">
+        <section className="py-16 md:py-[120px] max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 md:mb-16 gap-4 md:gap-6">
             <div>
               <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">The Collection</span>
-              <h2 className="font-serif text-4xl text-on-surface">Curated Heritage Butters</h2>
+              <h2 className="font-serif text-3xl md:text-4xl text-on-surface">Curated Heritage Butters</h2>
             </div>
             <Link className="text-on-surface-variant border-b border-outline-variant pb-1 text-xs font-bold uppercase tracking-[0.18em] hover:text-primary transition-colors" to="/shop">
               View All
@@ -120,7 +120,7 @@ export default function HomePage() {
           {!isLoadingProducts && productsError && <ProductGridMessage message="Products could not be loaded right now." />}
           {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No products are available yet." />}
           {!isLoadingProducts && !productsError && featuredProducts.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-8">
               {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
               ))}
@@ -129,13 +129,13 @@ export default function HomePage() {
         </section>
 
         {/* Video Section */}
-        <section className="bg-surface-dim py-[120px] relative">
-          <div className="max-w-4xl mx-auto px-6 md:px-12 text-center space-y-12">
-            <h2 className="font-serif text-[44px] md:text-[56px] leading-tight text-on-surface">See how we make it fresh</h2>
-            <div className="aspect-video bg-surface-container relative rounded-[28px] overflow-hidden group cursor-pointer shadow-2xl">
+        <section className="bg-surface-dim py-16 md:py-[120px] relative">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 text-center space-y-8 md:space-y-12">
+            <h2 className="font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">See how we make it fresh</h2>
+            <div className="aspect-video bg-surface-container relative rounded-[22px] md:rounded-[28px] overflow-hidden group cursor-pointer shadow-2xl">
               <img alt="Process Video Thumbnail" className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQgoGqWY-as-IvbVBnMObJNMACBB3_HRIHRasjORwlM2d3Sp8DhNL5OCpNOKcQ-u4osRRfwOcnYBvANNQniUbYYSVYXi4KZ-f1eaKnovVPPNaWmZ1MTQM53aI5eh_id7Fk_lYfhK4y4nKjas4JcNy5I6rDjDQHN6x3Rd8r6EuD4JNnKNJQV7eysGTrUQ-N1ARwRtBP1dcIFewniX7vBSlqHEmMfhBA2sQQimuv8JtKIvuw5IuTly3sGGGRrpJ_ORMw-Yo0Gj-NhHk" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-primary/90 text-on-primary rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 md:w-20 md:h-20 bg-primary/90 text-on-primary rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
                   <span className="material-symbols-outlined text-4xl">play_arrow</span>
                 </div>
               </div>
@@ -144,14 +144,14 @@ export default function HomePage() {
         </section>
 
         {/* Use Case Section */}
-        <section className="py-[120px] max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl text-on-surface">Made for Every Moment</h2>
+        <section className="py-16 md:py-[120px] max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="font-serif text-3xl md:text-4xl text-on-surface">Made for Every Moment</h2>
             <p className="text-on-surface-variant mt-4">Versatile energy for your daily rituals.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {useCases.map(([title, body, image]) => (
-              <div key={title} className="relative h-80 overflow-hidden rounded-xl border border-white/60 bg-surface-container-low p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(115,91,66,0.09)] group">
+              <div key={title} className="relative h-72 md:h-80 overflow-hidden rounded-xl border border-white/60 bg-surface-container-low p-6 md:p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(115,91,66,0.09)] group">
                 <img className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105" src={image} alt={`${title} with nut butter`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#2f2115]/80 via-[#4b3621]/35 to-white/20" />
                 <div className="absolute inset-0 backdrop-blur-[1px]" />
@@ -165,9 +165,9 @@ export default function HomePage() {
         </section>
 
         {/* Testimonials */}
-        <section className="bg-surface-container-low py-[120px]">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <div className="grid md:grid-cols-3 gap-12">
+        <section className="bg-surface-container-low py-16 md:py-[120px]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+            <div className="grid md:grid-cols-3 gap-10 md:gap-12">
               {testimonials.map(([name, role, quote]) => (
                 <div key={name} className="space-y-6">
                   <div className="flex gap-1 text-primary">
@@ -175,7 +175,7 @@ export default function HomePage() {
                       <span key={index} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                     ))}
                   </div>
-                  <p className="font-serif text-2xl text-on-surface italic">{quote}</p>
+                  <p className="font-serif text-xl md:text-2xl text-on-surface italic">{quote}</p>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-on-surface">{name}</p>
                     <p className="text-xs text-on-surface-variant">{role}</p>
@@ -187,25 +187,25 @@ export default function HomePage() {
         </section>
 
         {/* Brand Story */}
-        <section className="py-[120px] max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-24 items-center">
+        <section className="py-16 md:py-[120px] max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-24 items-center">
           <div className="order-2 md:order-1">
             <img alt="The Farm" className="w-full aspect-[4/5] object-cover rounded-[28px] grayscale-[15%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANYdeCa2d4k19IC6HPG-rE-7GSxKgy-jtikC8RhLjTRYp5kzLxeI3fBpJqpgN83sG9OGUnzVCsjurG_I2OZ0s19kd12vdHxlud8x6an56lqsMzUlHEkT04Zaf-wHrcXKqNsY51cZ8epU6We6N0m18yf3uXhgVlRc-jEq4Xc8u9zLSPY6RIj0iZUZMjDXe9b8_wMx7nZe47_CCgjUfGAW6cuWczBNNvuYYnbFHUFsqOWUQavlLQlYwcWjqyprGQf9lvkpJygsMIOO8" />
           </div>
           <div className="order-1 md:order-2 space-y-8">
             <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em]">Our Story</span>
-            <h2 className="font-serif text-[44px] md:text-[56px] leading-tight text-on-surface">Crafting purity since 1924.</h2>
-            <p className="text-on-surface-variant text-lg leading-8">Our heritage began in a small stone mill where we believed that the best food needs the least interference. Today, we still use slow-roasting techniques and stone-grinders to ensure every jar retains its natural soul.</p>
+            <h2 className="font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">Crafting purity since 1924.</h2>
+            <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8">Our heritage began in a small stone mill where we believed that the best food needs the least interference. Today, we still use slow-roasting techniques and stone-grinders to ensure every jar retains its natural soul.</p>
             <p className="text-on-surface-variant leading-7">We partner with family-owned groves that prioritize soil health and biodiversity. It is not just about the butter, it is about preserving a way of life that respects the land and our bodies.</p>
             <Link to="/about" className="inline-block border-b-2 border-primary text-primary pb-1 text-xs font-bold uppercase tracking-[0.18em] hover:text-primary-container transition-colors">Learn More About Our Mission</Link>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="py-24 bg-primary-container text-on-primary-container text-center">
-          <div className="max-w-4xl mx-auto px-6 md:px-12 space-y-8">
-            <h2 className="font-serif text-[44px] md:text-[56px] leading-tight">Ready to eat healthy?</h2>
-            <p className="text-on-primary/80 text-lg">Taste the difference that three generations of artisanal craft makes.</p>
-            <Link to="/shop" className="inline-block bg-white text-primary px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.18em] hover:bg-surface-container transition-all">Shop the collection</Link>
+        <section className="py-16 md:py-24 bg-primary-container text-on-primary-container text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 space-y-6 md:space-y-8">
+            <h2 className="font-serif text-[34px] md:text-[56px] leading-tight">Ready to eat healthy?</h2>
+            <p className="text-on-primary/80 text-base md:text-lg">Taste the difference that three generations of artisanal craft makes.</p>
+            <Link to="/shop" className="inline-block bg-white text-primary px-8 md:px-12 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.18em] hover:bg-surface-container transition-all">Shop the collection</Link>
           </div>
         </section>
       </main>

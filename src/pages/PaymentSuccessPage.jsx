@@ -71,18 +71,18 @@ export function PaymentResultShell({ icon, title, message, order }) {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow max-w-7xl mx-auto w-full px-8 md:px-12 py-xl">
-        <section className="max-w-2xl mx-auto bg-surface-container-low p-10 lg:p-12 rounded-[28px] shadow-[0_20px_50px_rgba(140,115,85,0.08)] border border-surface-container-highest/30 text-center">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-12 md:py-xl">
+        <section className="max-w-2xl mx-auto bg-surface-container-low p-6 sm:p-8 lg:p-12 rounded-[22px] md:rounded-[28px] shadow-[0_20px_50px_rgba(140,115,85,0.08)] border border-surface-container-highest/30 text-center">
           <span className="material-symbols-outlined text-6xl text-primary mb-6" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
-          <h1 className="font-serif text-[44px] md:text-[56px] leading-tight text-primary mb-4">{title}</h1>
+          <h1 className="font-serif text-[34px] md:text-[56px] leading-tight text-primary mb-4">{title}</h1>
           <p className="text-secondary leading-7 mb-8">{message}</p>
           {order && (
             <div className="rounded-xl border border-outline-variant bg-surface p-md mb-8 text-left">
-              <div className="flex justify-between gap-4 text-body-md text-on-surface-variant">
+              <div className="flex flex-col min-[380px]:flex-row min-[380px]:justify-between gap-1 min-[380px]:gap-4 text-base md:text-body-md text-on-surface-variant">
                 <span>Order ID</span>
                 <span className="font-semibold text-primary">{order.order_number}</span>
               </div>
-              <div className="flex justify-between gap-4 text-body-md text-on-surface-variant mt-sm">
+              <div className="flex flex-col min-[380px]:flex-row min-[380px]:justify-between gap-1 min-[380px]:gap-4 text-base md:text-body-md text-on-surface-variant mt-sm">
                 <span>Total</span>
                 <span className="font-semibold text-primary">{formatCurrency(order.total_amount)}</span>
               </div>
@@ -110,4 +110,3 @@ function formatCurrency(value) {
     maximumFractionDigits: 0,
   }).format(Number(value) || 0)
 }
-

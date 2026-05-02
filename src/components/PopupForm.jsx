@@ -23,7 +23,7 @@ export default function PopupForm({ onSuccess, onDismiss }) {
       <label className="block space-y-xs">
         <span className="sr-only">Email address</span>
         <input
-          className={`w-full bg-surface-container-low border rounded-lg px-md py-4 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-on-surface placeholder:text-outline font-serif ${
+          className={`w-full bg-surface-container-low border rounded-lg px-4 md:px-md py-4 focus:outline-none focus:ring-2 focus:ring-secondary/20 text-base text-on-surface placeholder:text-outline font-serif ${
             error ? 'border-error' : 'border-transparent focus:border-secondary'
           }`}
           placeholder="Email address"
@@ -39,7 +39,7 @@ export default function PopupForm({ onSuccess, onDismiss }) {
       {error && <p className="text-label-sm text-error">{error}</p>}
 
       <button
-        className="w-full bg-primary-container text-on-primary py-4 px-md rounded-lg font-semibold transition-all hover:opacity-90 active:scale-[0.98] uppercase tracking-widest text-label-md"
+        className="w-full bg-primary-container text-on-primary py-4 px-4 md:px-md rounded-lg font-semibold transition-all hover:opacity-90 active:scale-[0.98] uppercase tracking-widest text-label-md"
         type="submit"
       >
         Claim Discount

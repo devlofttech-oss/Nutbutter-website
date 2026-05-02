@@ -9,9 +9,9 @@ export default function FaqAccordion({ section }) {
 
   return (
     <section className="scroll-mt-32" id={section.id}>
-      <div className="flex items-center gap-4 mb-lg">
-        <span className="material-symbols-outlined text-secondary text-3xl">{section.icon}</span>
-        <h2 className="font-serif text-headline-lg text-primary">{section.title}</h2>
+      <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-lg">
+        <span className="material-symbols-outlined text-secondary text-2xl md:text-3xl">{section.icon}</span>
+        <h2 className="font-serif text-2xl md:text-headline-lg text-primary">{section.title}</h2>
       </div>
 
       <div className="space-y-4">
@@ -26,11 +26,11 @@ export default function FaqAccordion({ section }) {
               <button
                 aria-controls={`${item.id}-answer`}
                 aria-expanded={isOpen}
-                className="w-full flex items-center justify-between gap-md p-6 text-left cursor-pointer"
+                className="w-full flex items-center justify-between gap-4 md:gap-md p-5 md:p-6 text-left cursor-pointer"
                 type="button"
                 onClick={() => toggleItem(item.id)}
               >
-                <span className="font-serif text-headline-md text-primary leading-tight">{item.question}</span>
+                <span className="font-serif text-xl md:text-headline-md text-primary leading-tight">{item.question}</span>
                 <span
                   className={`material-symbols-outlined text-secondary transition-transform duration-300 ${
                     isOpen ? 'rotate-180' : ''
@@ -42,7 +42,7 @@ export default function FaqAccordion({ section }) {
 
               {isOpen && (
                 <div
-                  className="px-6 pb-6 text-body-md text-on-surface-variant border-t border-outline-variant pt-4"
+                  className="px-5 md:px-6 pb-5 md:pb-6 text-base md:text-body-md leading-7 text-on-surface-variant border-t border-outline-variant pt-4"
                   id={`${item.id}-answer`}
                 >
                   {item.answer}

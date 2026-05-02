@@ -37,11 +37,11 @@ export default function ShopPage() {
   return (
     <div className="bg-background text-on-background min-h-screen">
       <Header />
-      <main className="max-w-7xl mx-auto px-6 md:px-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         {/* Shop Hero */}
-        <section className="mt-24 mb-16 text-center">
-          <h1 className="font-serif text-[48px] md:text-[64px] leading-tight text-primary mb-4">Our Products</h1>
-          <p className="text-lg leading-8 text-secondary max-w-2xl mx-auto">
+        <section className="mt-14 md:mt-24 mb-10 md:mb-16 text-center">
+          <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-primary mb-4">Our Products</h1>
+          <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary max-w-2xl mx-auto">
             Explore our natural and healthy nut butter range, crafted with artisanal care and sustainably sourced ingredients.
           </p>
         </section>
@@ -51,7 +51,7 @@ export default function ShopPage() {
         {!isLoading && error && <ShopState message="Products could not be loaded right now." />}
         {!isLoading && !error && products.length === 0 && <ShopState message="No products match your selection." />}
         {!isLoading && !error && products.length > 0 && (
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-12 pb-32">
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-y-16 gap-x-12 pb-16 md:pb-32">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -66,8 +66,8 @@ export default function ShopPage() {
 
 function ShopState({ message }) {
   return (
-    <section className="pb-32">
-      <div className="rounded-[28px] border border-outline-variant bg-surface-container-low px-8 py-16 text-center text-on-surface-variant">
+    <section className="pb-16 md:pb-32">
+      <div className="rounded-[22px] md:rounded-[28px] border border-outline-variant bg-surface-container-low px-5 md:px-8 py-12 md:py-16 text-center text-on-surface-variant">
         {message}
       </div>
     </section>

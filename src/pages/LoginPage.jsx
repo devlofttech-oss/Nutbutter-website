@@ -78,10 +78,10 @@ export function AuthPageShell({ title, subtitle, children }) {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow max-w-7xl mx-auto w-full px-8 md:px-12 py-xl">
-        <section className="max-w-xl mx-auto bg-surface-container-low p-10 lg:p-12 rounded-[28px] shadow-[0_20px_50px_rgba(140,115,85,0.08)] border border-surface-container-highest/30">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-12 md:py-xl">
+        <section className="max-w-xl mx-auto bg-surface-container-low p-6 sm:p-8 lg:p-12 rounded-[22px] md:rounded-[28px] shadow-[0_20px_50px_rgba(140,115,85,0.08)] border border-surface-container-highest/30">
           <div className="mb-8 text-center">
-            <h1 className="font-serif text-[44px] md:text-[56px] leading-tight text-primary mb-4">{title}</h1>
+            <h1 className="font-serif text-[34px] md:text-[56px] leading-tight text-primary mb-4">{title}</h1>
             <p className="text-secondary leading-7">{subtitle}</p>
           </div>
           <div className="space-y-6">{children}</div>
@@ -97,7 +97,7 @@ export function AuthField({ label, name, type, value, onChange }) {
     <label className="space-y-2 block">
       <span className="text-xs font-bold text-primary uppercase tracking-[0.18em] ml-1">{label}</span>
       <input
-        className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-on-surface placeholder:text-outline-variant"
+        className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-tertiary-container transition-colors py-3 px-1 text-base text-on-surface placeholder:text-outline-variant"
         name={name}
         required
         type={type}

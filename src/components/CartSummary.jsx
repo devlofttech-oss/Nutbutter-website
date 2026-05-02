@@ -4,14 +4,14 @@ import { PAYMENT_METHODS } from '../data/cartData.js'
 export default function CartSummary({ subtotal, discount, tax, total, coupon, onCouponChange, onApplyCoupon }) {
   return (
     <aside className="lg:col-span-4 space-y-6">
-      <section className="p-5 md:p-6 bg-surface-container-high/60 rounded-xl border border-outline-variant shadow-[0_14px_35px_rgba(115,91,66,0.05)]">
+      <section className="p-4 md:p-6 bg-surface-container-high/60 rounded-xl border border-outline-variant shadow-[0_14px_35px_rgba(115,91,66,0.05)]">
         <label
           className="block text-xs uppercase tracking-[0.16em] text-primary-container/80 mb-3 font-bold"
           htmlFor="discount-code"
         >
           Discount Code
         </label>
-        <div className="flex overflow-hidden rounded-lg border border-outline-variant bg-white">
+        <div className="flex flex-col min-[380px]:flex-row overflow-hidden rounded-lg border border-outline-variant bg-white">
           <input
             id="discount-code"
             className="flex-grow min-w-0 border-none px-4 py-3 text-sm text-primary-container focus:outline-none focus:ring-1 focus:ring-secondary placeholder:text-on-surface-variant/40"
@@ -43,7 +43,7 @@ export default function CartSummary({ subtotal, discount, tax, total, coupon, on
           <SummaryRow label="Estimated Tax" value={formatCurrency(tax)} className="border-b border-outline-variant pb-4" />
           <div className="flex justify-between items-baseline pt-4 gap-4">
             <span className="font-serif text-2xl text-primary-container">Total</span>
-            <span className="font-serif text-4xl text-primary-container">{formatCurrency(total)}</span>
+            <span className="font-serif text-3xl md:text-4xl text-primary-container">{formatCurrency(total)}</span>
           </div>
         </div>
 

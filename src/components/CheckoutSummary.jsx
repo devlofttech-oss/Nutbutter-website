@@ -1,14 +1,14 @@
 export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, error = '' }) {
   return (
-    <aside className="lg:w-[400px] flex-shrink-0">
-      <div className="sticky top-24 space-y-md p-lg bg-surface-container-low rounded-xl border border-outline-variant">
-        <h2 className="font-serif text-headline-md text-primary border-b border-outline-variant pb-base">
+    <aside className="w-full lg:w-[400px] flex-shrink-0">
+      <div className="lg:sticky lg:top-24 space-y-md p-5 md:p-lg bg-surface-container-low rounded-xl border border-outline-variant">
+        <h2 className="font-serif text-xl md:text-headline-md text-primary border-b border-outline-variant pb-base">
           Order Summary
         </h2>
 
         <div className="space-y-md py-md">
           {items.map((item) => (
-            <div key={item.id} className="flex gap-md">
+            <div key={item.id} className="flex gap-4 md:gap-md">
               <div className="h-20 w-20 rounded-lg overflow-hidden bg-surface-variant flex-shrink-0">
                 <img className="w-full h-full object-cover grayscale-[0.3]" src={item.image} alt={item.name} />
               </div>
@@ -29,7 +29,7 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
           <SummaryRow label="Shipping" value={formatCurrency(shipping)} />
           {discount > 0 && <SummaryRow label="Discount" value={`-${formatCurrency(discount)}`} />}
           <SummaryRow label="Estimated Tax" value={formatCurrency(tax)} />
-          <div className="flex justify-between font-serif text-headline-md text-primary pt-sm">
+          <div className="flex justify-between font-serif text-xl md:text-headline-md text-primary pt-sm gap-4">
             <span>Total</span>
             <span>{formatCurrency(total)}</span>
           </div>

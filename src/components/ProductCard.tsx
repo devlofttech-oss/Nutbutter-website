@@ -21,7 +21,7 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="product-card group bg-white rounded-[28px] border border-[#eadfd2] flex flex-col overflow-hidden shadow-[0_18px_45px_rgba(115,91,66,0.07)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(115,91,66,0.13)]">
+    <div className="product-card group bg-white rounded-[22px] md:rounded-[28px] border border-[#eadfd2] flex flex-col overflow-hidden shadow-[0_18px_45px_rgba(115,91,66,0.07)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(115,91,66,0.13)]">
       <div
         className="relative bg-[#f2e8df] overflow-hidden cursor-pointer flex items-center justify-center"
         style={{ aspectRatio: '1/1' }}
@@ -40,17 +40,17 @@ export default function ProductCard({ product }) {
         <img
           src={product.image}
           alt={product.name}
-          className="absolute inset-px z-10 h-[calc(100%-2px)] w-[calc(100%-2px)] object-cover rounded-[27px] shadow-[0_20px_50px_rgba(75,54,33,0.16)] transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-px z-10 h-[calc(100%-2px)] w-[calc(100%-2px)] object-cover rounded-[21px] md:rounded-[27px] shadow-[0_20px_50px_rgba(75,54,33,0.16)] transition-transform duration-700 group-hover:scale-105"
         />
       </div>
 
-      <div className="p-6 flex flex-col" style={{ flex: 1 }}>
+      <div className="p-4 sm:p-5 md:p-6 flex flex-col" style={{ flex: 1 }}>
         <p className="text-[11px] text-secondary uppercase font-bold mb-2 tracking-[0.2em]">
           {product.category}
         </p>
         <div className="flex justify-between items-start gap-4 mb-2">
-          <h3 className="font-serif text-2xl font-semibold text-primary leading-tight">{product.name}</h3>
-          <span className="font-serif text-xl font-semibold text-primary whitespace-nowrap">{price}</span>
+          <h3 className="font-serif text-xl md:text-2xl font-semibold text-primary leading-tight">{product.name}</h3>
+          <span className="font-serif text-lg md:text-xl font-semibold text-primary whitespace-nowrap">{price}</span>
         </div>
         <div className="flex items-center gap-1 mb-4">
           <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -60,12 +60,12 @@ export default function ProductCard({ product }) {
             {product.rating} ({product.reviews} reviews)
           </span>
         </div>
-        <p className="text-sm text-on-surface-variant mb-6 leading-6" style={{ flex: 1 }}>
+        <p className="text-sm text-on-surface-variant mb-5 md:mb-6 leading-6" style={{ flex: 1 }}>
           {product.description}
         </p>
         <button
           onClick={handleAddToCart}
-          className="w-full py-3.5 bg-[#3b2a18] text-white rounded-full text-xs font-bold uppercase tracking-[0.18em] flex items-center justify-center gap-2 hover:bg-[#8C7355] transition-colors"
+          className="w-full min-h-11 py-3 md:py-3.5 bg-[#3b2a18] text-white rounded-full text-xs font-bold uppercase tracking-[0.14em] md:tracking-[0.18em] flex items-center justify-center gap-2 hover:bg-[#8C7355] transition-colors"
           style={{ marginTop: 'auto' }}
           disabled={isAdding}
         >

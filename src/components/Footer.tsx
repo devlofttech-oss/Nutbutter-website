@@ -5,10 +5,10 @@ import logo from '../../assets/logo.png'
 export default function Footer() {
   return (
     <footer className="w-full border-t border-[#eadfd2] bg-[#f4e9dc]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-9 md:gap-12 mb-12 md:mb-14">
           <div className="md:pr-8">
-            <div className="flex items-center gap-3 text-xl font-serif font-bold tracking-[0.12em] uppercase text-[#4B3621] mb-5">
+            <div className="flex items-center gap-3 text-lg md:text-xl font-serif font-bold tracking-[0.1em] md:tracking-[0.12em] uppercase text-[#4B3621] mb-5">
               <img className="h-11 w-11 rounded-full object-cover" src={logo} alt="Satvegik logo" />
               <span>Satvegik</span>
             </div>
@@ -46,10 +46,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[#decdb8] pt-8 flex flex-col md:flex-row justify-between gap-4 text-center md:text-left">
-          <p className="text-[#4B3621] text-xs uppercase tracking-[0.2em] opacity-80">
+          <p className="text-[#4B3621] text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em] opacity-80">
             (c) 2024 Satvegik. Crafted for the slow pace.
           </p>
-          <p className="text-stone-500 text-xs uppercase tracking-[0.2em]">
+          <p className="text-stone-500 text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em]">
             Pure Ingredients / No Palm Oil / Small Batch
           </p>
         </div>

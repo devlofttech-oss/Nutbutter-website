@@ -10,10 +10,10 @@ export default function FaqPage() {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow max-w-7xl mx-auto w-full px-6 md:px-12 py-xl">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-12 md:py-xl">
         <FaqHero />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-xl">
           <FaqCategoryNav sections={FAQ_SECTIONS} />
 
           <div className="lg:col-span-9 space-y-xl">

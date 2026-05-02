@@ -1,14 +1,14 @@
 export default function PolicySection({ index, section }) {
   return (
     <article className="scroll-mt-32" id={section.id}>
-      <div className="flex items-center gap-4 mb-md">
-        <span className="text-tertiary-fixed-dim font-serif text-headline-md">
+      <div className="flex items-start gap-3 md:gap-4 mb-md">
+        <span className="text-tertiary-fixed-dim font-serif text-xl md:text-headline-md">
           {String(index + 1).padStart(2, '0')}.
         </span>
-        <h2 className="font-serif text-headline-lg text-primary">{section.title}</h2>
+        <h2 className="font-serif text-2xl md:text-headline-lg text-primary">{section.title}</h2>
       </div>
 
-      <div className="space-y-6 text-body-md text-on-surface-variant leading-relaxed">
+      <div className="space-y-6 text-base md:text-body-md text-on-surface-variant leading-7 md:leading-relaxed">
         {section.blocks.map((block, blockIndex) => (
           <PolicyBlock key={`${section.id}-${blockIndex}`} block={block} />
         ))}

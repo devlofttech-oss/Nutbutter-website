@@ -11,11 +11,11 @@ export default function PolicyPageTemplate({ policy }) {
       <main className="flex-grow">
         <PolicyHero policy={policy} />
 
-        <section className="pb-xl px-8 md:px-12">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-lg">
+        <section className="pb-16 md:pb-xl px-4 sm:px-6 md:px-12">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-lg">
             <PolicySidebar sections={policy.sections} />
 
-            <div className="md:col-span-9 space-y-xl">
+            <div className="md:col-span-9 space-y-12 md:space-y-xl">
               {policy.sections.map((section, index) => (
                 <PolicySection key={section.id} index={index} section={section} />
               ))}
