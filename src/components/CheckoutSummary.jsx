@@ -55,7 +55,7 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
           </p>
         )}
         <p className="text-center text-label-sm text-on-surface-variant italic">
-          Secure checkout powered by Artisan Nut Co.
+          Secure checkout powered by Satvegik
         </p>
       </div>
     </aside>

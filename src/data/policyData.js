@@ -11,11 +11,11 @@ const artisanWorkshopImages = [
 
 export const POLICIES = {
   privacy: {
-    eyebrow: 'Artisan Nut Co.',
+    eyebrow: 'Satvegik',
     title: 'Privacy Policy',
     effectiveDate: 'Effective as of May 14, 2024',
     intro:
-      'Your trust matters to us. This policy explains how we collect, use, and protect information when you browse, shop, or contact Artisan Nut Co.',
+      'Your trust matters to us. This policy explains how we collect, use, and protect information when you browse, shop, or contact Satvegik.',
     contactText: 'Questions about this Privacy Policy should be directed to our care team.',
     contactLabel: 'Contact Privacy Care',
     contactHref: 'mailto:privacy@artisannutco.com',
@@ -37,7 +37,7 @@ export const POLICIES = {
           {
             type: 'callout',
             text:
-              'We only ask for details that help us prepare your order, answer your questions, and keep your experience with Artisan Nut Co. smooth and personal.',
+              'We only ask for details that help us prepare your order, answer your questions, and keep your experience with Satvegik smooth and personal.',
           },
         ],
       },
@@ -67,7 +67,7 @@ export const POLICIES = {
           {
             type: 'paragraph',
             text:
-              'We do not sell your personal information. Service partners may use your information only to perform work for Artisan Nut Co. or as required by law.',
+              'We do not sell your personal information. Service partners may use your information only to perform work for Satvegik or as required by law.',
           },
         ],
       },
@@ -85,7 +85,7 @@ export const POLICIES = {
     ],
   },
   terms: {
-    eyebrow: 'Artisan Nut Co.',
+    eyebrow: 'Satvegik',
     title: 'Terms & Conditions',
     effectiveDate: 'Effective as of May 14, 2024',
     intro:
@@ -101,7 +101,7 @@ export const POLICIES = {
           {
             type: 'paragraph',
             text:
-              'By accessing Artisan Nut Co., you represent that you are at least the age of majority in your place of residence. You may not use our products or services for any illegal or unauthorized purpose.',
+              'By accessing Satvegik, you represent that you are at least the age of majority in your place of residence. You may not use our products or services for any illegal or unauthorized purpose.',
           },
           {
             type: 'paragraph',
@@ -141,12 +141,12 @@ export const POLICIES = {
           {
             type: 'paragraph',
             text:
-              'Artisan Nut Co. does not guarantee that your use of our service will be uninterrupted, timely, secure, or error-free. Your use of the service is at your sole risk.',
+              'Satvegik does not guarantee that your use of our service will be uninterrupted, timely, secure, or error-free. Your use of the service is at your sole risk.',
           },
           {
             type: 'paragraph',
             text:
-              'In no case shall Artisan Nut Co., our directors, employees, partners, or affiliates be liable for indirect, incidental, punitive, special, or consequential damages of any kind.',
+              'In no case shall Satvegik, our directors, employees, partners, or affiliates be liable for indirect, incidental, punitive, special, or consequential damages of any kind.',
           },
         ],
       },
@@ -157,7 +157,7 @@ export const POLICIES = {
           {
             type: 'paragraph',
             text:
-              'The website, product names, content, imagery, design, and trade dress are the property of Artisan Nut Co. or its licensors and may not be used without prior written consent.',
+              'The website, product names, content, imagery, design, and trade dress are the property of Satvegik or its licensors and may not be used without prior written consent.',
           },
           {
             type: 'images',
@@ -168,7 +168,7 @@ export const POLICIES = {
     ],
   },
   shipping: {
-    eyebrow: 'Artisan Nut Co.',
+    eyebrow: 'Satvegik',
     title: 'Shipping Policy',
     effectiveDate: 'Effective as of May 14, 2024',
     intro:
@@ -232,7 +232,7 @@ export const POLICIES = {
     ],
   },
   refund: {
-    eyebrow: 'Artisan Nut Co.',
+    eyebrow: 'Satvegik',
     title: 'Refund Policy',
     effectiveDate: 'Effective as of May 14, 2024',
     intro:

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
-import { fetchFeaturedProducts } from '../api/productApi.js'
+import { fetchProducts } from '../api/productApi.js'
 
 const benefits = [
   ['eco', '100% Natural'],
@@ -13,10 +13,10 @@ const benefits = [
 ]
 
 const useCases = [
-  ['Breakfast', 'Drizzled over overnight oats or artisan sourdough.'],
-  ['Gym', 'Clean protein fuel for your pre-workout boost.'],
-  ['Dessert', 'The perfect companion for dark chocolate and fruit.'],
-  ['Kids', 'Nutrition that actually tastes like a treat.'],
+  ['Breakfast', 'Drizzled over overnight oats or artisan sourdough.', 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=900&q=80'],
+  ['Gym', 'Clean protein fuel for your pre-workout boost.', 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80'],
+  ['Dessert', 'The perfect companion for dark chocolate and fruit.', 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80'],
+  ['Kids', 'Nutrition that actually tastes like a treat.', 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=900&q=80'],
 ]
 
 const testimonials = [
@@ -33,7 +33,7 @@ export default function HomePage() {
   useEffect(() => {
     let isMounted = true
 
-    fetchFeaturedProducts(4)
+    fetchProducts({ range: { from: 0, to: 2 } })
       .then(({ data }) => {
         if (!isMounted) return
         setFeaturedProducts(data)
@@ -118,9 +118,9 @@ export default function HomePage() {
           </div>
           {isLoadingProducts && <ProductGridMessage message="Loading curated products..." />}
           {!isLoadingProducts && productsError && <ProductGridMessage message="Products could not be loaded right now." />}
-          {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No featured products are available yet." />}
+          {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No products are available yet." />}
           {!isLoadingProducts && !productsError && featuredProducts.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
               ))}
@@ -144,16 +144,21 @@ export default function HomePage() {
         </section>
 
         {/* Use Case Section */}
-        <section id="why-choose-us" className="py-[120px] max-w-7xl mx-auto px-6 md:px-12">
+        <section className="py-[120px] max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-16">
             <h2 className="font-serif text-4xl text-on-surface">Made for Every Moment</h2>
             <p className="text-on-surface-variant mt-4">Versatile energy for your daily rituals.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {useCases.map(([title, body], index) => (
-              <div key={title} className={`p-10 h-80 flex flex-col justify-end group hover:bg-tertiary transition-colors duration-500 rounded-[28px] ${index % 2 ? 'bg-surface-container-high' : 'bg-surface-container-low'}`}>
-                <h4 className="font-serif text-2xl text-on-surface group-hover:text-on-tertiary transition-colors">{title}</h4>
-                <p className="text-on-surface-variant group-hover:text-on-tertiary/80 transition-colors mt-2">{body}</p>
+            {useCases.map(([title, body, image]) => (
+              <div key={title} className="relative h-80 overflow-hidden rounded-xl border border-white/60 bg-surface-container-low p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(115,91,66,0.09)] group">
+                <img className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105" src={image} alt={`${title} with nut butter`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2f2115]/80 via-[#4b3621]/35 to-white/20" />
+                <div className="absolute inset-0 backdrop-blur-[1px]" />
+                <div className="relative z-10">
+                  <h4 className="font-serif text-2xl text-white drop-shadow-sm">{title}</h4>
+                  <p className="mt-2 text-sm leading-6 text-white/90 drop-shadow-sm">{body}</p>
+                </div>
               </div>
             ))}
           </div>

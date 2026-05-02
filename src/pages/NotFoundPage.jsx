@@ -6,7 +6,7 @@ import Seo from '../components/Seo.jsx'
 export default function NotFoundPage() {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
-      <Seo title="Page Not Found | Artisan Nut Co." />
+      <Seo title="Page Not Found | Satvegik" />
       <Header />
       <main className="flex-grow max-w-7xl mx-auto w-full px-8 md:px-12 py-xl">
         <section className="bg-surface-container rounded-xl border border-outline-variant p-xl text-center">

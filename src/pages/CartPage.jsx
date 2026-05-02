@@ -23,15 +23,15 @@ export default function CartPage() {
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header cartCount={itemCount} />
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-8 md:px-12 py-xl">
-        <section className="mb-lg">
-          <nav className="flex items-center gap-2 mb-sm text-xs text-secondary uppercase tracking-widest">
-            <Link className="hover:text-primary transition-colors font-serif" to="/">Home</Link>
+      <main className="flex-grow max-w-7xl mx-auto w-full px-6 md:px-12 py-16 md:py-20">
+        <section className="mb-12">
+          <nav className="flex items-center gap-2 mb-5 text-xs text-secondary uppercase tracking-[0.16em]">
+            <Link className="hover:text-primary transition-colors font-semibold" to="/">Home</Link>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
-            <span className="text-primary font-semibold font-serif">Cart</span>
+            <span className="text-primary font-semibold">Cart</span>
           </nav>
-          <h1 className="font-serif text-headline-xl text-primary-container mb-sm">Your Cart</h1>
-          <p className="font-serif text-body-lg text-on-surface-variant max-w-2xl">
+          <h1 className="font-serif text-[42px] md:text-[58px] leading-tight text-primary-container mb-4">Your Cart</h1>
+          <p className="text-base md:text-lg leading-8 text-on-surface-variant max-w-2xl">
             Review your selection of artisanal nut butters, stone-ground for purity and slow-crafted for depth of flavor.
           </p>
         </section>
@@ -39,8 +39,8 @@ export default function CartPage() {
         {isLoading && <CartState message="Loading your cart..." />}
         {!isLoading && error && <CartState message="Your cart could not be loaded right now." />}
         {!isLoading && !error && cartItems.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
-            <section className="lg:col-span-8 space-y-md">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <section className="lg:col-span-8 space-y-5">
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id}
@@ -77,7 +77,7 @@ export default function CartPage() {
 
 function CartState({ message }) {
   return (
-    <section className="bg-surface-container rounded-xl border border-outline-variant p-xl text-center text-on-surface-variant">
+    <section className="bg-surface-container rounded-xl border border-outline-variant p-10 text-center text-base text-on-surface-variant">
       {message}
     </section>
   )
@@ -86,7 +86,7 @@ function CartState({ message }) {
 function ContinueShopping() {
   return (
     <Link
-      className="inline-flex items-center gap-3 text-label-md font-semibold text-secondary hover:text-primary-container transition-all pt-4"
+      className="inline-flex items-center gap-3 pt-4 text-sm font-bold uppercase tracking-[0.14em] text-secondary hover:text-primary-container transition-all"
       to="/shop"
     >
       <span className="material-symbols-outlined text-lg">arrow_back</span>
@@ -97,14 +97,14 @@ function ContinueShopping() {
 
 function EmptyCart() {
   return (
-    <section className="bg-surface-container rounded-xl border border-outline-variant p-xl text-center">
-      <span className="material-symbols-outlined text-5xl text-secondary mb-md">shopping_bag</span>
-      <h2 className="font-serif text-headline-lg text-primary mb-sm">Your cart is empty</h2>
-      <p className="text-body-md text-on-surface-variant max-w-lg mx-auto mb-md">
+    <section className="bg-surface-container rounded-xl border border-outline-variant p-10 md:p-16 text-center shadow-[0_18px_45px_rgba(115,91,66,0.06)]">
+      <span className="material-symbols-outlined text-5xl text-secondary mb-5">shopping_bag</span>
+      <h2 className="font-serif text-3xl text-primary mb-3">Your cart is empty</h2>
+      <p className="text-base leading-7 text-on-surface-variant max-w-lg mx-auto mb-6">
         Add a small-batch spread to begin building your next pantry ritual.
       </p>
       <Link to="/shop">
-        <button className="bg-primary-container text-on-primary px-lg py-sm rounded-lg text-sm font-semibold tracking-wide transition-all hover:opacity-90 active:scale-95">
+        <button className="bg-primary-container text-on-primary px-8 py-4 rounded-lg text-sm font-bold uppercase tracking-[0.14em] transition-all hover:opacity-90 active:scale-95">
           Continue Shopping
         </button>
       </Link>

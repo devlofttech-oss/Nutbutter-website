@@ -40,7 +40,7 @@ export default function ProductCard({ product }) {
         <img
           src={product.image}
           alt={product.name}
-          className="relative z-10 w-[82%] h-[82%] object-cover rounded-[22px] shadow-[0_20px_50px_rgba(75,54,33,0.16)] transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-px z-10 h-[calc(100%-2px)] w-[calc(100%-2px)] object-cover rounded-[27px] shadow-[0_20px_50px_rgba(75,54,33,0.16)] transition-transform duration-700 group-hover:scale-105"
         />
       </div>
 

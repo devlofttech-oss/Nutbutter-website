@@ -47,7 +47,7 @@ export default function BlogPage() {
         <section className="max-w-[1440px] mx-auto px-6 md:px-12 py-[120px] bg-secondary-container/20 text-center rounded-[32px] my-16">
           <h2 className="font-serif text-4xl text-on-surface mb-6">Share Your Creations</h2>
           <p className="text-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
-            We love seeing how you use Artisan Nut Co. Tag us in your kitchen moments for a chance to be featured.
+            We love seeing how you use Satvegik. Tag us in your kitchen moments for a chance to be featured.
           </p>
           <a className="inline-flex items-center gap-3 text-xs font-bold text-primary uppercase tracking-[0.18em] border-b-2 border-primary pb-1 hover:gap-5 transition-all" href="https://instagram.com">
             Follow us on Instagram <span className="material-symbols-outlined text-sm">arrow_forward</span>

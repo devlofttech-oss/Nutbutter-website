@@ -9,7 +9,7 @@ export const BRAND_STORY = {
   eyebrow: 'The Essence',
   title: 'Born from a Golden Standard',
   body: [
-    'Artisan Nut Co. was founded on a simple realization: true nutrition does not need complexity. We returned to the old rhythm of stone-grinding so every jar keeps the natural oils, body, and deep aroma of the raw nut.',
+    'Satvegik was founded on a simple realization: true nutrition does not need complexity. We returned to the old rhythm of stone-grinding so every jar keeps the natural oils, body, and deep aroma of the raw nut.',
     'Our process avoids the high-heat friction of industrial blades, preserving the earthy character of each harvest. We believe healthy living should feel generous, textured, and quietly indulgent.',
   ],
   image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDVxJ7oO35znyAUeh-6vaAwGikgevFwIwfzuph4bZcnfhXtLiC5VTYQZVkfZPfPBq3X4P5XYkJFY4gPUptXm6qaRKDR6MsHRw4sRvGFHLbpei2TZYBUHd-YH3L_KeXPcKdnFOmK8M17uxccbsP6Ju_kdKaXS3nh_w0F-V0BXzYY9iPOAuvj9Sx2sTz2C9G1Y8gesjro-pJay8q8_W-mxU1r5L_wDy0g29eDsgdAC5fMfYK1Nekg1xst_lXZkEUixx0b2KRT40nq0ow',
@@ -32,7 +32,7 @@ export const FOUNDER_STORY = {
   eyebrow: 'The Founder',
   title: 'A Personal Quest for Purity',
   quote: '"I could not find a nut butter that tasted like the ones from my grandmother\'s kitchen - rich, textured, and full of life. Everything on the shelf felt stripped of its soul."',
-  body: 'What started in a small home kitchen with a granite mortar became a journey across farming communities to source clean harvests and preserve them with patience. Artisan Nut Co. is a letter of appreciation to the land and the simple joy of real food.',
+  body: 'What started in a small home kitchen with a granite mortar became a journey across farming communities to source clean harvests and preserve them with patience. Satvegik is a letter of appreciation to the land and the simple joy of real food.',
   name: 'Elena Moretti',
   role: 'Founder & Head Artisan',
   image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCsmuxd-QsoK2evHTV7fanhk4ngS6kw2oNQMOUMv8njULi-5XNZXRoAW8lH7li4TC1rCPhMAELWWdXLn_6ALg9qsxXKRTt6F8pSd8A7Ah4eMN5oD_QE_EC3losNt064D2JnB2zcReKWLW2kYTwAhVAI2guVikDTy9eCKAwUCg-6ssHhUHRconHEskcQOW0sHt0GB-1eeypqbJEUeZYpyy8Y0R2_xrYknoUmwhRWOxvg6hoqUjzEppIrArdzTqoyn3f64ZXrYEpJRUc',

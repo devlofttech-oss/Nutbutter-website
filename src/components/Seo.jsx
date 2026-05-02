@@ -1,4 +1,4 @@
-export default function Seo({ title = 'Artisan Nut Co.', description = 'Premium stone-ground nut butters made in small batches.' }) {
+export default function Seo({ title = 'Satvegik', description = 'Premium stone-ground nut butters made in small batches.' }) {
   document.title = title
 
   const existingDescription = document.querySelector('meta[name="description"]')
@@ -12,4 +12,3 @@ export default function Seo({ title = 'Artisan Nut Co.', description = 'Premium 
 
   return null
 }
-

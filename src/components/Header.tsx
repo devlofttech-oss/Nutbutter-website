@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/constants.js'
 import { useAuthSession } from '../providers/AuthSessionProvider.jsx'
 import { useCart } from '../providers/CartProvider.jsx'
+import logo from '../../assets/logo.png'
 
 export default function Header({ cartCount }) {
   const { pathname } = useLocation()
@@ -16,10 +17,11 @@ export default function Header({ cartCount }) {
       <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-12 h-20 flex justify-between items-center w-full">
         <Link
           to="/"
-          className="text-xl md:text-2xl font-serif font-bold tracking-[0.12em] uppercase text-[#4B3621]"
+          className="flex items-center gap-3 text-xl md:text-2xl font-serif font-bold tracking-[0.12em] uppercase text-[#4B3621]"
           onClick={() => setMenuOpen(false)}
         >
-          Artisan Nut Co.
+          <img className="h-12 w-12 rounded-full object-cover shadow-[0_8px_22px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik logo" />
+          <span>Satvegik</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">

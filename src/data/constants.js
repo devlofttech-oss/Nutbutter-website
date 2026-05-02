@@ -4,7 +4,6 @@ export const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Recipes', href: '/blog' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Why Choose Us', href: '/#why-choose-us' },
 ]
 
 export const PRODUCTS = [

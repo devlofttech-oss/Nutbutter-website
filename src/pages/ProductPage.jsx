@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
+import EcommerceFaqSection from '../components/EcommerceFaqSection.jsx'
 import { fetchProductBySlugOrId, fetchProductReviews, fetchProducts, fetchRelatedProducts } from '../api/productApi.js'
 import { useCart } from '../providers/CartProvider.jsx'
 
@@ -259,13 +260,14 @@ export default function ProductPage() {
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div>
+          <div className="mb-[120px]">
             <h2 className="font-serif text-4xl mb-12">Complete Your Pantry</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedProducts.map((item) => <ProductCard key={item.id} product={item} />)}
             </div>
           </div>
         )}
+        <EcommerceFaqSection title="Product Questions" />
       </main>
       <Footer />
     </div>

@@ -43,7 +43,7 @@ export default function AboutPage() {
               <div className="inline-block px-4 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-[0.18em]">The Origin</div>
               <h2 className="font-serif text-4xl text-primary">Clean. Natural. Stone-Ground.</h2>
               <div className="space-y-6 text-lg leading-8 text-on-surface-variant">
-                <p>Artisan Nut Co. began in a small home kitchen with a simple observation: the world had forgotten what real food tastes like. Most nut butters were laden with emulsifiers, palm oils, and refined sugars.</p>
+                <p>Satvegik began in a small home kitchen with a simple observation: the world had forgotten what real food tastes like. Most nut butters were laden with emulsifiers, palm oils, and refined sugars.</p>
                 <p>Our mission was clear: return to the roots. We sought out the highest quality nuts from sustainable orchards and revived the ancient art of stone-grinding.</p>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function AboutPage() {
             <div className="md:col-span-3 space-y-6">
               <span className="material-symbols-outlined text-4xl text-primary/40">format_quote</span>
               <h2 className="font-serif text-4xl text-primary italic">"I wanted to create something my family could eat without question."</h2>
-              <p className="text-lg leading-8 text-on-surface-variant">Artisan Nut Co. was born from a personal journey toward simpler food. The secret was not more processing, but less: pure, unadulterated flavors of nature for people who value health and craft.</p>
+              <p className="text-lg leading-8 text-on-surface-variant">Satvegik was born from a personal journey toward simpler food. The secret was not more processing, but less: pure, unadulterated flavors of nature for people who value health and craft.</p>
               <div className="pt-4">
                 <p className="text-xs font-bold text-primary uppercase tracking-[0.2em]">Elena Vance</p>
                 <p className="text-secondary">Founder & Head Maker</p>

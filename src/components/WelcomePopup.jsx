@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PopupForm from './PopupForm.jsx'
-
-const popupImage =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuC45h7Yq0ffZbBm7RmLRXeiLNASRcfZspnt1QKvf22AKK14Ht8LlWh4AS-Bn5wxGme2fMno60LQMGdBgzuu4RNAzUPVZzV5FI0pBoLSlWWdY189gt_lLGrogTUc3RokMSLXgv2IHQnRCjHzH4fNOaahQiHn57pYBARmecQqRo94S1xUrsj0AUhNKaInGHqMwmEjFqpj6oyEHTeUqgW2YTc9VltMhRJ1xL-GzssIo4Y6CX0GDmhMAI9Yc61hoRXfy7p0Qzp6Bjm1Zq4'
+import popupVideo from '../../assets/popup.mp4'
 
 export default function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,10 +61,14 @@ export default function WelcomePopup() {
         </button>
 
         <div className="hidden md:block w-5/12 relative min-h-[520px] bg-surface-container">
-          <img
-            alt="Artisan kitchen setting with roasted nuts on a wooden board"
+          <video
+            aria-label="Satvegik nut butter welcome video"
+            autoPlay
             className="absolute inset-0 w-full h-full object-cover"
-            src={popupImage}
+            loop
+            muted
+            playsInline
+            src={popupVideo}
           />
           <div className="absolute inset-0 bg-primary/10" />
         </div>
@@ -74,7 +76,7 @@ export default function WelcomePopup() {
         <div className="flex-1 p-lg md:p-xl flex flex-col items-center text-center justify-center space-y-md">
           <div className="mb-xs">
             <span className="text-[#4B3621] font-serif text-headline-md font-bold italic tracking-tight">
-              PureGold Butters
+              Satvegik
             </span>
           </div>
 
