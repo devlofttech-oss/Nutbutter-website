@@ -12,22 +12,22 @@ export default function PaymentSuccessPage() {
   const [status, setStatus] = useState('verifying')
   const [message, setMessage] = useState('Verifying your payment...')
   const [order, setOrder] = useState(null)
-  const orderId = searchParams.get('order_id')
+  const checkoutSessionId = searchParams.get('checkout_session_id') ?? searchParams.get('order_id')
   const merchantOrderId = searchParams.get('merchant_order_id')
 
   useEffect(() => {
     let isMounted = true
 
     async function verifyPayment() {
-      if (!orderId || !merchantOrderId) {
+      if (!checkoutSessionId || !merchantOrderId) {
         setStatus('failed')
         setMessage('Payment verification details are missing.')
         return
       }
 
       try {
-        const result = await verifyPhonePePayment(orderId, merchantOrderId)
-        const orderData = await fetchOrderById(orderId)
+        const result = await verifyPhonePePayment(checkoutSessionId, merchantOrderId)
+        const orderData = result.orderId ? await fetchOrderById(result.orderId) : null
 
         if (!isMounted) return
 
@@ -55,7 +55,7 @@ export default function PaymentSuccessPage() {
     return () => {
       isMounted = false
     }
-  }, [clearCart, merchantOrderId, orderId, refreshCart])
+  }, [checkoutSessionId, clearCart, merchantOrderId, refreshCart])
 
   return (
     <PaymentResultShell
@@ -86,6 +86,12 @@ export function PaymentResultShell({ icon, title, message, order }) {
                 <span>Total</span>
                 <span className="font-semibold text-primary">{formatCurrency(order.total_amount)}</span>
               </div>
+              {order.shipments?.[0] && (
+                <div className="flex flex-col min-[380px]:flex-row min-[380px]:justify-between gap-1 min-[380px]:gap-4 text-base md:text-body-md text-on-surface-variant mt-sm">
+                  <span>Shipping</span>
+                  <span className="font-semibold text-primary">{order.shipments[0].awb_code ? `AWB ${order.shipments[0].awb_code}` : order.shipments[0].status.replaceAll('_', ' ')}</span>
+                </div>
+              )}
             </div>
           )}
           <div className="flex flex-col sm:flex-row justify-center gap-4">

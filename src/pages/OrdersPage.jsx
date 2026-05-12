@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import { fetchMyOrders } from '../api/orderApi.js'
+import { trackShipment } from '../api/shippingApi.js'
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
+  const [trackingOrderId, setTrackingOrderId] = useState('')
 
   useEffect(() => {
     let isMounted = true
@@ -31,6 +33,19 @@ export default function OrdersPage() {
       isMounted = false
     }
   }, [])
+
+  const refreshTracking = async (orderId) => {
+    setTrackingOrderId(orderId)
+    try {
+      await trackShipment(orderId)
+      const data = await fetchMyOrders()
+      setOrders(data)
+    } catch (trackingError) {
+      setError(trackingError.message)
+    } finally {
+      setTrackingOrderId('')
+    }
+  }
 
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
@@ -73,6 +88,30 @@ export default function OrdersPage() {
                     </div>
                   ))}
                 </div>
+                {order.shipments?.[0] && (
+                  <div className="mt-5 rounded-xl border border-outline-variant bg-surface-container-low p-4 text-sm text-on-surface-variant">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-secondary">Shipping</p>
+                        <p className="mt-1">
+                          {order.shipments[0].courier_name || order.shiprocket_courier_name || 'Shiprocket'} / {order.shipments[0].status.replaceAll('_', ' ')}
+                        </p>
+                        {order.shipments[0].awb_code && <p className="mt-1">AWB: {order.shipments[0].awb_code}</p>}
+                        {(order.shipments[0].estimated_delivery_date || order.estimated_delivery_date) && (
+                          <p className="mt-1">Estimated delivery: {new Date(order.shipments[0].estimated_delivery_date || order.estimated_delivery_date).toLocaleDateString('en-IN')}</p>
+                        )}
+                      </div>
+                      <button
+                        className="w-full md:w-auto rounded-full border border-primary px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-primary transition-all hover:bg-primary hover:text-on-primary disabled:opacity-60"
+                        type="button"
+                        disabled={!order.shipments[0].awb_code || trackingOrderId === order.id}
+                        onClick={() => refreshTracking(order.id)}
+                      >
+                        {trackingOrderId === order.id ? 'Refreshing...' : 'Refresh Tracking'}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </article>
             ))}
           </section>

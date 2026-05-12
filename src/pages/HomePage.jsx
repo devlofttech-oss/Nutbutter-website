@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
+import HeroCarousel from '../components/HeroCarousel.jsx'
 import ProductCard from '../components/ProductCard.tsx'
 import { fetchProducts } from '../api/productApi.js'
 
@@ -53,8 +54,6 @@ export default function HomePage() {
     }
   }, [])
 
-  const heroImage = featuredProducts[0]?.image ?? 'https://lh3.googleusercontent.com/aida-public/AB6AXuBQgoGqWY-as-IvbVBnMObJNMACBB3_HRIHRasjORwlM2d3Sp8DhNL5OCpNOKcQ-u4osRRfwOcnYBvANNQniUbYYSVYXi4KZ-f1eaKnovVPPNaWmZ1MTQM53aI5eh_id7Fk_lYfhK4y4nKjas4JcNy5I6rDjDQHN6x3Rd8r6EuD4JNnKNJQV7eysGTrUQ-N1ARwRtBP1dcIFewniX7vBSlqHEmMfhBA2sQQimuv8JtKIvuw5IuTly3sGGGRrpJ_ORMw-Yo0Gj-NhHk'
-
   return (
     <div className="bg-background text-on-surface">
       <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant px-4 py-2 text-center text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] border-b border-outline-variant/30">
@@ -84,11 +83,7 @@ export default function HomePage() {
             </div>
             <div className="relative flex justify-center">
               <div className="absolute -inset-10 bg-tertiary/5 rounded-full blur-3xl opacity-70" />
-              <img
-                alt="Artisanal Nut Butter Jar"
-                className="relative z-10 w-full max-w-sm md:max-w-md rounded-[24px] md:rounded-[32px] shadow-[0_35px_80px_rgba(111,88,60,0.18)] transition-transform duration-700 hover:scale-105"
-                src={heroImage}
-              />
+              <HeroCarousel className="group aspect-[4/5]" />
             </div>
           </div>
         </section>

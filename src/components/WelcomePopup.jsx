@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PopupForm from './PopupForm.jsx'
+import logo from '../../assets/logo.png'
 import popupVideo from '../../assets/popup.mp4'
 
 export default function WelcomePopup() {
@@ -75,9 +76,7 @@ export default function WelcomePopup() {
 
         <div className="flex-1 p-6 md:p-xl flex flex-col items-center text-center justify-center space-y-md">
           <div className="mb-xs">
-            <span className="text-[#4B3621] font-serif text-headline-md font-bold italic tracking-tight">
-              Satvegik
-            </span>
+            <img className="mx-auto h-16 w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
           </div>
 
           <div className="space-y-sm">

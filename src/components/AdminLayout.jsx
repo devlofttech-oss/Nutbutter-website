@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import logo from '../../assets/logo.png'
 
 const adminLinks = [
   ['Dashboard', '/admin'],
@@ -14,7 +15,9 @@ export default function AdminLayout({ title, children }) {
     <div className="min-h-screen bg-background text-on-surface">
       <header className="border-b border-outline-variant bg-white/85 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-3">
-          <Link className="font-serif font-bold tracking-[0.12em] uppercase text-primary" to="/">Satvegik</Link>
+          <Link className="inline-flex items-center self-center md:self-auto" to="/" aria-label="Satvegik home">
+            <img className="h-12 w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
+          </Link>
           <nav className="flex gap-4 overflow-x-auto text-xs font-bold uppercase tracking-[0.14em]">
             {adminLinks.map(([label, href]) => (
               <NavLink key={href} className={({ isActive }) => isActive ? 'text-primary border-b border-primary pb-1 whitespace-nowrap' : 'text-secondary hover:text-primary whitespace-nowrap'} end={href === '/admin'} to={href}>
@@ -31,4 +34,3 @@ export default function AdminLayout({ title, children }) {
     </div>
   )
 }
-

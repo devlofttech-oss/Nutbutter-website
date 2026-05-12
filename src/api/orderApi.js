@@ -1,4 +1,4 @@
-import { insertRows, selectRows } from './databaseApi.js'
+import { selectRows } from './databaseApi.js'
 import { SUPABASE_TABLES } from '../lib/supabase/tables.js'
 
 const ORDER_COLUMNS = `
@@ -16,6 +16,9 @@ const ORDER_COLUMNS = `
   total_amount,
   currency,
   delivery_method,
+  shiprocket_courier_id,
+  shiprocket_courier_name,
+  estimated_delivery_date,
   created_at,
   order_items (
     id,
@@ -33,73 +36,22 @@ const ORDER_COLUMNS = `
     merchant_order_id,
     status,
     amount
+  ),
+  shipments (
+    id,
+    provider,
+    status,
+    shiprocket_order_id,
+    shiprocket_shipment_id,
+    courier_company_id,
+    courier_name,
+    awb_code,
+    tracking_url,
+    estimated_delivery_date,
+    freight_charge,
+    last_tracked_at
   )
 `
-
-function createOrderNumber() {
-  const date = new Date()
-  const stamp = date.toISOString().slice(0, 10).replaceAll('-', '')
-  const random = Math.random().toString(36).slice(2, 8).toUpperCase()
-  return `ANC-${stamp}-${random}`
-}
-
-export async function saveAddress(userId, address) {
-  const [data] = await insertRows(SUPABASE_TABLES.addresses, {
-    user_id: userId,
-    full_name: address.fullName,
-    email: address.email,
-    phone: address.phone,
-    address_line1: address.address,
-    address_line2: address.addressLine2 || null,
-    city: address.city,
-    state: address.state,
-    pincode: address.pincode,
-    country: address.country || 'India',
-  })
-
-  return data
-}
-
-export async function createOrder({ userId, formValues, billingSameAsShipping, billingValues, cartItems, totals, deliveryMethod }) {
-  const shippingAddress = await saveAddress(userId, formValues)
-  const billingAddress = billingSameAsShipping
-    ? shippingAddress
-    : await saveAddress(userId, billingValues)
-
-  const [order] = await insertRows(SUPABASE_TABLES.orders, {
-    order_number: createOrderNumber(),
-    user_id: userId,
-    shipping_address_id: shippingAddress.id,
-    billing_address_id: billingAddress.id,
-    customer_email: formValues.email,
-    customer_phone: formValues.phone,
-    status: 'pending_payment',
-    payment_status: 'pending',
-    subtotal: totals.subtotal,
-    shipping_amount: totals.shipping,
-    tax_amount: totals.tax,
-    discount_amount: totals.discount,
-    total_amount: totals.total,
-    delivery_method: deliveryMethod,
-    billing_same_as_shipping: billingSameAsShipping,
-  })
-
-  const orderItems = cartItems.map((item) => ({
-    order_id: order.id,
-    product_id: item.productId,
-    product_name: item.name,
-    product_slug: item.product?.slug ?? null,
-    variant_label: item.variant,
-    quantity: item.quantity,
-    unit_price: item.price,
-    line_total: item.price * item.quantity,
-    image_url: item.image,
-  }))
-
-  await insertRows(SUPABASE_TABLES.orderItems, orderItems, { returning: false })
-
-  return order
-}
 
 export async function fetchMyOrders() {
   const { data } = await selectRows(SUPABASE_TABLES.orders, {
@@ -119,4 +71,3 @@ export async function fetchOrderById(orderId) {
 
   return data
 }
-

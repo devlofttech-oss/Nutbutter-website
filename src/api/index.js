@@ -1,4 +1,7 @@
 export * from './authApi.js'
+export * from './checkoutApi.js'
 export * from './databaseApi.js'
+export * from './orderApi.js'
+export * from './paymentApi.js'
 export * from './productApi.js'
-
+export * from './shippingApi.js'

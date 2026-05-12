@@ -2,7 +2,7 @@ import { requireSupabaseClient } from '../lib/supabaseClient.js'
 import { SUPABASE_TABLES } from '../lib/supabase/tables.js'
 
 const PRODUCT_COLUMNS = 'id, name, slug, sku, price, stock_quantity, is_featured, is_active, image_url, category_id, description, badge, rating, reviews_count, created_at, categories:category_id(id, name, slug)'
-const ORDER_COLUMNS = 'id, order_number, customer_email, customer_phone, status, payment_status, total_amount, created_at, order_items(id, product_name, quantity, line_total)'
+const ORDER_COLUMNS = 'id, order_number, customer_email, customer_phone, status, payment_status, total_amount, shipping_amount, shiprocket_courier_name, estimated_delivery_date, created_at, order_items(id, product_name, quantity, line_total), shipments(id, status, courier_name, awb_code, tracking_url, estimated_delivery_date)'
 
 export async function isCurrentUserAdmin(userId) {
   if (!userId) return false

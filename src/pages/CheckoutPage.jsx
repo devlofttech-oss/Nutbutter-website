@@ -6,8 +6,8 @@ import CheckoutForm from '../components/CheckoutForm.jsx'
 import DeliveryOptions from '../components/DeliveryOptions.jsx'
 import PaymentOptions from '../components/PaymentOptions.jsx'
 import CheckoutSummary from '../components/CheckoutSummary.jsx'
-import { CUSTOMER_FIELDS, DELIVERY_OPTIONS } from '../data/checkoutData.js'
-import { createOrder } from '../api/orderApi.js'
+import { CUSTOMER_FIELDS } from '../data/checkoutData.js'
+import { createCheckoutSession, estimateShipping } from '../api/checkoutApi.js'
 import { createPhonePePayment } from '../api/paymentApi.js'
 import { useAuthSession } from '../providers/AuthSessionProvider.jsx'
 import { useCart } from '../providers/CartProvider.jsx'
@@ -33,7 +33,10 @@ export default function CheckoutPage() {
   const [formValues, setFormValues] = useState(initialFormValues)
   const [billingValues, setBillingValues] = useState(initialFormValues)
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true)
-  const [selectedDelivery, setSelectedDelivery] = useState(DELIVERY_OPTIONS[0].id)
+  const [shippingQuote, setShippingQuote] = useState(null)
+  const [selectedCourierId, setSelectedCourierId] = useState(null)
+  const [isEstimatingShipping, setIsEstimatingShipping] = useState(false)
+  const [shippingError, setShippingError] = useState('')
   const [selectedPayment, setSelectedPayment] = useState('phonepe')
   const [errors, setErrors] = useState({})
   const [billingErrors, setBillingErrors] = useState({})
@@ -52,7 +55,49 @@ export default function CheckoutPage() {
     }))
   }, [user])
 
-  const shipping = DELIVERY_OPTIONS.find((option) => option.id === selectedDelivery)?.price ?? 0
+  useEffect(() => {
+    const pincode = formValues.pincode.trim()
+
+    setShippingError('')
+
+    if (!isAuthenticated || pincode.length !== 6 || cartItems.length === 0) {
+      setShippingQuote(null)
+      setSelectedCourierId(null)
+      return undefined
+    }
+
+    let isMounted = true
+    const timeoutId = window.setTimeout(() => {
+      setIsEstimatingShipping(true)
+      estimateShipping(pincode)
+        .then((quote) => {
+          if (!isMounted) return
+          setShippingQuote(quote)
+          setSelectedCourierId((currentId) => (
+            quote.couriers?.some((courier) => Number(courier.courierId) === Number(currentId))
+              ? currentId
+              : quote.recommendedCourier?.courierId ?? quote.couriers?.[0]?.courierId ?? null
+          ))
+        })
+        .catch((error) => {
+          if (!isMounted) return
+          setShippingQuote(null)
+          setSelectedCourierId(null)
+          setShippingError(error.message)
+        })
+        .finally(() => {
+          if (isMounted) setIsEstimatingShipping(false)
+        })
+    }, 450)
+
+    return () => {
+      isMounted = false
+      window.clearTimeout(timeoutId)
+    }
+  }, [cartItems.length, formValues.pincode, isAuthenticated])
+
+  const selectedCourier = shippingQuote?.couriers?.find((courier) => Number(courier.courierId) === Number(selectedCourierId))
+  const shipping = selectedCourier?.freightCharge ?? 0
   const discount = 0
   const tax = useMemo(() => Math.round((subtotal - discount) * 0.05), [discount, subtotal])
   const total = Math.max(subtotal - discount + shipping + tax, 0)
@@ -91,19 +136,21 @@ export default function CheckoutPage() {
       return
     }
 
+    if (!selectedCourierId) {
+      setCheckoutError('Please enter a serviceable pincode and select a shipping method.')
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
-      const order = await createOrder({
-        userId: user.id,
-        formValues,
+      const session = await createCheckoutSession({
+        shippingAddress: formValues,
         billingSameAsShipping,
-        billingValues,
-        cartItems,
-        totals: { subtotal, shipping, tax, discount, total },
-        deliveryMethod: selectedDelivery,
+        billingAddress: billingSameAsShipping ? null : billingValues,
+        selectedCourierId,
       })
-      const payment = await createPhonePePayment(order.id)
+      const payment = await createPhonePePayment(session.checkoutSessionId)
 
       setOrderPlaced(true)
 
@@ -163,8 +210,20 @@ export default function CheckoutPage() {
               {!billingSameAsShipping && (
                 <CheckoutForm values={billingValues} errors={billingErrors} title="Billing Address" onChange={handleBillingInputChange} />
               )}
-              <DeliveryOptions selectedDelivery={selectedDelivery} onChange={setSelectedDelivery} />
-              <PaymentOptions selectedPayment={selectedPayment} onChange={setSelectedPayment} />
+              <DeliveryOptions
+                codAvailable={Boolean(shippingQuote?.codAvailable)}
+                couriers={shippingQuote?.couriers ?? []}
+                error={shippingError}
+                isLoading={isEstimatingShipping}
+                pincode={formValues.pincode.trim()}
+                selectedCourierId={selectedCourierId}
+                onChange={setSelectedCourierId}
+              />
+              <PaymentOptions
+                codAvailable={Boolean(shippingQuote?.codAvailable)}
+                selectedPayment={selectedPayment}
+                onChange={setSelectedPayment}
+              />
             </div>
 
             <CheckoutSummary
@@ -176,6 +235,7 @@ export default function CheckoutPage() {
               total={total}
               orderPlaced={orderPlaced}
               isSubmitting={isSubmitting}
+              isDisabled={!selectedCourierId || isEstimatingShipping}
               error={checkoutError}
               onPlaceOrder={handleSubmit}
             />

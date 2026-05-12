@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { HERO_SLIDES } from '../data/heroSlides.js'
 
-const AUTOPLAY_DELAY = 3600
+const AUTOPLAY_DELAY = 3800
 const SWIPE_THRESHOLD = 48
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ className = '' }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef(null)
@@ -54,9 +53,9 @@ export default function HeroCarousel() {
   }
 
   return (
-    <section
+    <div
       aria-label="Featured nut butter carousel"
-      className="relative h-[78vh] min-h-[600px] max-h-[860px] overflow-hidden bg-surface-container-low"
+      className={`relative z-10 w-full max-w-sm md:max-w-md overflow-hidden rounded-[24px] md:rounded-[32px] bg-surface-container-low shadow-[0_35px_80px_rgba(111,88,60,0.18)] transition-transform duration-700 hover:scale-105 ${className}`}
       onFocus={() => setIsPaused(true)}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -67,10 +66,10 @@ export default function HeroCarousel() {
         const isActive = index === activeIndex
 
         return (
-          <div
+          <figure
             aria-hidden={!isActive}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-out ${
-              isActive ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.035]'
             }`}
             key={slide.id}
           >
@@ -79,52 +78,35 @@ export default function HeroCarousel() {
               className="h-full w-full object-cover"
               src={slide.image}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-[#F5EFE6]/20 to-[#fff9ef]/85" />
-            <div className="absolute inset-0 bg-primary/5" />
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#4B3621]/10 via-transparent to-white/20" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#fff9ef]/45 to-transparent" />
+          </figure>
         )
       })}
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <p className="mb-sm text-xs font-bold uppercase tracking-[0.32em] text-secondary">
-          {HERO_SLIDES[activeIndex].name}
-        </p>
-        <h1 className="font-serif text-[46px] leading-[1.05] md:text-[72px] text-primary mb-md max-w-4xl">
-          Stone-Ground Nut Butters
-        </h1>
-        <p className="text-body-lg text-on-surface-variant mb-lg tracking-wide max-w-2xl">
-          Pure ingredients, pastel pantry rituals, and a richer small-batch texture made for modern nourishment.
-        </p>
-        <Link to="/shop">
-          <button className="bg-[#3b2a18] text-white px-xl py-sm rounded-full text-label-md font-bold uppercase tracking-[0.18em] hover:bg-[#8C7355] hover:shadow-[0_18px_35px_rgba(75,54,33,0.22)] hover:-translate-y-1 transition-all duration-500 active:scale-95">
-            Shop Now
-          </button>
-        </Link>
-      </div>
-
       <button
         aria-label="Previous slide"
-        className="absolute inset-y-0 left-base md:left-md flex items-center text-primary hover:opacity-60 transition-opacity"
+        className="absolute inset-y-0 left-3 hidden items-center text-primary opacity-0 transition-opacity duration-300 hover:opacity-80 md:flex md:group-hover:opacity-100"
         type="button"
         onClick={goToPrevious}
       >
-        <span className="material-symbols-outlined rounded-full bg-white/70 p-base backdrop-blur-md shadow-sm">
+        <span className="material-symbols-outlined rounded-full bg-white/70 p-2 backdrop-blur-md shadow-sm">
           chevron_left
         </span>
       </button>
 
       <button
         aria-label="Next slide"
-        className="absolute inset-y-0 right-base md:right-md flex items-center text-primary hover:opacity-60 transition-opacity"
+        className="absolute inset-y-0 right-3 hidden items-center text-primary opacity-0 transition-opacity duration-300 hover:opacity-80 md:flex md:group-hover:opacity-100"
         type="button"
         onClick={goToNext}
       >
-        <span className="material-symbols-outlined rounded-full bg-white/70 p-base backdrop-blur-md shadow-sm">
+        <span className="material-symbols-outlined rounded-full bg-white/70 p-2 backdrop-blur-md shadow-sm">
           chevron_right
         </span>
       </button>
 
-      <div className="absolute bottom-lg left-1/2 flex -translate-x-1/2 gap-sm">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-white/45 px-3 py-2 backdrop-blur-md">
         {HERO_SLIDES.map((slide, index) => (
           <button
             aria-label={`Show ${slide.name}`}
@@ -138,6 +120,6 @@ export default function HeroCarousel() {
           />
         ))}
       </div>
-    </section>
+    </div>
   )
 }

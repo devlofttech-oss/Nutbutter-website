@@ -1,4 +1,6 @@
-export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, error = '' }) {
+import logo from '../../assets/logo.png'
+
+export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, isDisabled = false, error = '' }) {
   return (
     <aside className="w-full lg:w-[400px] flex-shrink-0">
       <div className="lg:sticky lg:top-24 space-y-md p-5 md:p-lg bg-surface-container-low rounded-xl border border-outline-variant">
@@ -39,9 +41,9 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
           className="w-full bg-primary-container text-on-primary py-md rounded-lg text-label-md font-semibold uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all mt-lg"
           type="button"
           onClick={onPlaceOrder}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isDisabled}
         >
-          {isSubmitting ? 'Redirecting...' : 'Place Order'}
+          {isSubmitting ? 'Redirecting...' : isDisabled ? 'Select Shipping' : 'Place Order'}
         </button>
 
         {error && (
@@ -54,9 +56,10 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
             Order details captured. We will confirm shortly.
           </p>
         )}
-        <p className="text-center text-label-sm text-on-surface-variant italic">
-          Secure checkout powered by Satvegik
-        </p>
+        <div className="flex items-center justify-center gap-2 text-label-sm text-on-surface-variant italic">
+          <span>Secure checkout powered by</span>
+          <img className="h-7 w-auto object-contain opacity-85" src={logo} alt="Satvegik" />
+        </div>
       </div>
     </aside>
   )

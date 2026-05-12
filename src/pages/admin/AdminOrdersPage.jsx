@@ -44,6 +44,11 @@ export default function AdminOrdersPage() {
                 <div>
                   <h2 className="font-serif text-xl text-primary">{order.order_number}</h2>
                   <p className="text-sm text-on-surface-variant">{order.customer_email} / {new Date(order.created_at).toLocaleDateString('en-IN')}</p>
+                  {order.shipments?.[0] && (
+                    <p className="text-sm text-on-surface-variant mt-1">
+                      {order.shipments[0].courier_name || order.shiprocket_courier_name || 'Shiprocket'} / {order.shipments[0].awb_code || order.shipments[0].status}
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="font-serif text-xl text-primary">{formatCurrency(order.total_amount)}</span>
@@ -68,4 +73,3 @@ function EmptyState({ message }) {
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(Number(value) || 0)
 }
-

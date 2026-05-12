@@ -8,9 +8,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-9 md:gap-12 mb-12 md:mb-14">
           <div className="md:pr-8">
-            <div className="flex items-center gap-3 text-lg md:text-xl font-serif font-bold tracking-[0.1em] md:tracking-[0.12em] uppercase text-[#4B3621] mb-5">
-              <img className="h-11 w-11 rounded-full object-cover" src={logo} alt="Satvegik logo" />
-              <span>Satvegik</span>
+            <div className="mb-5">
+              <img className="h-14 w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
             </div>
             <p className="text-sm text-stone-600 font-serif leading-7">
               Premium stone-ground nut butters made in small batches with clean ingredients, patient craft, and a naturally luxurious finish.

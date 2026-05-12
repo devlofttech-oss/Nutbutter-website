@@ -17,11 +17,11 @@ export default function Header({ cartCount }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 xl:px-12 h-16 md:h-20 flex justify-between items-center w-full">
         <Link
           to="/"
-          className="flex min-w-0 items-center gap-2.5 md:gap-3 text-lg sm:text-xl md:text-2xl font-serif font-bold tracking-[0.08em] md:tracking-[0.12em] uppercase text-[#4B3621]"
+          className="flex min-w-0 items-center"
           onClick={() => setMenuOpen(false)}
+          aria-label="Satvegik home"
         >
-          <img className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shadow-[0_8px_22px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik logo" />
-          <span className="truncate">Satvegik</span>
+          <img className="h-12 w-auto md:h-14 object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.13)]" src={logo} alt="Satvegik" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">

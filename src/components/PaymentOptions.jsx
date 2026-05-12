@@ -3,10 +3,11 @@ const PAYMENT_OPTIONS = [
     id: 'phonepe',
     title: 'PhonePe Secure Checkout',
     icon: 'account_balance_wallet',
+    description: 'Pay online with UPI, cards, wallets, or netbanking.',
   },
 ]
 
-export default function PaymentOptions({ selectedPayment, onChange }) {
+export default function PaymentOptions({ selectedPayment, onChange, codAvailable = false }) {
   return (
     <section className="space-y-md">
       <h2 className="font-serif text-xl md:text-headline-md text-primary flex items-center gap-base border-b border-outline-variant pb-base">
@@ -34,12 +35,18 @@ export default function PaymentOptions({ selectedPayment, onChange }) {
               style={{ accentColor: '#33210d' }}
             />
             <div className="flex-grow flex items-center justify-between gap-4">
-              <span className="text-label-md font-semibold text-primary">{option.title}</span>
+              <span>
+                <span className="block text-label-md font-semibold text-primary">{option.title}</span>
+                <span className="block text-label-sm text-on-surface-variant mt-1">{option.description}</span>
+              </span>
               <span className="material-symbols-outlined text-on-surface-variant">{option.icon}</span>
             </div>
           </label>
         ))}
       </div>
+      <p className="text-label-sm text-on-surface-variant">
+        Cash on Delivery: <span className="font-semibold text-primary">{codAvailable ? 'available for this pincode, but online checkout is enabled for this storefront' : 'not available for this pincode'}</span>
+      </p>
     </section>
   )
 }

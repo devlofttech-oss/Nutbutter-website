@@ -1,9 +1,9 @@
 import { requireSupabaseClient } from '../lib/supabaseClient.js'
 
-export async function createPhonePePayment(orderId) {
+export async function createPhonePePayment(checkoutSessionId) {
   const supabase = requireSupabaseClient()
   const { data, error } = await supabase.functions.invoke('create-phonepe-payment', {
-    body: { orderId },
+    body: { checkoutSessionId },
   })
 
   if (error) throw error
@@ -12,10 +12,10 @@ export async function createPhonePePayment(orderId) {
   return data
 }
 
-export async function verifyPhonePePayment(orderId, merchantOrderId) {
+export async function verifyPhonePePayment(checkoutSessionId, merchantOrderId) {
   const supabase = requireSupabaseClient()
   const { data, error } = await supabase.functions.invoke('verify-phonepe-payment', {
-    body: { orderId, merchantOrderId },
+    body: { checkoutSessionId, merchantOrderId },
   })
 
   if (error) throw error
