@@ -2,7 +2,7 @@ export default function WhatsAppCTA() {
   return (
     <a
       className="flex items-center justify-between p-md bg-[#25D366]/10 rounded-lg border border-[#25D366]/20 group transition-all duration-300 hover:bg-[#25D366]/20"
-      href="https://wa.me/919876543210"
+      href="https://wa.me/919607195225"
       rel="noreferrer"
       target="_blank"
     >

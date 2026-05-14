@@ -15,4 +15,6 @@ export const SUPABASE_TABLES = {
   newsletterSubscribers: 'newsletter_subscribers',
   adminRoles: 'admin_roles',
   coupons: 'coupons',
+  orderTimelineEvents: 'order_timeline_events',
+  emailEvents: 'email_events',
 }

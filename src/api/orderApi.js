@@ -50,6 +50,14 @@ const ORDER_COLUMNS = `
     estimated_delivery_date,
     freight_charge,
     last_tracked_at
+  ),
+  order_timeline_events (
+    id,
+    status,
+    label,
+    description,
+    occurred_at,
+    metadata
   )
 `
 

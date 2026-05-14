@@ -57,7 +57,7 @@ export default function HomePage() {
   return (
     <div className="bg-background text-on-surface">
       <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant px-4 py-2 text-center text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] border-b border-outline-variant/30">
-        Join the heritage club and receive 10% off your first order
+        Satvegik • Stone-Ground • Savoury • Gourmet • Home-Grown
       </div>
       <Header />
 
@@ -67,10 +67,10 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 items-center gap-10 md:gap-16">
             <div className="space-y-6 md:space-y-8">
               <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
-                Pure. Natural. <br /><span className="italic font-normal">Delicious Nut Butters.</span>
+                Satvegik. <br /><span className="italic font-normal">Stone-Ground Nut & SeedButters.</span>
               </h1>
               <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
-                Hand-crafted in small batches using premium, stone-ground heritage nuts. No additives, just the honest taste of nature's finest ingredients.
+                Home-grown ingredients, savoury craft, and patient stone-grinding come together in small-batch spreads with a naturally luxurious finish.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 md:pt-4">
                 <Link to="/shop" className="w-full sm:w-auto text-center bg-primary text-on-primary px-8 md:px-10 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-primary-container transition-colors shadow-lg shadow-primary/10">

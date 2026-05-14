@@ -58,7 +58,7 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
         )}
         <div className="flex items-center justify-center gap-2 text-label-sm text-on-surface-variant italic">
           <span>Secure checkout powered by</span>
-          <img className="h-7 w-auto object-contain opacity-85" src={logo} alt="Satvegik" />
+          <img className="h-[55px] w-auto object-contain opacity-85" src={logo} alt="Satvegik" />
         </div>
       </div>
     </aside>

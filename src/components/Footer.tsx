@@ -9,10 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-9 md:gap-12 mb-12 md:mb-14">
           <div className="md:pr-8">
             <div className="mb-5">
-              <img className="h-14 w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
+              <img className="h-[109px] w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
             </div>
             <p className="text-sm text-stone-600 font-serif leading-7">
-              Premium stone-ground nut butters made in small batches with clean ingredients, patient craft, and a naturally luxurious finish.
+              Satvegik makes stone-ground, savoury, gourmet nut butters from home-grown ingredients with patient craft and a naturally luxurious finish.
+            </p>
+            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#4B3621]">
+              Stone-Ground • Savoury • Gourmet • Home-Grown
             </p>
             <Link
               to="/contact"
@@ -49,7 +52,7 @@ export default function Footer() {
             (c) 2024 Satvegik. Crafted for the slow pace.
           </p>
           <p className="text-stone-500 text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em]">
-            Pure Ingredients / No Palm Oil / Small Batch
+            Mob: 9607195225 / Email: Satvegik@gmail.com
           </p>
         </div>
       </div>

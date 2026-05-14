@@ -1,6 +1,20 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { corsHeaders, jsonResponse } from '../_shared/cors.ts'
+import { addTimelineEvent } from '../_shared/fulfillment.ts'
 import { trackShiprocketAwb } from '../_shared/shiprocket.ts'
+
+function getTrackingStatus(payload: Record<string, unknown>) {
+  const trackingData = payload.tracking_data as Record<string, unknown> | undefined
+  const shipmentTrack = trackingData?.shipment_track as Array<Record<string, unknown>> | undefined
+  const current = shipmentTrack?.[0] ?? trackingData ?? payload
+  const status = String(current.current_status ?? current.shipment_status ?? current.status ?? '').toLowerCase()
+
+  if (status.includes('delivered')) return 'delivered'
+  if (status.includes('out for delivery') || status.includes('ofd')) return 'out_for_delivery'
+  if (status.includes('transit') || status.includes('shipped') || status.includes('pickup')) return 'in_transit'
+
+  return ''
+}
 
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') {
@@ -47,13 +61,25 @@ Deno.serve(async (request) => {
     if (!shipment.awb_code) return jsonResponse({ shipment, tracking: null })
 
     const tracking = await trackShiprocketAwb(shipment.awb_code)
+    const nextStatus = getTrackingStatus(tracking)
     await serviceClient
       .from('shipments')
       .update({
+        ...(nextStatus ? { status: nextStatus } : {}),
         tracking_response: tracking,
         last_tracked_at: new Date().toISOString(),
+        failure_reason: null,
       })
       .eq('id', shipment.id)
+
+    if (nextStatus === 'out_for_delivery') {
+      await addTimelineEvent(serviceClient, orderId, 'out_for_delivery', 'Out For Delivery', 'Your order is out for delivery.', { awbCode: shipment.awb_code })
+    }
+
+    if (nextStatus === 'delivered') {
+      await addTimelineEvent(serviceClient, orderId, 'delivered', 'Delivered', 'Your order has been delivered.', { awbCode: shipment.awb_code })
+      await serviceClient.from('orders').update({ status: 'delivered' }).eq('id', orderId)
+    }
 
     return jsonResponse({ shipment, tracking })
   } catch (error) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchAdminOrders, updateAdminOrderStatus } from '../../api/adminApi.js'
 import AdminLayout from '../../components/AdminLayout.jsx'
+import OrderTimeline from '../../components/OrderTimeline.jsx'
 import PageLoader from '../../components/PageLoader.jsx'
 import { useToast } from '../../providers/ToastProvider.jsx'
 
@@ -49,6 +50,9 @@ export default function AdminOrdersPage() {
                       {order.shipments[0].courier_name || order.shiprocket_courier_name || 'Shiprocket'} / {order.shipments[0].awb_code || order.shipments[0].status}
                     </p>
                   )}
+                  {order.shipments?.[0]?.failure_reason && (
+                    <p className="text-sm text-error mt-1">{order.shipments[0].failure_reason}</p>
+                  )}
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="font-serif text-xl text-primary">{formatCurrency(order.total_amount)}</span>
@@ -56,6 +60,9 @@ export default function AdminOrdersPage() {
                     {statuses.map((status) => <option key={status} value={status}>{status}</option>)}
                   </select>
                 </div>
+              </div>
+              <div className="mt-5 rounded-xl border border-outline-variant bg-surface-container-low p-4">
+                <OrderTimeline compact events={order.order_timeline_events ?? []} />
               </div>
             </article>
           ))}

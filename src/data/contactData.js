@@ -2,12 +2,12 @@ export const CONTACT_INFO = [
   {
     icon: 'mail',
     title: 'Email',
-    lines: ['hello@artisannutco.com', 'wholesale@artisannutco.com'],
+    lines: ['Satvegik@gmail.com'],
   },
   {
     icon: 'call',
     title: 'Phone',
-    lines: ['+91 98765 43210', 'Mon - Fri, 9am - 5pm IST'],
+    lines: ['+91 9607195225', 'Stone-Ground • Savoury • Gourmet • Home-Grown'],
   },
   {
     icon: 'location_on',
@@ -24,7 +24,7 @@ export const CONTACT_INFO = [
 export const CONTACT_FIELDS = [
   { name: 'fullName', label: 'Full Name', type: 'text', placeholder: 'e.g. Julian Vane', required: true },
   { name: 'email', label: 'Email Address', type: 'email', placeholder: 'julian@example.com', required: true },
-  { name: 'phone', label: 'Phone', type: 'tel', placeholder: '+91 98765 43210', required: false },
+  { name: 'phone', label: 'Phone', type: 'tel', placeholder: '+91 9607195225', required: false },
 ]
 
 export const MAP_DETAILS = {

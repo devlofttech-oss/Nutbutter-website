@@ -37,13 +37,29 @@ Deno.serve(async (request) => {
       return jsonResponse({ error: 'Checkout session not found.' }, 404)
     }
 
-    if (!['draft', 'payment_failed'].includes(session.status)) {
+    if (!['draft', 'payment_failed', 'payment_pending'].includes(session.status)) {
       return jsonResponse({ error: 'Checkout session is not payable.' }, 400)
     }
 
     if (new Date(session.expires_at).getTime() < Date.now()) {
       await serviceClient.from('checkout_sessions').update({ status: 'expired' }).eq('id', session.id)
       return jsonResponse({ error: 'Checkout session has expired. Please refresh shipping and try again.' }, 400)
+    }
+
+    const { data: existingPayment, error: existingPaymentError } = await serviceClient
+      .from('payments')
+      .select('checkout_session_id, merchant_order_id, payment_url, status')
+      .eq('idempotency_key', `phonepe:${session.id}`)
+      .maybeSingle()
+
+    if (existingPaymentError) throw existingPaymentError
+    if (existingPayment?.payment_url && ['created', 'pending'].includes(existingPayment.status)) {
+      return jsonResponse({
+        checkoutSessionId: existingPayment.checkout_session_id,
+        merchantOrderId: existingPayment.merchant_order_id,
+        redirectUrl: existingPayment.payment_url,
+        reused: true,
+      })
     }
 
     const merchantOrderId = `SAT-${Date.now()}-${session.id.slice(0, 8).toUpperCase()}`
@@ -85,6 +101,7 @@ Deno.serve(async (request) => {
       checkout_session_id: session.id,
       provider: 'phonepe',
       merchant_order_id: merchantOrderId,
+      idempotency_key: `phonepe:${session.id}`,
       amount: session.total_amount,
       currency: session.currency,
       status: phonePeResponse.ok ? 'pending' : 'failed',

@@ -14,14 +14,14 @@ export default function Header({ cartCount }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#eadfd2]/80 bg-white/85 shadow-[0_18px_45px_rgba(115,91,66,0.06)] backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 xl:px-12 h-16 md:h-20 flex justify-between items-center w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 xl:px-12 h-[101px] md:h-[120px] flex justify-between items-center w-full">
         <Link
           to="/"
           className="flex min-w-0 items-center"
           onClick={() => setMenuOpen(false)}
           aria-label="Satvegik home"
         >
-          <img className="h-12 w-auto md:h-14 object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.13)]" src={logo} alt="Satvegik" />
+          <img className="h-[91px] w-auto md:h-[109px] object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.13)]" src={logo} alt="Satvegik" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">

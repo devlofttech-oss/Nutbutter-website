@@ -2,7 +2,7 @@ import { requireSupabaseClient } from '../lib/supabaseClient.js'
 import { SUPABASE_TABLES } from '../lib/supabase/tables.js'
 
 const PRODUCT_COLUMNS = 'id, name, slug, sku, price, stock_quantity, is_featured, is_active, image_url, category_id, description, badge, rating, reviews_count, created_at, categories:category_id(id, name, slug)'
-const ORDER_COLUMNS = 'id, order_number, customer_email, customer_phone, status, payment_status, total_amount, shipping_amount, shiprocket_courier_name, estimated_delivery_date, created_at, order_items(id, product_name, quantity, line_total), shipments(id, status, courier_name, awb_code, tracking_url, estimated_delivery_date)'
+const ORDER_COLUMNS = 'id, order_number, customer_email, customer_phone, status, payment_status, total_amount, shipping_amount, shiprocket_courier_name, estimated_delivery_date, created_at, order_items(id, product_name, quantity, line_total), shipments(id, status, courier_name, awb_code, tracking_url, estimated_delivery_date, failure_reason, retry_count), order_timeline_events(id, status, label, description, occurred_at, metadata)'
 
 export async function isCurrentUserAdmin(userId) {
   if (!userId) return false
@@ -33,6 +33,10 @@ export async function fetchAdminStats() {
   })
 
   const revenue = (orders.data ?? []).reduce((sum, order) => sum + Number(order.total_amount ?? 0), 0)
+  const recentOrders = (orders.data ?? [])
+    .slice()
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, 5)
 
   return {
     productCount: products.count ?? 0,
@@ -40,6 +44,7 @@ export async function fetchAdminStats() {
     openMessages: messages.count ?? 0,
     activeCoupons: coupons.count ?? 0,
     revenue,
+    recentOrders,
   }
 }
 

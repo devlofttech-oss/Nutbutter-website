@@ -1,4 +1,4 @@
-export default function Seo({ title = 'Satvegik', description = 'Premium stone-ground nut butters made in small batches.' }) {
+export default function Seo({ title = 'Satvegik', description = 'Stone-ground, savoury, gourmet, home-grown nut butters by Satvegik.' }) {
   document.title = title
 
   const existingDescription = document.querySelector('meta[name="description"]')

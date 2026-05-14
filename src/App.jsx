@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import AboutPage from './pages/AboutPage.jsx'
 import BlogPage from './pages/BlogPage.jsx'
@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import LogoutPage from './pages/LogoutPage.jsx'
 import OrdersPage from './pages/OrdersPage.jsx'
+import OrderDetailPage from './pages/OrderDetailPage.jsx'
 import PaymentFailedPage from './pages/PaymentFailedPage.jsx'
 import PaymentSuccessPage from './pages/PaymentSuccessPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
@@ -37,6 +38,9 @@ const AdminMessagesPage = lazy(() => import('./pages/admin/AdminMessagesPage.jsx
 const AdminCouponsPage = lazy(() => import('./pages/admin/AdminCouponsPage.jsx'))
 
 export default function App() {
+  const { pathname } = useLocation()
+  const isHomePage = pathname === '/'
+
   return (
     <>
       <Seo />
@@ -57,6 +61,7 @@ export default function App() {
         <Route path="/auth/callback" element={<AuthCallbackPage />} />
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+        <Route path="/orders/:orderId" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
         <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccessPage /></ProtectedRoute>} />
         <Route path="/payment/failed" element={<ProtectedRoute><PaymentFailedPage /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading admin..." />}><AdminDashboardPage /></Suspense></AdminRoute>} />
@@ -77,7 +82,7 @@ export default function App() {
         <Route path="/policies/refund" element={<RefundPolicyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <WelcomePopup />
+      {isHomePage ? <WelcomePopup /> : null}
     </>
   )
 }

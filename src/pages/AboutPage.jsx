@@ -3,16 +3,40 @@ import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 
 const values = [
-  ['eco', '100% Natural', 'Every jar contains only what nature intended. No fillers, no shortcuts, just pure botanical goodness.'],
-  ['science', 'No Chemicals', 'We maintain a strict zero-chemical policy. No preservatives, no additives, and no synthetic emulsifiers.'],
-  ['verified', 'Honest Ingredients', 'Full transparency from farm to jar. We source only the finest, ethically harvested nuts and seeds.'],
+  ['grain', 'Traditionally Stone-Ground', 'Slow stone grinding preserves natural oils, nutrients, flavour, and texture for a richer, more authentic experience.'],
+  ['verified', 'Clean Ingredients', 'No refined sugar, no preservatives, and no artificial additives. Just thoughtfully selected ingredients.'],
+  ['inventory_2', 'Small-Batch Crafted', 'Made in limited batches to ensure freshness, consistency, and quality in every jar.'],
+  ['eco', 'Plant-Based Goodness', 'Wholesome vegetarian spreads crafted for everyday nourishment and conscious living.'],
+  ['fitness_center', 'Protein & Nutrient Rich', 'Perfect for mindful snacking, smoothies, breakfast bowls, and guilt-free indulgence.'],
+  ['restaurant', 'Gourmet Functional Flavours', 'Inspired by global flavours, Indian spices, and everyday wellness.'],
 ]
 
 const steps = [
-  ['01', 'Sourcing', 'Hand-selected heirloom nuts from small-scale family farms.'],
-  ['02', 'Roasting', 'Gentle air-roasting to unlock deep, complex flavors without burning.'],
-  ['03', 'Grinding', 'Slow-motion stone grinding for 24 hours for silky smooth texture.'],
-  ['04', 'Batching', 'Jarred by hand in small batches to ensure absolute freshness.'],
+  ['01', 'Retain', 'Natural oils and nutrients stay intact through patient stone grinding.'],
+  ['02', 'Enhance', 'The slow process deepens flavour and aroma without heavy processing.'],
+  ['03', 'Texture', 'Stone grinding creates a richer, silkier butter with authentic character.'],
+  ['04', 'Preserve', 'The integrity of nuts and seeds is protected naturally.'],
+]
+
+const signatureButters = [
+  ['Masala Peanut Butter', 'Stone-ground roasted peanuts blended with red chilli, curry leaves, asafoetida, and cold-pressed peanut oil for a bold savoury kick.'],
+  ['Herby Cashew Butter', 'Creamy stone-ground cashews infused with herbs and cracked pepper for a smooth savoury experience.'],
+  ['Peri Peri Almond Butter', 'A fiery fusion of premium almonds and smoky peri peri seasoning.'],
+  ['Zesty Cacao Almond Butter', 'Rich cacao meets slow stone-ground almonds in this deeply indulgent chocolatey spread.'],
+  ['Hazelnut Nutella Butter', 'Luxuriously creamy hazelnuts crafted into a decadent, dessert-inspired spread with a velvety finish.'],
+  ['Royal Pistachio Butter', 'Stone-ground pistachios elevated with saffron and subtle white pepper notes for a refined gourmet touch.'],
+  ['Omega Seed Butter', 'A nourishing blend of pumpkin, sunflower, flax, hemp, and chia seeds packed with wholesome nutrition.'],
+  ['Minty Pumpkin Seed Butter', 'Roasted pumpkin seeds balanced with refreshing mint for a uniquely flavourful spread.'],
+]
+
+const servingIdeas = [
+  'Toasts & crackers',
+  'Smoothies & smoothie bowls',
+  'Fruits & desserts',
+  'Overnight oats',
+  'Healthy baking recipes',
+  'Energy snacks',
+  'Straight from the jar',
 ]
 
 export default function AboutPage() {
@@ -25,7 +49,7 @@ export default function AboutPage() {
           <div className="max-w-[800px] mx-auto">
             <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-primary mb-5 md:mb-6">Our Story</h1>
             <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary max-w-2xl mx-auto">
-              A commitment to natural living and the purity of honest, artisanal ingredients. We believe in the slow, stone-ground journey from soil to spoon.
+              Welcome to Satvegik: stone-ground nut and seed butters, crafted clean and made mindfully.
             </p>
           </div>
         </header>
@@ -40,11 +64,12 @@ export default function AboutPage() {
               <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-tertiary-fixed rounded-full opacity-30 blur-3xl" />
             </div>
             <div className="space-y-6 md:space-y-8">
-              <div className="inline-block px-4 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-[0.18em]">The Origin</div>
-              <h2 className="font-serif text-3xl md:text-4xl text-primary">Clean. Natural. Stone-Ground.</h2>
+              <div className="inline-block px-4 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-[0.18em]">Stone-Ground Nut & Seed Butters</div>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Crafted Clean. Made Mindfully.</h2>
               <div className="space-y-5 md:space-y-6 text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
-                <p>Satvegik began in a small home kitchen with a simple observation: the world had forgotten what real food tastes like. Most nut butters were laden with emulsifiers, palm oils, and refined sugars.</p>
-                <p>Our mission was clear: return to the roots. We sought out the highest quality nuts from sustainable orchards and revived the ancient art of stone-grinding.</p>
+                <p>At Satvegik, we believe healthy eating should feel indulgent, nourishing, and deeply satisfying. Our handcrafted nut and seed butters are traditionally stone-ground in small batches, preserving the natural richness, texture, aroma, and nutrition of every ingredient.</p>
+                <p>Unlike heavily processed spreads, stone grinding creates a smoother, more wholesome butter while retaining the authentic character of nuts and seeds, delivering flavour the way nature intended.</p>
+                <p>From the fiery warmth of Masala Peanut to the decadent richness of Hazelnut Nutella and the nutrient-dense Omega Seed Butter, every jar is thoughtfully crafted for conscious living.</p>
               </div>
             </div>
           </div>
@@ -54,9 +79,10 @@ export default function AboutPage() {
         <section className="py-16 md:py-[120px] px-4 sm:px-6 md:px-12 bg-surface-container-low">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
+              <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">Why Satvegik?</span>
               <h2 className="font-serif text-3xl md:text-4xl text-primary">Crafted with Intention</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {values.map(([icon, title, body]) => (
                 <div key={title} className="bg-surface rounded-[22px] md:rounded-[28px] p-7 md:p-10 shadow-[0_20px_60px_rgba(111,88,60,0.08)] flex flex-col items-center text-center group hover:-translate-y-2 transition-transform duration-500">
                   <div className="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-8 group-hover:bg-tertiary-fixed transition-colors">
@@ -70,22 +96,23 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Founder Story */}
+        {/* Signature Butters */}
         <section className="py-16 md:py-[120px] px-4 sm:px-6 md:px-12">
-          <div className="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16 items-center">
-            <div className="md:col-span-2">
-              <div className="aspect-square rounded-full overflow-hidden border-[12px] border-surface-container-high shadow-[0_20px_60px_rgba(111,88,60,0.08)]">
-                <img className="w-full h-full object-cover" alt="Founder portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA31P1Ew9O-w7l74dn_YOtRJn9itwANMuEdOmi-SB0544Q7VUEOlKwk0UUNEcYtHTXBWpAr4eZeyirp-oP-mwj_0nkotKwD1GHzO6G5bGP16xh6k8TvdLvexcfUuQONEDzOETAB4JX1q1mdqjiGybOJJgxUfV3Z4m7Vf_Y_OWXAuzNs4RQ-oJhfpfG7Z-cH0BbH7ocDUdZJrx0PLgisVILRB0Z_qc8V4HV8jdB_H4OpCFHrtvivejphgukjVceDXFXof_OEMz1SSeQ" />
-              </div>
+          <div className="max-w-7xl mx-auto">
+            <div className="max-w-3xl mb-10 md:mb-16">
+              <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">Explore Our Signature Butters</span>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary">Gourmet flavours for everyday wellness</h2>
+              <p className="mt-5 text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
+                Each blend is designed with a clear flavour personality, from savoury spice to dessert-inspired indulgence.
+              </p>
             </div>
-            <div className="md:col-span-3 space-y-6">
-              <span className="material-symbols-outlined text-4xl text-primary/40">format_quote</span>
-              <h2 className="font-serif text-3xl md:text-4xl text-primary italic">"I wanted to create something my family could eat without question."</h2>
-              <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">Satvegik was born from a personal journey toward simpler food. The secret was not more processing, but less: pure, unadulterated flavors of nature for people who value health and craft.</p>
-              <div className="pt-4">
-                <p className="text-xs font-bold text-primary uppercase tracking-[0.2em]">Elena Vance</p>
-                <p className="text-secondary">Founder & Head Maker</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+              {signatureButters.map(([title, body]) => (
+                <article key={title} className="rounded-[22px] md:rounded-[28px] border border-outline-variant bg-surface-container-low p-6 md:p-8">
+                  <h3 className="font-serif text-2xl text-primary mb-3">{title}</h3>
+                  <p className="text-secondary leading-7">{body}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -93,7 +120,11 @@ export default function AboutPage() {
         {/* Manufacturing Process */}
         <section className="py-16 md:py-[120px] px-4 sm:px-6 md:px-12 bg-surface-container-highest">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="font-serif text-3xl md:text-4xl text-primary mb-10 md:mb-12">The Slow-Ground Difference</h2>
+            <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">The Art of Stone Grinding</span>
+            <h2 className="font-serif text-3xl md:text-4xl text-primary mb-5">Great food deserves patience</h2>
+            <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary max-w-3xl mx-auto mb-10 md:mb-12">
+              At Satvegik, we embrace the traditional method of stone grinding because it creates a butter that tastes authentic, wholesome, and beautifully handcrafted.
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
               {steps.map(([number, title, body]) => (
                 <div key={title} className="space-y-4">
@@ -106,10 +137,35 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Usage Ideas */}
+        <section className="py-16 md:py-[120px] px-4 sm:px-6 md:px-12 bg-surface-container-low">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div>
+              <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">More Than Just a Spread</span>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">Spread it. Dip it. Blend it. Spoon it.</h2>
+              <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
+                Satvegik butters fit beautifully into modern lifestyles, whether you are health-conscious, fitness-focused, vegan-curious, or simply someone who appreciates clean, artisanal food.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {servingIdeas.map((idea) => (
+                <div key={idea} className="flex items-center gap-3 rounded-full bg-surface px-5 py-4 border border-outline-variant">
+                  <span className="material-symbols-outlined text-primary">check_circle</span>
+                  <span className="text-secondary font-medium">{idea}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Closing CTA */}
         <section className="py-16 md:py-[120px] px-4 sm:px-6 md:px-12 text-center bg-surface relative overflow-hidden">
           <div className="max-w-[600px] mx-auto relative z-10">
-            <h2 className="font-serif text-[34px] sm:text-[40px] md:text-[64px] leading-tight text-primary mb-8">Join our journey to healthier living</h2>
+            <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">Crafted for Conscious Living</span>
+            <h2 className="font-serif text-[34px] sm:text-[40px] md:text-[64px] leading-tight text-primary mb-6">Stone-Ground. Wholesome. Gourmet. Honest.</h2>
+            <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary mb-8">
+              Every Satvegik jar reflects our passion for honest ingredients, traditional craftsmanship, and elevated everyday nourishment.
+            </p>
             <Link to="/shop" className="inline-block bg-primary text-on-primary px-8 md:px-12 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.18em] hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">
               Shop Collection
             </Link>

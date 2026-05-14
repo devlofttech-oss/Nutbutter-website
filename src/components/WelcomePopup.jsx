@@ -76,7 +76,7 @@ export default function WelcomePopup() {
 
         <div className="flex-1 p-6 md:p-xl flex flex-col items-center text-center justify-center space-y-md">
           <div className="mb-xs">
-            <img className="mx-auto h-16 w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
+            <img className="mx-auto h-[127px] w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
           </div>
 
           <div className="space-y-sm">

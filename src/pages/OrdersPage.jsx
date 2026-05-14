@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
+import OrderTimeline from '../components/OrderTimeline.jsx'
 import { fetchMyOrders } from '../api/orderApi.js'
 import { trackShipment } from '../api/shippingApi.js'
 
@@ -72,7 +73,7 @@ export default function OrdersPage() {
               <article key={order.id} className="bg-white/40 rounded-xl border border-outline-variant shadow-sm p-5 md:p-6">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 border-b border-outline-variant pb-5 mb-5">
                   <div>
-                    <h2 className="font-serif text-headline-md text-primary-container">{order.order_number}</h2>
+                    <Link className="font-serif text-headline-md text-primary-container hover:text-primary" to={`/orders/${order.id}`}>{order.order_number}</Link>
                     <p className="text-sm text-on-surface-variant mt-1">{new Date(order.created_at).toLocaleDateString('en-IN')}</p>
                   </div>
                   <div className="text-left md:text-right">
@@ -87,6 +88,9 @@ export default function OrdersPage() {
                       <span>{formatCurrency(item.line_total)}</span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-5 rounded-xl border border-outline-variant bg-surface-container-low p-4">
+                  <OrderTimeline compact events={order.order_timeline_events ?? []} />
                 </div>
                 {order.shipments?.[0] && (
                   <div className="mt-5 rounded-xl border border-outline-variant bg-surface-container-low p-4 text-sm text-on-surface-variant">

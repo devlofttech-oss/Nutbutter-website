@@ -5,8 +5,9 @@ import { createContactMessage } from '../api/adminApi.js'
 import { useToast } from '../providers/ToastProvider.jsx'
 
 const details = [
-  ['mail', 'Email', 'hello@heritagebutters.com'],
-  ['call', 'Phone', '+91 98765 43210'],
+  ['mail', 'Email', 'Satvegik@gmail.com'],
+  ['call', 'Phone', '+91 9607195225'],
+  ['eco', 'Tagline', 'Stone-Ground • Savoury • Gourmet • Home-Grown'],
   ['location_on', 'Studio', 'The Artisanal District, Block 42, Pondicherry, India 605001'],
 ]
 
@@ -50,7 +51,7 @@ export default function ContactPage() {
         <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 flex flex-col items-center text-center max-w-screen-xl mx-auto">
           <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-primary mb-5 md:mb-6">Get in Touch</h1>
           <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary max-w-2xl font-light">
-            We value the connection between provenance and people. Reach out for inquiries about our artisanal process or wholesale opportunities.
+            Satvegik brings stone-ground, savoury, gourmet, home-grown nut butters to every table. Reach out for inquiries about our artisanal process or wholesale opportunities.
           </p>
         </section>
 
