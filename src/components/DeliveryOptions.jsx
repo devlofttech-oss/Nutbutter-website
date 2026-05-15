@@ -16,7 +16,7 @@ export default function DeliveryOptions({
 
       {!pincode && (
         <p className="rounded-xl border border-outline-variant bg-surface-container-low p-4 text-sm text-on-surface-variant">
-          Enter your delivery pincode to view live Shiprocket shipping options.
+          Enter your delivery pincode to view live shipping charges and courier options.
         </p>
       )}
       {isLoading && (
@@ -58,7 +58,7 @@ export default function DeliveryOptions({
                   <span className="text-label-md font-semibold text-primary">{formatCurrency(option.freightCharge)}</span>
                 </div>
                 <p className="text-label-sm text-on-surface-variant mt-xs">
-                  {option.estimatedDeliveryDays ? `${option.estimatedDeliveryDays} day estimate` : 'Estimated delivery shown after confirmation'}
+                  {option.estimatedDeliveryDays ? `${option.estimatedDeliveryDays} day estimate` : 'Estimated delivery shown before payment confirmation'}
                 </p>
               </div>
               {selected && (

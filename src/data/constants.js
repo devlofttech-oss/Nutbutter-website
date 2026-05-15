@@ -6,6 +6,20 @@ export const NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ]
 
+export const BUSINESS_CONTACT = {
+  name: 'Satvegik',
+  email: 'satvegik@gmail.com',
+  phone: '+91 9607195225',
+  tagline: 'Stone-Ground | Savoury | Gourmet | Home-Grown',
+  address: 'Satvegik production studio, India',
+}
+
+export const SOCIAL_LINKS = [
+  { label: 'Instagram', href: '' },
+  { label: 'Facebook', href: '' },
+  { label: 'YouTube', href: '' },
+]
+
 export const PRODUCTS = [
   {
     id: 1,
@@ -113,7 +127,7 @@ export const TESTIMONIALS = [
 export const FOOTER_LINKS = {
   Shop: [
     { label: 'All Products', href: '/shop' },
-    { label: 'Combo Packs', href: '/shop#bundles' },
+    { label: 'FAQ', href: '/faq' },
     { label: 'My Cart', href: '/cart' },
   ],
   Company: [

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FOOTER_LINKS } from '../data/constants.js'
+import { BUSINESS_CONTACT, FOOTER_LINKS, SOCIAL_LINKS } from '../data/constants.js'
 import logo from '../../assets/logo.png'
 
 export default function Footer() {
@@ -9,14 +9,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-9 md:gap-12 mb-12 md:mb-14">
           <div className="md:pr-8">
             <div className="mb-5">
-              <img className="h-[109px] w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
+              <img className="h-[65px] w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
             </div>
             <p className="text-sm text-stone-600 font-serif leading-7">
               Satvegik makes stone-ground, savoury, gourmet nut butters from home-grown ingredients with patient craft and a naturally luxurious finish.
             </p>
             <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#4B3621]">
-              Stone-Ground • Savoury • Gourmet • Home-Grown
+              {BUSINESS_CONTACT.tagline}
             </p>
+            <div className="mt-5 space-y-2 font-serif text-sm text-stone-600">
+              <p>Email: <a className="hover:text-[#8C7355]" href={`mailto:${BUSINESS_CONTACT.email}`}>{BUSINESS_CONTACT.email}</a></p>
+              <p>Phone: <a className="hover:text-[#8C7355]" href={`tel:${BUSINESS_CONTACT.phone.replace(/\s/g, '')}`}>{BUSINESS_CONTACT.phone}</a></p>
+            </div>
             <Link
               to="/contact"
               className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#4B3621] font-bold hover:text-[#A67B5B] transition-colors"
@@ -47,12 +51,25 @@ export default function Footer() {
           ))}
         </div>
 
+        <div className="border-t border-[#decdb8] pt-6 pb-8 flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs uppercase tracking-[0.16em] text-[#4B3621]">
+          <span className="font-bold">Social</span>
+          {SOCIAL_LINKS.map((link) => (
+            link.href ? (
+              <a key={link.label} className="text-stone-600 hover:text-[#8C7355] transition-colors" href={link.href} rel="noreferrer" target="_blank">
+                {link.label}
+              </a>
+            ) : (
+              <span key={link.label} className="text-stone-500">{link.label}</span>
+            )
+          ))}
+        </div>
+
         <div className="border-t border-[#decdb8] pt-8 flex flex-col md:flex-row justify-between gap-4 text-center md:text-left">
           <p className="text-[#4B3621] text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em] opacity-80">
-            (c) 2024 Satvegik. Crafted for the slow pace.
+            &copy; {new Date().getFullYear()} Satvegik. All rights reserved.
           </p>
           <p className="text-stone-500 text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em]">
-            Mob: 9607195225 / Email: Satvegik@gmail.com
+            Secure online payments. Freshly packed orders.
           </p>
         </div>
       </div>

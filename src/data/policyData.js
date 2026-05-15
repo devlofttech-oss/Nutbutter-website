@@ -1,3 +1,5 @@
+import { BUSINESS_CONTACT } from './constants.js'
+
 const artisanWorkshopImages = [
   {
     alt: 'Golden nut butter texture',
@@ -18,7 +20,7 @@ export const POLICIES = {
       'Your trust matters to us. This policy explains how we collect, use, and protect information when you browse, shop, or contact Satvegik.',
     contactText: 'Questions about this Privacy Policy should be directed to our care team.',
     contactLabel: 'Contact Privacy Care',
-    contactHref: 'mailto:privacy@artisannutco.com',
+    contactHref: `mailto:${BUSINESS_CONTACT.email}`,
     sections: [
       {
         id: 'collection',
@@ -92,7 +94,7 @@ export const POLICIES = {
       'Please read these terms carefully before browsing our website, placing an order, or engaging with our handcrafted collections.',
     contactText: 'Questions regarding these Terms & Conditions should be directed to our concierge team.',
     contactLabel: 'Contact Concierge',
-    contactHref: 'mailto:concierge@artisannutco.com',
+    contactHref: `mailto:${BUSINESS_CONTACT.email}`,
     sections: [
       {
         id: 'usage',
@@ -175,7 +177,7 @@ export const POLICIES = {
       'Every jar is packed with care so it reaches your pantry ready for slow breakfasts, nourishing snacks, and everyday rituals.',
     contactText: 'Questions about shipping, tracking, or delivery availability can be sent to our dispatch team.',
     contactLabel: 'Contact Dispatch',
-    contactHref: 'mailto:shipping@artisannutco.com',
+    contactHref: `mailto:${BUSINESS_CONTACT.email}`,
     sections: [
       {
         id: 'processing',
@@ -239,7 +241,7 @@ export const POLICIES = {
       'We want every jar to feel thoughtful, fresh, and worthy of your table. This policy explains how we handle refunds and replacements.',
     contactText: 'Questions about refunds or replacements should be sent with your order number and photos when relevant.',
     contactLabel: 'Start a Refund Request',
-    contactHref: 'mailto:refunds@artisannutco.com',
+    contactHref: `mailto:${BUSINESS_CONTACT.email}`,
     sections: [
       {
         id: 'eligibility',

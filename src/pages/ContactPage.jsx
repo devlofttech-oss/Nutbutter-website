@@ -2,13 +2,14 @@ import { useState } from 'react'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import { createContactMessage } from '../api/adminApi.js'
+import { BUSINESS_CONTACT } from '../data/constants.js'
 import { useToast } from '../providers/ToastProvider.jsx'
 
 const details = [
-  ['mail', 'Email', 'Satvegik@gmail.com'],
-  ['call', 'Phone', '+91 9607195225'],
-  ['eco', 'Tagline', 'Stone-Ground • Savoury • Gourmet • Home-Grown'],
-  ['location_on', 'Studio', 'The Artisanal District, Block 42, Pondicherry, India 605001'],
+  ['mail', 'Email', BUSINESS_CONTACT.email],
+  ['call', 'Phone', BUSINESS_CONTACT.phone],
+  ['eco', 'Tagline', BUSINESS_CONTACT.tagline],
+  ['location_on', 'Studio', BUSINESS_CONTACT.address],
 ]
 
 export default function ContactPage() {
@@ -110,7 +111,7 @@ export default function ContactPage() {
             <div className="bg-surface/80 backdrop-blur-md p-6 md:p-10 max-w-md text-center shadow-2xl rounded-[22px] md:rounded-[28px] border border-white/20">
               <span className="material-symbols-outlined text-4xl text-primary mb-4">restaurant</span>
               <h2 className="font-serif text-3xl md:text-4xl text-primary mb-2">Visit Our Studio</h2>
-              <p className="text-secondary font-light">Experience the traditional churning process firsthand at our flagship location in the heart of Pondicherry.</p>
+              <p className="text-secondary font-light">Connect with our care team for product questions, wholesale inquiries, and order support.</p>
             </div>
           </div>
         </section>

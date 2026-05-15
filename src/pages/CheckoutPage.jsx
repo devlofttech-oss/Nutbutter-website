@@ -233,6 +233,7 @@ export default function CheckoutPage() {
               tax={tax}
               discount={discount}
               total={total}
+              selectedPaymentLabel={selectedPayment === 'phonepe' ? 'PhonePe Secure Checkout' : selectedPayment}
               orderPlaced={orderPlaced}
               isSubmitting={isSubmitting}
               isDisabled={!selectedCourierId || isEstimatingShipping}

@@ -3,7 +3,7 @@ const PAYMENT_OPTIONS = [
     id: 'phonepe',
     title: 'PhonePe Secure Checkout',
     icon: 'account_balance_wallet',
-    description: 'Pay online with UPI, cards, wallets, or netbanking.',
+    description: 'You will be redirected to PhonePe to pay with UPI, cards, wallets, or netbanking.',
   },
 ]
 
@@ -45,7 +45,7 @@ export default function PaymentOptions({ selectedPayment, onChange, codAvailable
         ))}
       </div>
       <p className="text-label-sm text-on-surface-variant">
-        Cash on Delivery: <span className="font-semibold text-primary">{codAvailable ? 'available for this pincode, but online checkout is enabled for this storefront' : 'not available for this pincode'}</span>
+        Payment security: <span className="font-semibold text-primary">online payments are completed on PhonePe's secure checkout.</span>
       </p>
     </section>
   )

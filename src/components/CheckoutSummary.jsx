@@ -1,6 +1,6 @@
 import logo from '../../assets/logo.png'
 
-export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, isDisabled = false, error = '' }) {
+export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, discount = 0, total, onPlaceOrder, orderPlaced, isSubmitting = false, isDisabled = false, error = '', selectedPaymentLabel = 'PhonePe Secure Checkout' }) {
   return (
     <aside className="w-full lg:w-[400px] flex-shrink-0">
       <div className="lg:sticky lg:top-24 space-y-md p-5 md:p-lg bg-surface-container-low rounded-xl border border-outline-variant">
@@ -29,6 +29,7 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
         <div className="space-y-sm pt-md border-t border-outline-variant">
           <SummaryRow label="Subtotal" value={formatCurrency(subtotal)} />
           <SummaryRow label="Shipping" value={formatCurrency(shipping)} />
+          <SummaryRow label="Payment Method" value={selectedPaymentLabel} />
           {discount > 0 && <SummaryRow label="Discount" value={`-${formatCurrency(discount)}`} />}
           <SummaryRow label="Estimated Tax" value={formatCurrency(tax)} />
           <div className="flex justify-between font-serif text-xl md:text-headline-md text-primary pt-sm gap-4">
@@ -43,7 +44,7 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
           onClick={onPlaceOrder}
           disabled={isSubmitting || isDisabled}
         >
-          {isSubmitting ? 'Redirecting...' : isDisabled ? 'Select Shipping' : 'Place Order'}
+          {isSubmitting ? 'Redirecting to PhonePe...' : isDisabled ? 'Select Shipping' : 'Pay Securely'}
         </button>
 
         {error && (
@@ -53,12 +54,12 @@ export default function CheckoutSummary({ items, subtotal, shipping, tax = 0, di
         )}
         {orderPlaced && (
           <p className="text-center text-label-sm text-secondary font-semibold">
-            Order details captured. We will confirm shortly.
+            Order details captured. Continue in PhonePe to complete payment.
           </p>
         )}
         <div className="flex items-center justify-center gap-2 text-label-sm text-on-surface-variant italic">
-          <span>Secure checkout powered by</span>
-          <img className="h-[55px] w-auto object-contain opacity-85" src={logo} alt="Satvegik" />
+          <span>Secure checkout by Satvegik</span>
+          <img className="h-[33px] w-auto object-contain opacity-85" src={logo} alt="Satvegik" />
         </div>
       </div>
     </aside>
