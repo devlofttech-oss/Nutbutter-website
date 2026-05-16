@@ -446,6 +446,25 @@ export const POLICIES = {
         ],
       },
       {
+        id: 'return-policy',
+        title: 'Return Policy',
+        blocks: [
+          {
+            type: 'paragraph',
+            text:
+              'Returns are accepted within 7 days of delivery, subject to product condition verification and approval by Satvegik support.',
+          },
+          {
+            type: 'list',
+            items: [
+              'Products must be unused, unopened, and returned in their original packaging wherever applicable.',
+              'Return requests raised after 7 days of delivery may not be eligible for approval.',
+              'Food products that are opened, consumed, tampered with, or improperly stored after delivery may not qualify for return.',
+            ],
+          },
+        ],
+      },
+      {
         id: 'cancellations',
         title: 'Cancellation Rules',
         blocks: [
@@ -511,8 +530,7 @@ export const POLICIES = {
         blocks: [
           {
             type: 'paragraph',
-            text:
-              supportInstruction,
+            text: supportInstruction,
           },
           {
             type: 'list',
