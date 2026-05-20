@@ -21,7 +21,7 @@ export default function Header({ cartCount }) {
           onClick={() => setMenuOpen(false)}
           aria-label="Satvegik home"
         >
-          <img className="h-[55px] w-auto md:h-[65px] object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.13)]" src={logo} alt="Satvegik" />
+          <img className="h-[39px] w-auto md:h-[46px] object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.13)]" src={logo} alt="Satvegik" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">

@@ -3,6 +3,7 @@ import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
 import EcommerceFaqSection from '../components/EcommerceFaqSection.jsx'
+import { ProductGridSkeleton } from '../components/SkeletonLoader.jsx'
 import { fetchProducts } from '../api/productApi.js'
 
 export default function ShopPage() {
@@ -47,7 +48,7 @@ export default function ShopPage() {
         </section>
 
         {/* Product Grid */}
-        {isLoading && <ShopState message="Loading products..." />}
+        {isLoading && <section className="pb-16 md:pb-32"><ProductGridSkeleton /></section>}
         {!isLoading && error && <ShopState message="Products could not be loaded right now." />}
         {!isLoading && !error && products.length === 0 && <ShopState message="No products match your selection." />}
         {!isLoading && !error && products.length > 0 && (

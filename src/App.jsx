@@ -29,6 +29,7 @@ import AdminRoute from './components/AdminRoute.jsx'
 import PageLoader from './components/PageLoader.jsx'
 import Seo from './components/Seo.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage.jsx'))
 const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage.jsx'))
@@ -43,45 +44,48 @@ export default function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Seo />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/product/:slug" element={<ProductPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/auth/callback" element={<AuthCallbackPage />} />
-        <Route path="/logout" element={<LogoutPage />} />
-        <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
-        <Route path="/orders/:orderId" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
-        <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccessPage /></ProtectedRoute>} />
-        <Route path="/payment/failed" element={<ProtectedRoute><PaymentFailedPage /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading admin..." />}><AdminDashboardPage /></Suspense></AdminRoute>} />
-        <Route path="/admin/products" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading products..." />}><AdminProductsPage /></Suspense></AdminRoute>} />
-        <Route path="/admin/orders" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading orders..." />}><AdminOrdersPage /></Suspense></AdminRoute>} />
-        <Route path="/admin/customers" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading customers..." />}><AdminCustomersPage /></Suspense></AdminRoute>} />
-        <Route path="/admin/messages" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading messages..." />}><AdminMessagesPage /></Suspense></AdminRoute>} />
-        <Route path="/admin/coupons" element={<AdminRoute><Suspense fallback={<PageLoader message="Loading coupons..." />}><AdminCouponsPage /></Suspense></AdminRoute>} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
-        <Route path="/refund-policy" element={<RefundPolicyPage />} />
-        <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
-        <Route path="/policies/terms" element={<TermsPage />} />
-        <Route path="/policies/shipping" element={<ShippingPolicyPage />} />
-        <Route path="/policies/refund" element={<RefundPolicyPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<PageLoader message="Loading page..." />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/product/:slug" element={<ProductPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/auth/callback" element={<AuthCallbackPage />} />
+          <Route path="/logout" element={<LogoutPage />} />
+          <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+          <Route path="/orders/:orderId" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
+          <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccessPage /></ProtectedRoute>} />
+          <Route path="/payment/failed" element={<ProtectedRoute><PaymentFailedPage /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminRoute><AdminDashboardPage /></AdminRoute>} />
+          <Route path="/admin/products" element={<AdminRoute><AdminProductsPage /></AdminRoute>} />
+          <Route path="/admin/orders" element={<AdminRoute><AdminOrdersPage /></AdminRoute>} />
+          <Route path="/admin/customers" element={<AdminRoute><AdminCustomersPage /></AdminRoute>} />
+          <Route path="/admin/messages" element={<AdminRoute><AdminMessagesPage /></AdminRoute>} />
+          <Route path="/admin/coupons" element={<AdminRoute><AdminCouponsPage /></AdminRoute>} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
+          <Route path="/policies/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/policies/terms" element={<TermsPage />} />
+          <Route path="/policies/shipping" element={<ShippingPolicyPage />} />
+          <Route path="/policies/refund" element={<RefundPolicyPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
       {isHomePage ? <WelcomePopup /> : null}
     </>
   )

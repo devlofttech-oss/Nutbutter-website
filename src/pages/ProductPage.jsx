@@ -4,6 +4,7 @@ import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
 import EcommerceFaqSection from '../components/EcommerceFaqSection.jsx'
+import { ProductPageSkeleton } from '../components/SkeletonLoader.jsx'
 import { fetchProductBySlugOrId, fetchProductReviews, fetchProducts, fetchRelatedProducts } from '../api/productApi.js'
 import { useCart } from '../providers/CartProvider.jsx'
 
@@ -81,7 +82,7 @@ export default function ProductPage() {
   }, [slug])
 
   if (isLoading) {
-    return <ProductPageState message="Loading product..." />
+    return <ProductPageState isSkeleton message="Loading product..." />
   }
 
   if (error) {
@@ -274,14 +275,21 @@ export default function ProductPage() {
   )
 }
 
-function ProductPageState({ message }) {
+function ProductPageState({ message, isSkeleton = false }) {
   return (
     <div className="bg-background text-on-background min-h-screen">
       <Header />
       <main className="pt-8 md:pt-16 pb-16 md:pb-32 max-w-[1280px] mx-auto px-4 sm:px-6 md:px-16">
-        <div className="rounded-[22px] md:rounded-[28px] border border-outline-variant bg-surface-container-low px-5 md:px-8 py-12 md:py-16 text-center text-on-surface-variant">
-          {message}
-        </div>
+        {isSkeleton ? (
+          <div role="status" aria-live="polite" aria-label={message}>
+            <ProductPageSkeleton />
+            <span className="sr-only">{message}</span>
+          </div>
+        ) : (
+          <div className="rounded-[22px] md:rounded-[28px] border border-outline-variant bg-surface-container-low px-5 md:px-8 py-12 md:py-16 text-center text-on-surface-variant">
+            {message}
+          </div>
+        )}
       </main>
       <Footer />
     </div>

@@ -4,6 +4,7 @@ import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import HeroCarousel from '../components/HeroCarousel.jsx'
 import ProductCard from '../components/ProductCard.tsx'
+import { ProductGridSkeleton } from '../components/SkeletonLoader.jsx'
 import { fetchProducts } from '../api/productApi.js'
 
 const benefits = [
@@ -111,7 +112,7 @@ export default function HomePage() {
               View All
             </Link>
           </div>
-          {isLoadingProducts && <ProductGridMessage message="Loading curated products..." />}
+          {isLoadingProducts && <ProductGridSkeleton />}
           {!isLoadingProducts && productsError && <ProductGridMessage message="Products could not be loaded right now." />}
           {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No products are available yet." />}
           {!isLoadingProducts && !productsError && featuredProducts.length > 0 && (
