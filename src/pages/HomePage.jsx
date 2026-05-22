@@ -47,6 +47,10 @@ export default function HomePage() {
               <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
                 Home-grown ingredients, savoury craft, and patient stone-grinding come together in small-batch spreads with a naturally luxurious finish.
               </p>
+              <div className="relative flex justify-center md:hidden">
+                <div className="absolute -inset-10 bg-tertiary/5 rounded-full blur-3xl opacity-70" />
+                <HeroCarousel className="group aspect-[4/5]" />
+              </div>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 md:pt-4">
                 <Link to="/shop" className="w-full sm:w-auto text-center bg-primary text-on-primary px-8 md:px-10 py-4 md:py-5 rounded-full text-xs font-bold uppercase tracking-[0.16em] md:tracking-[0.2em] hover:bg-primary-container transition-colors shadow-lg shadow-primary/10">
                   Shop Now
@@ -56,7 +60,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative flex justify-center">
+            <div className="relative hidden justify-center md:flex">
               <div className="absolute -inset-10 bg-tertiary/5 rounded-full blur-3xl opacity-70" />
               <HeroCarousel className="group aspect-[4/5]" />
             </div>
