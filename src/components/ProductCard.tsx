@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
     setIsAdding(true)
 
     try {
-      await addToCart(product, 1, '250g')
+      await addToCart(product, 1, '200g')
       navigate('/cart')
     } finally {
       setIsAdding(false)

@@ -4,7 +4,7 @@ import Footer from '../components/Footer.tsx'
 
 const values = [
   ['grain', 'Traditionally Stone-Ground', 'Slow stone grinding preserves natural oils, nutrients, flavour, and texture for a richer, more authentic experience.'],
-  ['verified', 'Clean Ingredients', 'No refined sugar, no preservatives, and no artificial additives. Just thoughtfully selected ingredients.'],
+  ['verified', 'Clean Ingredients', 'No added refined sugar, no preservatives, and no artificial additives. Just thoughtfully selected ingredients.'],
   ['inventory_2', 'Small-Batch Crafted', 'Made in limited batches to ensure freshness, consistency, and quality in every jar.'],
   ['eco', 'Plant-Based Goodness', 'Wholesome vegetarian spreads crafted for everyday nourishment and conscious living.'],
   ['fitness_center', 'Protein & Nutrient Rich', 'Perfect for mindful snacking, smoothies, breakfast bowls, and guilt-free indulgence.'],

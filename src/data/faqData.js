@@ -9,7 +9,7 @@ export const FAQ_SECTIONS = [
         id: 'ingredients',
         question: 'What are the main ingredients?',
         answer:
-          'Our nut butters are made with slow-roasted nuts and, in select blends, a pinch of mineral-rich sea salt. We never use palm oil, refined sugar, preservatives, artificial colors, or stabilizers.',
+          'Our nut butters are made with slow-roasted nuts and, in select blends, a pinch of mineral-rich sea salt. We never use palm oil, added refined sugar, preservatives, artificial colors, or stabilizers.',
       },
       {
         id: 'shelf-life',

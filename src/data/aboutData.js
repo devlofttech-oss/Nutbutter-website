@@ -70,7 +70,7 @@ export const QUALITY_PROMISES = [
   {
     icon: 'do_not_disturb_on',
     title: 'No Additives',
-    body: 'Zero palm oil, stabilizers, or refined sugars.',
+    body: 'Zero palm oil, stabilizers, or added refined sugar.',
   },
   {
     icon: 'nature_people',

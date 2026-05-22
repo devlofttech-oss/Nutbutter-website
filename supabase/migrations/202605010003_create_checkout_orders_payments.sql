@@ -47,7 +47,7 @@ create table if not exists public.order_items (
   product_id uuid references public.products(id) on delete set null,
   product_name text not null,
   product_slug text,
-  variant_label text not null default '250g',
+  variant_label text not null default '200g',
   quantity integer not null check (quantity > 0),
   unit_price numeric(10, 2) not null check (unit_price >= 0),
   line_total numeric(10, 2) not null check (line_total >= 0),

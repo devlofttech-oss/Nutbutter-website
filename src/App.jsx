@@ -30,6 +30,7 @@ import PageLoader from './components/PageLoader.jsx'
 import Seo from './components/Seo.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton.jsx'
 
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage.jsx'))
 const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage.jsx'))
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      <FloatingWhatsAppButton />
       {isHomePage ? <WelcomePopup /> : null}
     </>
   )

@@ -11,7 +11,7 @@ create table if not exists public.cart_items (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
   product_id uuid not null references public.products(id) on delete cascade,
-  variant_label text not null default '250g',
+  variant_label text not null default '200g',
   quantity integer not null default 1 check (quantity > 0),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),

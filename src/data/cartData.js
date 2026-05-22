@@ -2,7 +2,7 @@ export const INITIAL_CART_ITEMS = [
   {
     id: 1,
     name: 'Stone-Ground Almond Butter',
-    variant: '500g - Heirloom Varietal',
+    variant: '200g - Heirloom Varietal',
     price: 549,
     quantity: 1,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCm3hNxDo_XrMBrHTAFF-mD6mv1mgQXDIO3Ra6hPbx3xUUqJkIPsIIBFSnzRtExri1WoSwKkQS0kCqJylrqYNy7RtajB8okXnJ3lLZ0Bdv7RtyNQV7Tz6ixkI963QuG2_kQkq6y_xiX_uxBhqKYXs9S9zqxSko3kkLf5uioSfnJpK8xI-X09IOzc_p3eG-j9TB5CTMTb6Lp3thQc98QSKvH4jY_qYqmIo-6BNI_f0YDxNcF1rFq4uvKXyoN-axCuDgekd1bfO34jiw',
@@ -10,7 +10,7 @@ export const INITIAL_CART_ITEMS = [
   {
     id: 2,
     name: 'Raw Pistachio Cream',
-    variant: '250g - Bronte Heritage',
+    variant: '200g - Bronte Heritage',
     price: 1249,
     quantity: 2,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCw5VUJF-0ghg4BjYygWVrkEM9NlfzCwl2_Be2jgvyjtqWxwzmplBiO5pnL0wu6bkpygQOreCLYbeuJvi_9goTkFMu8kbmXXq_W0UziyHJGDHImnv7Ej0X8IsWA0IKZsTs19-H7QkGN7Vxcv0PNVIT67WucTOw_C8e863Y9v04y5ZcGtoPxkxbLCVRWkah2GXxlFQOksUUf8Pohwg531yM4OoeRZ_VJbyL66NDdWcqCDgq8mXWSOAgHptaXdU0TAXv35WBlrDDsgS0',

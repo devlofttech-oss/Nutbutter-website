@@ -19,7 +19,7 @@ function writeGuestCart(items) {
 
 function toGuestCartItem(product, quantity, variant) {
   const productId = product.id
-  const itemVariant = variant ?? '250g'
+  const itemVariant = variant ?? '200g'
 
   return {
     id: `${productId}:${itemVariant}`,
@@ -102,7 +102,7 @@ export function CartProvider({ children }) {
     })
   }, [])
 
-  const addToCart = useCallback(async (product, quantity = 1, variant = '250g') => {
+  const addToCart = useCallback(async (product, quantity = 1, variant = '200g') => {
     setError('')
 
     try {

@@ -9,7 +9,7 @@ import { fetchProductBySlugOrId, fetchProductReviews, fetchProducts, fetchRelate
 import { useCart } from '../providers/CartProvider.jsx'
 
 const benefits = [
-  ['eco', 'No Sugar'],
+  ['eco', 'No Added Refined Sugar'],
   ['security', 'No Preservatives'],
   ['forest', 'No Palm Oil'],
   ['fitness_center', 'High Protein'],
@@ -25,7 +25,7 @@ export default function ProductPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
-  const [size, setSize] = useState('250g')
+  const [size] = useState('200g')
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [reviews, setReviews] = useState([])
@@ -137,8 +137,8 @@ export default function ProductPage() {
               <div>
                 <span className="text-on-surface text-xs font-bold uppercase tracking-[0.18em] block mb-4">Select Size</span>
                 <div className="flex gap-3 md:gap-4">
-                  {['250g', '500g'].map((option) => (
-                    <button key={option} className={`min-h-11 px-6 md:px-8 py-3 rounded-full border-2 transition-all ${size === option ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant text-on-surface hover:border-primary'}`} type="button" onClick={() => setSize(option)}>
+                  {['200g'].map((option) => (
+                    <button key={option} className="min-h-11 px-6 md:px-8 py-3 rounded-full border-2 border-primary bg-primary text-on-primary transition-all" type="button">
                       {option}
                     </button>
                   ))}
@@ -157,7 +157,7 @@ export default function ProductPage() {
               {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
             </button>
             <div className="mt-4 flex flex-wrap gap-4">
-              {['NO ADDED SUGAR', 'NO PALM OIL'].map((label) => (
+              {['NO ADDED REFINED SUGAR', 'NO PALM OIL'].map((label) => (
                 <span key={label} className="inline-flex items-center gap-2 px-4 py-2 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold uppercase tracking-[0.12em]">
                   <span className="material-symbols-outlined text-[18px]">verified</span> {label}
                 </span>

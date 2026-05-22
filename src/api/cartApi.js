@@ -61,7 +61,7 @@ export async function fetchCartItems(userId) {
   return (data ?? []).map(toCartItem)
 }
 
-export async function addCartItem(userId, productId, quantity = 1, variantLabel = '250g') {
+export async function addCartItem(userId, productId, quantity = 1, variantLabel = '200g') {
   const supabase = requireSupabaseClient()
   const { data: existingItem, error: findError } = await supabase
     .from(SUPABASE_TABLES.cartItems)

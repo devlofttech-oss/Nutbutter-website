@@ -61,7 +61,7 @@ export default function WelcomePopup() {
           <span className="material-symbols-outlined">close</span>
         </button>
 
-        <div className="hidden md:block w-5/12 relative min-h-[520px] bg-surface-container">
+        <div className="relative h-56 w-full overflow-hidden bg-surface-container md:h-auto md:min-h-[520px] md:w-5/12">
           <video
             aria-label="Satvegik nut butter welcome video"
             autoPlay
@@ -71,11 +71,14 @@ export default function WelcomePopup() {
             playsInline
             src={popupVideo}
           />
-          <div className="absolute inset-0 bg-primary/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/35 via-primary/5 to-white/10 md:bg-primary/10" />
+          <div className="absolute bottom-4 left-4 right-14 rounded-full border border-white/50 bg-white/20 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg backdrop-blur-md md:hidden">
+            Stone-ground in small batches
+          </div>
         </div>
 
         <div className="flex-1 p-6 md:p-xl flex flex-col items-center text-center justify-center space-y-md">
-          <div className="mb-xs">
+          <div className="mb-xs hidden md:block">
             <img className="mx-auto h-[76px] w-auto object-contain drop-shadow-[0_8px_18px_rgba(75,54,33,0.12)]" src={logo} alt="Satvegik" />
           </div>
 

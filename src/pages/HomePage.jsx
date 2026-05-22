@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import HeroCarousel from '../components/HeroCarousel.jsx'
-import ProductCard from '../components/ProductCard.tsx'
-import { ProductGridSkeleton } from '../components/SkeletonLoader.jsx'
-import { fetchProducts } from '../api/productApi.js'
+import popupVideo from '../../assets/popup.mp4'
+import breakfastImage from '../../img/breakfast.jpg'
+import dessertImage from '../../img/dessert.jpg'
+import gymImage from '../../img/gym.jpg'
+import kidsImage from '../../img/kids.jpg'
 
 const benefits = [
   ['eco', '100% Natural'],
@@ -15,46 +16,19 @@ const benefits = [
 ]
 
 const useCases = [
-  ['Breakfast', 'Drizzled over overnight oats or artisan sourdough.', 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=900&q=80'],
-  ['Gym', 'Clean protein fuel for your pre-workout boost.', 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80'],
-  ['Dessert', 'The perfect companion for dark chocolate and fruit.', 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80'],
-  ['Kids', 'Nutrition that actually tastes like a treat.', 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=900&q=80'],
+  ['Breakfast', 'Drizzled over overnight oats or artisan sourdough.', breakfastImage],
+  ['Gym', 'Clean protein fuel for your pre-workout boost.', gymImage],
+  ['Dessert', 'The perfect companion for dark chocolate and fruit.', dessertImage],
+  ['Kids', 'Nutrition that actually tastes like a treat.', kidsImage],
 ]
 
 const testimonials = [
   ['Sarah J.', 'Verified Buyer', '"The smoothest almond butter I have ever tasted. It is like silk in a jar."'],
-  ['Michael R.', 'Nutritionist', '"Finally, a brand that does not hide behind palm oil and sugar."'],
+  ['Michael R.', 'Nutritionist', '"Finally, a brand that does not hide behind palm oil and added refined sugar."'],
   ['Emma L.', 'Home Chef', '"The Cacao Hazelnut is dangerous. It is way better than the usual chocolate spreads."'],
 ]
 
 export default function HomePage() {
-  const [featuredProducts, setFeaturedProducts] = useState([])
-  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
-  const [productsError, setProductsError] = useState('')
-
-  useEffect(() => {
-    let isMounted = true
-
-    fetchProducts({ range: { from: 0, to: 2 } })
-      .then(({ data }) => {
-        if (!isMounted) return
-        setFeaturedProducts(data)
-        setProductsError('')
-      })
-      .catch((error) => {
-        if (!isMounted) return
-        setProductsError(error.message)
-        setFeaturedProducts([])
-      })
-      .finally(() => {
-        if (isMounted) setIsLoadingProducts(false)
-      })
-
-    return () => {
-      isMounted = false
-    }
-  }, [])
-
   return (
     <div className="bg-background text-on-surface">
       <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant px-4 py-2 text-center text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] border-b border-outline-variant/30">
@@ -68,7 +42,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 items-center gap-10 md:gap-16">
             <div className="space-y-6 md:space-y-8">
               <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
-                Satvegik. <br /><span className="italic font-normal">Stone-Ground Nut & SeedButters.</span>
+                <span className="italic font-normal">Stone-Ground Nut & SeedButters.</span>
               </h1>
               <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
                 Home-grown ingredients, savoury craft, and patient stone-grinding come together in small-batch spreads with a naturally luxurious finish.
@@ -101,39 +75,24 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Products */}
-        <section className="py-16 md:py-[120px] max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 md:mb-16 gap-4 md:gap-6">
-            <div>
-              <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] block mb-4">The Collection</span>
-              <h2 className="font-serif text-3xl md:text-4xl text-on-surface">Curated Heritage Butters</h2>
-            </div>
-            <Link className="text-on-surface-variant border-b border-outline-variant pb-1 text-xs font-bold uppercase tracking-[0.18em] hover:text-primary transition-colors" to="/shop">
-              View All
-            </Link>
-          </div>
-          {isLoadingProducts && <ProductGridSkeleton />}
-          {!isLoadingProducts && productsError && <ProductGridMessage message="Products could not be loaded right now." />}
-          {!isLoadingProducts && !productsError && featuredProducts.length === 0 && <ProductGridMessage message="No products are available yet." />}
-          {!isLoadingProducts && !productsError && featuredProducts.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-8">
-              {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          )}
-        </section>
-
         {/* Video Section */}
         <section className="bg-surface-dim py-16 md:py-[120px] relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 text-center space-y-8 md:space-y-12">
             <h2 className="font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">See how we make it fresh</h2>
             <div className="aspect-video bg-surface-container relative rounded-[22px] md:rounded-[28px] overflow-hidden group cursor-pointer shadow-2xl">
-              <img alt="Process Video Thumbnail" className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQgoGqWY-as-IvbVBnMObJNMACBB3_HRIHRasjORwlM2d3Sp8DhNL5OCpNOKcQ-u4osRRfwOcnYBvANNQniUbYYSVYXi4KZ-f1eaKnovVPPNaWmZ1MTQM53aI5eh_id7Fk_lYfhK4y4nKjas4JcNy5I6rDjDQHN6x3Rd8r6EuD4JNnKNJQV7eysGTrUQ-N1ARwRtBP1dcIFewniX7vBSlqHEmMfhBA2sQQimuv8JtKIvuw5IuTly3sGGGRrpJ_ORMw-Yo0Gj-NhHk" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-14 h-14 md:w-20 md:h-20 bg-primary/90 text-on-primary rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-4xl">play_arrow</span>
-                </div>
+              <video
+                aria-label="Satvegik churning process video"
+                autoPlay
+                className="h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+                loop
+                muted
+                playsInline
+                src={popupVideo}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/45 via-primary/5 to-white/10" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-full border border-white/40 bg-white/20 px-4 py-3 text-left text-white shadow-lg backdrop-blur-md md:bottom-6 md:left-6 md:right-6 md:px-6">
+                <span className="text-xs font-bold uppercase tracking-[0.18em]">Fresh churning</span>
+                <span className="material-symbols-outlined text-3xl">play_circle</span>
               </div>
             </div>
           </div>
@@ -149,8 +108,7 @@ export default function HomePage() {
             {useCases.map(([title, body, image]) => (
               <div key={title} className="relative h-72 md:h-80 overflow-hidden rounded-xl border border-white/60 bg-surface-container-low p-6 md:p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(115,91,66,0.09)] group">
                 <img className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105" src={image} alt={`${title} with nut butter`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2f2115]/80 via-[#4b3621]/35 to-white/20" />
-                <div className="absolute inset-0 backdrop-blur-[1px]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2f2115]/55 via-[#4b3621]/15 to-white/5" />
                 <div className="relative z-10">
                   <h4 className="font-serif text-2xl text-white drop-shadow-sm">{title}</h4>
                   <p className="mt-2 text-sm leading-6 text-white/90 drop-shadow-sm">{body}</p>
@@ -207,14 +165,6 @@ export default function HomePage() {
       </main>
 
       <Footer />
-    </div>
-  )
-}
-
-function ProductGridMessage({ message }) {
-  return (
-    <div className="rounded-[28px] border border-outline-variant bg-surface-container-low px-8 py-12 text-center text-on-surface-variant">
-      {message}
     </div>
   )
 }
