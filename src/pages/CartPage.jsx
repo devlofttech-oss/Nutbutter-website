@@ -39,8 +39,8 @@ export default function CartPage() {
         {isLoading && <CartState message="Loading your cart..." />}
         {!isLoading && error && <CartState message="Your cart could not be loaded right now." />}
         {!isLoading && !error && cartItems.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <section className="lg:col-span-8 space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_374px] gap-8 items-start">
+            <section className="space-y-5">
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id}

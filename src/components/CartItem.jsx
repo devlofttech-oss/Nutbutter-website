@@ -1,7 +1,7 @@
 export default function CartItem({ item, onIncrease, onDecrease, onRemove }) {
   return (
-    <article className="group flex flex-col sm:flex-row items-center gap-5 md:gap-6 p-4 md:p-5 bg-white/60 rounded-xl border border-outline-variant shadow-[0_12px_35px_rgba(115,91,66,0.06)] transition-all duration-300 hover:bg-white hover:shadow-lg">
-      <div className="w-full sm:w-36 h-44 sm:h-36 flex-shrink-0 overflow-hidden rounded-lg bg-surface-container">
+    <article className="group grid grid-cols-1 sm:grid-cols-[144px_minmax(0,1fr)] gap-5 md:gap-6 p-4 md:p-5 bg-white/80 rounded-xl border border-outline-variant shadow-[0_12px_35px_rgba(115,91,66,0.06)] transition-all duration-300 hover:bg-white hover:shadow-lg">
+      <div className="w-full sm:w-36 h-44 sm:h-36 overflow-hidden rounded-lg bg-surface-container">
         <img
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           src={item.image}
@@ -9,8 +9,8 @@ export default function CartItem({ item, onIncrease, onDecrease, onRemove }) {
         />
       </div>
 
-      <div className="flex-grow flex flex-col sm:flex-row justify-between items-center sm:items-start w-full gap-4">
-        <div className="text-center sm:text-left space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] items-start gap-5 md:gap-8 min-w-0">
+        <div className="text-center sm:text-left space-y-2 min-w-0">
           <h3 className="font-serif text-xl md:text-2xl text-primary-container leading-tight">{item.name}</h3>
           <p className="text-sm font-medium text-on-surface-variant">{item.variant}</p>
           <button
@@ -23,9 +23,9 @@ export default function CartItem({ item, onIncrease, onDecrease, onRemove }) {
           </button>
         </div>
 
-        <div className="flex flex-col items-center sm:items-end gap-4">
+        <div className="flex flex-row md:flex-col items-center justify-between md:justify-start md:items-end gap-4 w-full md:w-auto">
           <div className="font-serif text-xl md:text-2xl font-semibold text-primary-container">{formatCurrency(item.price)}</div>
-          <div className="flex items-center border border-outline-variant rounded-full px-3 py-1 bg-white/50">
+          <div className="flex items-center justify-between border border-outline-variant rounded-full px-3 py-1 bg-white min-w-[116px]">
             <button
               className="material-symbols-outlined text-sm text-on-surface-variant hover:text-primary transition-colors p-1 disabled:opacity-30"
               type="button"

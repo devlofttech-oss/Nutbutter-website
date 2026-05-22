@@ -3,7 +3,7 @@ import { PAYMENT_METHODS } from '../data/cartData.js'
 
 export default function CartSummary({ subtotal, discount, tax, total, coupon, onCouponChange, onApplyCoupon }) {
   return (
-    <aside className="lg:col-span-4 space-y-6">
+    <aside className="space-y-6 w-full">
       <section className="p-4 md:p-6 bg-surface-container-high/60 rounded-xl border border-outline-variant shadow-[0_14px_35px_rgba(115,91,66,0.05)]">
         <label
           className="block text-xs uppercase tracking-[0.16em] text-primary-container/80 mb-3 font-bold"
@@ -47,7 +47,7 @@ export default function CartSummary({ subtotal, discount, tax, total, coupon, on
           </div>
         </div>
 
-        <Link to="/checkout">
+        <Link className="block" to="/checkout">
           <button className="w-full bg-primary-container text-on-primary py-4 rounded-lg text-sm font-bold uppercase tracking-[0.14em] hover:shadow-2xl hover:bg-primary transition-all duration-300 flex items-center justify-center gap-3">
             Proceed to Checkout
             <span className="material-symbols-outlined">arrow_forward</span>

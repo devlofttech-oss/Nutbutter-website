@@ -110,9 +110,9 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {useCases.map(([title, body, image]) => (
-              <div key={title} className="relative h-72 md:h-80 overflow-hidden rounded-xl border border-white/60 bg-surface-container-low p-6 md:p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(115,91,66,0.09)] group">
-                <img className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105" src={image} alt={`${title} with nut butter`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2f2115]/55 via-[#4b3621]/15 to-white/5" />
+              <div key={title} className="relative h-72 md:h-80 overflow-hidden rounded-xl border border-white/70 bg-white p-6 md:p-8 flex flex-col justify-end shadow-[0_18px_45px_rgba(31,31,31,0.08)] group">
+                <img className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" src={image} alt={`${title} with nut butter`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                 <div className="relative z-10">
                   <h4 className="font-serif text-2xl text-white drop-shadow-sm">{title}</h4>
                   <p className="mt-2 text-sm leading-6 text-white/90 drop-shadow-sm">{body}</p>
