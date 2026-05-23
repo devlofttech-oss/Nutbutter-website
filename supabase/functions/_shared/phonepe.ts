@@ -2,6 +2,10 @@ type PhonePeTokenResponse = {
   access_token?: string
   token_type?: string
   expires_at?: number
+  code?: string
+  message?: string
+  error?: string
+  error_description?: string
 }
 
 export type PhonePeStatusPayload = Record<string, unknown> & {
@@ -40,10 +44,11 @@ export async function getPhonePeAccessToken() {
     body,
   })
 
-  const payload = await response.json() as PhonePeTokenResponse
+  const payload = await response.json().catch(() => ({})) as PhonePeTokenResponse
 
   if (!response.ok || !payload.access_token) {
-    throw new Error('Unable to authenticate with PhonePe.')
+    const providerMessage = payload.message ?? payload.error_description ?? payload.error ?? payload.code
+    throw new Error(providerMessage ? `Unable to authenticate with PhonePe: ${providerMessage}` : 'Unable to authenticate with PhonePe.')
   }
 
   return payload.access_token
