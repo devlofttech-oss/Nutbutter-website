@@ -32,6 +32,8 @@
    - `SHIPROCKET_PACKAGE_LENGTH_CM`
    - `SHIPROCKET_PACKAGE_BREADTH_CM`
    - `SHIPROCKET_PACKAGE_HEIGHT_CM`
+   - `SHIPROCKET_FULFILLMENT_MODE` (`full` assigns AWB; `order_only` creates the Shiprocket order without AWB assignment or wallet deduction)
+   - `SHIPROCKET_SKIP_AWB_ASSIGNMENT` (optional emergency/test override: `true` skips AWB assignment)
    - `RESEND_API_KEY`
    - `EMAIL_FROM`
    - `EMAIL_FROM_NAME`
@@ -61,6 +63,7 @@ Use either basic callback credentials or x-verify salt secrets, matching the sec
 - PhonePe success-page verification and PhonePe webhooks both use the same finalization path.
 - `phonepe_webhook_events`, `email_events`, and shipment retry fields store processing state, retry counts, and failure reasons.
 - Failed Shiprocket syncs keep the order confirmed and store retry metadata for a later manual or scheduled retry.
+- For live checkout tests where the Shiprocket wallet should not be charged, set `SHIPROCKET_FULFILLMENT_MODE=order_only` before deploying the functions. The checkout order and Shiprocket order are still created, but AWB assignment is skipped.
 - Schedule `retry-failed-operations` from Supabase cron or an external monitor with header `x-cron-secret: CRON_SECRET`; it retries failed PhonePe processing, Shiprocket syncs, and failed Resend email events.
 
 ## Frontend environment

@@ -1,6 +1,6 @@
 import type { SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { queueAndSendEmail, renderOrderConfirmationEmail, renderShippingConfirmationEmail } from './email.ts'
-import { assignShiprocketAwb, createShiprocketOrder, getShiprocketPickupLocation } from './shiprocket.ts'
+import { assignShiprocketAwb, createShiprocketOrder, getShiprocketPickupLocation, shouldAssignShiprocketAwb } from './shiprocket.ts'
 
 export const ORDER_DETAIL_COLUMNS = `
   *,
@@ -216,13 +216,18 @@ export async function syncShiprocketShipment(serviceClient: SupabaseClient, orde
       })
       .eq('id', shipment.id)
 
-    await addTimelineEvent(serviceClient, String(order.id), 'shipped', 'Shipped', 'Your order has been handed to the courier.', {
-      shiprocketOrderId,
-      shiprocketShipmentId,
-    })
-
     const shipmentIdForAwb = shiprocketShipmentId ?? shipment.shiprocket_shipment_id
     if (!shipmentIdForAwb) return shipment
+
+    if (!shouldAssignShiprocketAwb()) {
+      return {
+        ...shipment,
+        status: 'synced',
+        shiprocket_order_id: shiprocketOrderId ? String(shiprocketOrderId) : shipment.shiprocket_order_id,
+        shiprocket_shipment_id: String(shipmentIdForAwb),
+        raw_response: shiprocketOrder,
+      }
+    }
 
     const awbResponse = await assignShiprocketAwb(String(shipmentIdForAwb), Number(order.shiprocket_courier_id) || null)
     const awbCode = getShipmentValue(awbResponse, 'awb_code')
@@ -247,6 +252,11 @@ export async function syncShiprocketShipment(serviceClient: SupabaseClient, orde
     if (updateError) throw updateError
 
     if (awbCode) {
+      await addTimelineEvent(serviceClient, String(order.id), 'shipped', 'Shipped', 'Your order has been handed to the courier.', {
+        shiprocketOrderId,
+        shiprocketShipmentId,
+        awbCode,
+      })
       await sendShippingConfirmationEmail(serviceClient, String(order.id), updatedShipment)
     }
 

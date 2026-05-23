@@ -35,6 +35,13 @@ export function getShiprocketPickupLocation() {
   return pickupLocation
 }
 
+export function shouldAssignShiprocketAwb() {
+  const fulfillmentMode = (Deno.env.get('SHIPROCKET_FULFILLMENT_MODE') ?? 'full').toLowerCase()
+  const skipAwbAssignment = (Deno.env.get('SHIPROCKET_SKIP_AWB_ASSIGNMENT') ?? '').toLowerCase()
+
+  return fulfillmentMode !== 'order_only' && !['1', 'true', 'yes'].includes(skipAwbAssignment)
+}
+
 export function getDefaultPackageWeightKg() {
   return Number(Deno.env.get('SHIPROCKET_DEFAULT_WEIGHT_KG') ?? '0.5')
 }
