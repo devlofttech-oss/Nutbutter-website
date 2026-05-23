@@ -22,10 +22,15 @@ export function getPhonePeBaseUrl() {
   return Deno.env.get('PHONEPE_BASE_URL') ?? 'https://api-preprod.phonepe.com/apis/pg-sandbox'
 }
 
+export function getPhonePeAuthBaseUrl() {
+  return Deno.env.get('PHONEPE_AUTH_BASE_URL') ?? getPhonePeBaseUrl()
+}
+
 export async function getPhonePeAccessToken() {
   const clientId = Deno.env.get('PHONEPE_CLIENT_ID')
   const clientSecret = Deno.env.get('PHONEPE_CLIENT_SECRET')
   const clientVersion = Deno.env.get('PHONEPE_CLIENT_VERSION') ?? '1'
+  const tokenUrl = Deno.env.get('PHONEPE_TOKEN_URL') ?? `${getPhonePeAuthBaseUrl()}/v1/oauth/token`
 
   if (!clientId || !clientSecret) {
     throw new Error('PhonePe credentials are not configured.')
@@ -38,7 +43,7 @@ export async function getPhonePeAccessToken() {
     grant_type: 'client_credentials',
   })
 
-  const response = await fetch(`${getPhonePeBaseUrl()}/v1/oauth/token`, {
+  const response = await fetch(tokenUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body,

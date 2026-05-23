@@ -17,6 +17,8 @@
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `FRONTEND_URL`
    - `PHONEPE_BASE_URL`
+   - `PHONEPE_AUTH_BASE_URL` (production auth base, optional when auth and payment APIs share the same base)
+   - `PHONEPE_TOKEN_URL` (optional full token URL override)
    - `PHONEPE_CLIENT_ID`
    - `PHONEPE_CLIENT_SECRET`
    - `PHONEPE_CLIENT_VERSION`
