@@ -43,10 +43,6 @@ const requiredAddressFields: Array<keyof CheckoutAddress> = [
   'pincode',
 ]
 
-function isFreeShippingEnabled() {
-  return ['1', 'true', 'yes', 'on'].includes(String(Deno.env.get('FREE_SHIPPING_ENABLED') ?? '').toLowerCase())
-}
-
 function assertAddress(address: CheckoutAddress, label: string) {
   const missingField = requiredAddressFields.find((field) => !String(address?.[field] ?? '').trim())
   if (missingField) throw new Error(`${label} ${missingField} is required.`)
@@ -166,25 +162,7 @@ Deno.serve(async (request) => {
       orderAmount: subtotal,
     }).catch(() => null)
 
-    const freeShippingEnabled = isFreeShippingEnabled()
-    const actualShippingAmount = money(selectedCourier.freightCharge)
-    const shippingAmount = freeShippingEnabled ? 0 : actualShippingAmount
-    const selectedCourierForResponse = freeShippingEnabled
-      ? {
-          ...selectedCourier,
-          actualFreightCharge: selectedCourier.freightCharge,
-          freightCharge: 0,
-          freeShippingApplied: true,
-        }
-      : selectedCourier
-    const couriersForResponse = freeShippingEnabled
-      ? serviceability.couriers.map((courier) => ({
-          ...courier,
-          actualFreightCharge: courier.freightCharge,
-          freightCharge: 0,
-          freeShippingApplied: true,
-        }))
-      : serviceability.couriers
+    const shippingAmount = money(selectedCourier.freightCharge)
     const discount = 0
     const tax = money(Math.round((subtotal - discount) * 0.05))
     const total = money(Math.max(subtotal - discount + shippingAmount + tax, 0))
@@ -251,11 +229,9 @@ Deno.serve(async (request) => {
         estimated_delivery_days: selectedCourier.estimatedDeliveryDays,
         estimated_delivery_date: selectedCourier.estimatedDeliveryDate ?? addDays(selectedCourier.estimatedDeliveryDays),
         shipping_quote: {
-          selectedCourier: selectedCourierForResponse,
+          selectedCourier,
           serviceability: serviceability.raw,
           codServiceability: codQuote?.raw ?? null,
-          freeShippingApplied: freeShippingEnabled,
-          actualShippingAmount,
           package: { weightKg: totalWeightKg },
         },
       })
@@ -294,8 +270,8 @@ Deno.serve(async (request) => {
         discount,
         total,
       },
-      selectedCourier: selectedCourierForResponse,
-      couriers: couriersForResponse,
+      selectedCourier,
+      couriers: serviceability.couriers,
       codAvailable: session.cod_available,
       estimatedDeliveryDate: session.estimated_delivery_date,
     })
