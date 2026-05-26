@@ -171,17 +171,17 @@ export default function CheckoutPage() {
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-10 md:py-xl">
-        <section className="mb-8 md:mb-lg">
-          <nav className="flex items-center gap-2 mb-sm text-[11px] md:text-xs text-secondary uppercase tracking-[0.12em] md:tracking-widest overflow-x-auto whitespace-nowrap pb-1">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-7 md:py-xl">
+        <section className="mb-6 md:mb-lg">
+          <nav className="flex items-center gap-2 mb-4 md:mb-sm text-[11px] md:text-xs text-secondary uppercase tracking-[0.12em] md:tracking-widest overflow-x-auto whitespace-nowrap pb-1">
             <Link className="hover:text-primary transition-colors font-serif" to="/">Home</Link>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <Link className="hover:text-primary transition-colors font-serif" to="/cart">Cart</Link>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-primary font-semibold font-serif">Checkout</span>
           </nav>
-          <h1 className="font-serif text-4xl md:text-headline-xl text-primary mb-sm">Checkout</h1>
-          <p className="font-serif text-base md:text-body-lg leading-7 text-on-surface-variant max-w-2xl italic">
+          <h1 className="font-serif text-[32px] md:text-headline-xl leading-tight text-primary mb-3 md:mb-sm">Checkout</h1>
+          <p className="font-serif text-[15px] md:text-body-lg leading-7 text-on-surface-variant max-w-2xl italic">
             Finalize your order of our handcrafted, stone-ground provisions. Each jar is prepared with care and tradition.
           </p>
         </section>
@@ -189,18 +189,18 @@ export default function CheckoutPage() {
         {isCartLoading && <CheckoutState message="Loading your cart..." />}
         {!isCartLoading && cartItems.length === 0 && <CheckoutState message="Your cart is empty. Add a small-batch spread before checkout." />}
         {!isCartLoading && cartItems.length > 0 && (
-          <form className="flex flex-col lg:flex-row gap-8 md:gap-lg items-start" onSubmit={handleSubmit}>
-            <div className="flex-grow w-full space-y-8 md:space-y-lg">
+          <form className="flex flex-col lg:flex-row gap-6 md:gap-lg items-start" onSubmit={handleSubmit}>
+            <div className="flex-grow w-full space-y-6 md:space-y-lg">
               {!isAuthenticated && (
-                <div className="rounded-xl border border-outline-variant bg-surface-container-low p-md text-on-surface-variant">
+                <div className="rounded-xl border border-outline-variant bg-surface-container-low p-4 md:p-md text-sm md:text-base text-on-surface-variant">
                   Please <Link className="text-primary font-semibold" to="/login">sign in</Link> to place your order and save it to your account.
                 </div>
               )}
               <CheckoutForm values={formValues} errors={errors} title="Shipping Address" onChange={handleInputChange} />
-              <label className="flex items-start gap-3 text-label-md font-semibold text-primary-container">
+              <label className="flex items-start gap-3 rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 text-sm md:text-label-md font-semibold text-primary-container">
                 <input
                   checked={billingSameAsShipping}
-                  className="w-5 h-5"
+                  className="mt-0.5 h-4 w-4 md:h-5 md:w-5 flex-shrink-0"
                   type="checkbox"
                   onChange={(event) => setBillingSameAsShipping(event.target.checked)}
                   style={{ accentColor: '#33210d' }}
