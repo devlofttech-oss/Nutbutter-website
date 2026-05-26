@@ -9,6 +9,7 @@ import CheckoutSummary from '../components/CheckoutSummary.jsx'
 import { CUSTOMER_FIELDS } from '../data/checkoutData.js'
 import { createCheckoutSession, estimateShipping } from '../api/checkoutApi.js'
 import { createPhonePePayment } from '../api/paymentApi.js'
+import { env } from '../config/env.js'
 import { useAuthSession } from '../providers/AuthSessionProvider.jsx'
 import { useCart } from '../providers/CartProvider.jsx'
 
@@ -97,7 +98,7 @@ export default function CheckoutPage() {
   }, [cartItems.length, formValues.pincode, isAuthenticated])
 
   const selectedCourier = shippingQuote?.couriers?.find((courier) => Number(courier.courierId) === Number(selectedCourierId))
-  const shipping = selectedCourier?.freightCharge ?? 0
+  const shipping = env.freeShippingEnabled ? 0 : selectedCourier?.freightCharge ?? 0
   const discount = 0
   const tax = useMemo(() => Math.round((subtotal - discount) * 0.05), [discount, subtotal])
   const total = Math.max(subtotal - discount + shipping + tax, 0)

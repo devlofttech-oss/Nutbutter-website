@@ -2,6 +2,21 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { corsHeaders, jsonResponse } from '../_shared/cors.ts'
 import { getDefaultPackageWeightKg, getServiceabilityEstimate } from '../_shared/shiprocket.ts'
 
+function isFreeShippingEnabled() {
+  return ['1', 'true', 'yes', 'on'].includes(String(Deno.env.get('FREE_SHIPPING_ENABLED') ?? '').toLowerCase())
+}
+
+function applyFreeShipping(couriers: Array<Record<string, unknown>>, enabled: boolean) {
+  if (!enabled) return couriers
+
+  return couriers.map((courier) => ({
+    ...courier,
+    actualFreightCharge: courier.freightCharge,
+    freightCharge: 0,
+    freeShippingApplied: true,
+  }))
+}
+
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -68,11 +83,12 @@ Deno.serve(async (request) => {
       weightKg: totalWeightKg,
       orderAmount: subtotal,
     }).catch(() => null)
+    const couriers = applyFreeShipping(prepaid.couriers, isFreeShippingEnabled())
 
     return jsonResponse({
       pincode,
-      couriers: prepaid.couriers,
-      recommendedCourier: prepaid.couriers[0],
+      couriers,
+      recommendedCourier: couriers[0],
       codAvailable: Boolean(cod?.couriers?.some((courier) => courier.codAvailable)),
       package: { weightKg: totalWeightKg },
     })
