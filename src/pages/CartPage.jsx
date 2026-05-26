@@ -23,15 +23,15 @@ export default function CartPage() {
     <div className="bg-background text-on-surface min-h-screen flex flex-col">
       <Header cartCount={itemCount} />
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-10 md:py-20">
-        <section className="mb-8 md:mb-12">
-          <nav className="flex items-center gap-2 mb-5 text-[11px] md:text-xs text-secondary uppercase tracking-[0.12em] md:tracking-[0.16em]">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-12 py-7 md:py-20">
+        <section className="mb-6 md:mb-12">
+          <nav className="flex items-center gap-2 mb-4 md:mb-5 text-[11px] md:text-xs text-secondary uppercase tracking-[0.12em] md:tracking-[0.16em]">
             <Link className="hover:text-primary transition-colors font-semibold" to="/">Home</Link>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>chevron_right</span>
             <span className="text-primary font-semibold">Cart</span>
           </nav>
-          <h1 className="font-serif text-[34px] md:text-[58px] leading-tight text-primary-container mb-4">Your Cart</h1>
-          <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant max-w-2xl">
+          <h1 className="font-serif text-[32px] md:text-[58px] leading-tight text-primary-container mb-3 md:mb-4">Your Cart</h1>
+          <p className="text-[15px] md:text-lg leading-7 md:leading-8 text-on-surface-variant max-w-2xl">
             Review your selection of artisanal nut butters, stone-ground for purity and slow-crafted for depth of flavor.
           </p>
         </section>
@@ -39,8 +39,8 @@ export default function CartPage() {
         {isLoading && <CartState message="Loading your cart..." />}
         {!isLoading && error && <CartState message="Your cart could not be loaded right now." />}
         {!isLoading && !error && cartItems.length > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_374px] gap-8 items-start">
-            <section className="space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_374px] gap-6 lg:gap-8 items-start">
+            <section className="space-y-3 md:space-y-5">
               {cartItems.map((item) => (
                 <CartItem
                   key={item.id}
@@ -86,7 +86,7 @@ function CartState({ message }) {
 function ContinueShopping() {
   return (
     <Link
-      className="inline-flex items-center gap-3 pt-4 text-xs md:text-sm font-bold uppercase tracking-[0.12em] md:tracking-[0.14em] text-secondary hover:text-primary-container transition-all"
+      className="inline-flex items-center gap-2 pt-3 md:pt-4 text-xs md:text-sm font-bold uppercase tracking-[0.12em] md:tracking-[0.14em] text-secondary hover:text-primary-container transition-all"
       to="/shop"
     >
       <span className="material-symbols-outlined text-lg">arrow_back</span>
