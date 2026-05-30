@@ -96,8 +96,7 @@ export default function CheckoutPage() {
     }
   }, [cartItems.length, formValues.pincode, isAuthenticated])
 
-  const selectedCourier = shippingQuote?.couriers?.find((courier) => Number(courier.courierId) === Number(selectedCourierId))
-  const shipping = selectedCourier?.freightCharge ?? 0
+  const shipping = 0
   const discount = 0
   const tax = useMemo(() => Math.round((subtotal - discount) * 0.05), [discount, subtotal])
   const total = Math.max(subtotal - discount + shipping + tax, 0)

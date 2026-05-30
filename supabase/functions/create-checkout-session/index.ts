@@ -162,7 +162,7 @@ Deno.serve(async (request) => {
       orderAmount: subtotal,
     }).catch(() => null)
 
-    const shippingAmount = money(selectedCourier.freightCharge)
+    const shippingAmount = 0
     const discount = 0
     const tax = money(Math.round((subtotal - discount) * 0.05))
     const total = money(Math.max(subtotal - discount + shippingAmount + tax, 0))

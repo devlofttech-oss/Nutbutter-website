@@ -69,10 +69,15 @@ Deno.serve(async (request) => {
       orderAmount: subtotal,
     }).catch(() => null)
 
+    const freeCouriers = prepaid.couriers.map((courier) => ({
+      ...courier,
+      freightCharge: 0,
+    }))
+
     return jsonResponse({
       pincode,
-      couriers: prepaid.couriers,
-      recommendedCourier: prepaid.couriers[0],
+      couriers: freeCouriers,
+      recommendedCourier: freeCouriers[0],
       codAvailable: Boolean(cod?.couriers?.some((courier) => courier.codAvailable)),
       package: { weightKg: totalWeightKg },
     })
