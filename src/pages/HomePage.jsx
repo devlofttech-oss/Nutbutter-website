@@ -144,17 +144,74 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Brand Story */}
-        <section className="py-16 md:py-[120px] max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 gap-10 md:gap-24 items-center">
-          <div className="order-2 md:order-1">
-            <img alt="The Farm" className="w-full aspect-[4/5] object-cover rounded-[28px] grayscale-[15%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANYdeCa2d4k19IC6HPG-rE-7GSxKgy-jtikC8RhLjTRYp5kzLxeI3fBpJqpgN83sG9OGUnzVCsjurG_I2OZ0s19kd12vdHxlud8x6an56lqsMzUlHEkT04Zaf-wHrcXKqNsY51cZ8epU6We6N0m18yf3uXhgVlRc-jEq4Xc8u9zLSPY6RIj0iZUZMjDXe9b8_wMx7nZe47_CCgjUfGAW6cuWczBNNvuYYnbFHUFsqOWUQavlLQlYwcWjqyprGQf9lvkpJygsMIOO8" />
-          </div>
-          <div className="order-1 md:order-2 space-y-8">
-            <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em]">Our Story</span>
-            <h2 className="font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">Crafting purity since 1924.</h2>
-            <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8">Our heritage began in a small stone mill where we believed that the best food needs the least interference. Today, we still use slow-roasting techniques and stone-grinders to ensure every jar retains its natural soul.</p>
-            <p className="text-on-surface-variant leading-7">We partner with family-owned groves that prioritize soil health and biodiversity. It is not just about the butter, it is about preserving a way of life that respects the land and our bodies.</p>
-            <Link to="/about" className="inline-block border-b-2 border-primary text-primary pb-1 text-xs font-bold uppercase tracking-[0.18em] hover:text-primary-container transition-colors">Learn More About Our Mission</Link>
+        {/* Brand Copy */}
+        <section className="py-16 md:py-[120px] bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 md:gap-16 lg:gap-24 items-start">
+              <div className="space-y-7 md:space-y-9 lg:sticky lg:top-32">
+                <div className="space-y-4 md:space-y-5">
+                  <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em]">
+                    Premium stone-ground butters
+                  </span>
+                  <h2 className="font-serif text-[36px] sm:text-[44px] md:text-[64px] leading-[1.04] text-on-surface">
+                    Made with intention.
+                  </h2>
+                  <p className="max-w-xl text-on-surface-variant text-base md:text-lg leading-7 md:leading-8">
+                    Artisanal nut butters for the mindful palate. Slow-crafted spreads for conscious living.
+                  </p>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[
+                    'Ditch the mayo. Upgrade the spread.',
+                    'Spooning health, one jar at a time.',
+                    'Your toast deserves better.',
+                    'Good fats. Great decisions.',
+                    'Not your regular nut butter.',
+                  ].map((line) => (
+                    <p
+                      key={line}
+                      className="rounded-full border border-outline-variant bg-white/50 px-4 py-3 text-sm font-semibold text-primary-container shadow-[0_10px_24px_rgba(115,91,66,0.04)]"
+                    >
+                      “{line}”
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4 md:space-y-5">
+                {[
+                  [
+                    'Stone-Ground Nut Butters, Crafted Consciously.',
+                    'Pure, satvic and vegan nut and seed butters made in small batches with bold flavours, clean ingredients, and no nonsense.',
+                  ],
+                  [
+                    'India’s Savoury Nut Butter Revolution.',
+                    'From indulgent cacao spreads to uniquely savoury creations, Satvegik brings mindful eating to every spoonful.',
+                  ],
+                  [
+                    'Homegrown Goodness in Every Spoon.',
+                    'Thoughtfully crafted satvic and vegan nut butters made for modern, mindful lifestyles.',
+                  ],
+                  [
+                    'Purely Spreadable.',
+                    'Stone-ground vegan nut and seed butters with bold flavour and clean ingredients.',
+                  ],
+                ].map(([title, body]) => (
+                  <article
+                    key={title}
+                    className="rounded-[22px] border border-outline-variant bg-surface-container-low p-5 sm:p-6 md:p-8 shadow-[0_18px_45px_rgba(115,91,66,0.06)]"
+                  >
+                    <h3 className="font-serif text-[26px] md:text-[34px] leading-tight text-primary-container">
+                      {title}
+                    </h3>
+                    <p className="mt-3 text-on-surface-variant text-sm md:text-base leading-7">
+                      {body}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
