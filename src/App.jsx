@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import AboutPage from './pages/AboutPage.jsx'
+import AccountPage from './pages/AccountPage.jsx'
 import BlogPage from './pages/BlogPage.jsx'
 import CartPage from './pages/CartPage.jsx'
 import CheckoutPage from './pages/CheckoutPage.jsx'
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/auth/callback" element={<AuthCallbackPage />} />
           <Route path="/logout" element={<LogoutPage />} />
+          <Route path="/account" element={<ProtectedRoute><AccountPage /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
           <Route path="/orders/:orderId" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccessPage /></ProtectedRoute>} />

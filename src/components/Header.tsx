@@ -9,7 +9,7 @@ export default function Header({ cartCount }) {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const { itemCount } = useCart()
-  const { isAuthenticated, signOut } = useAuthSession()
+  const { isAuthenticated } = useAuthSession()
   const displayedCartCount = cartCount ?? itemCount
 
   return (
@@ -57,17 +57,21 @@ export default function Header({ cartCount }) {
             )}
           </Link>
           {isAuthenticated ? (
-            <button
-              className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform"
-              type="button"
-              aria-label="Logout"
-              onClick={() => signOut()}
-            >
-              logout
-            </button>
+            <Link to="/account" aria-label="My account">
+              <button
+                className={`h-10 w-10 rounded-full border transition-all active:scale-95 ${
+                  pathname.startsWith('/account') || pathname.startsWith('/orders')
+                    ? 'border-[#4B3621] bg-[#4B3621] text-white shadow-[0_10px_24px_rgba(75,54,33,0.18)]'
+                    : 'border-[#eadfd2] bg-white/70 text-[#4B3621] hover:border-[#8C7355]'
+                } material-symbols-outlined text-[22px]`}
+                type="button"
+              >
+                account_circle
+              </button>
+            </Link>
           ) : (
             <Link to="/login" aria-label="Login">
-              <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform p-1" type="button">
+              <button className="h-10 w-10 rounded-full border border-[#eadfd2] bg-white/70 text-[#4B3621] active:scale-95 transition-all hover:border-[#8C7355] material-symbols-outlined text-[20px]" type="button">
                 person
               </button>
             </Link>
