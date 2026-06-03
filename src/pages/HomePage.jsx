@@ -42,7 +42,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 items-center gap-10 md:gap-16">
             <div className="space-y-6 md:space-y-8">
               <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
-                <span className="italic font-normal">Stone-Ground Nut & SeedButters.</span>
+                <span className="italic font-normal">Stone-Ground Nut & Seed Butters.</span>
               </h1>
               <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
                 Home-grown ingredients, savoury craft, and patient stone-grinding come together in small-batch spreads with a naturally luxurious finish.

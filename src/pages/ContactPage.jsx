@@ -9,7 +9,6 @@ const details = [
   ['mail', 'Email', BUSINESS_CONTACT.email],
   ['call', 'Phone', BUSINESS_CONTACT.phone],
   ['eco', 'Tagline', BUSINESS_CONTACT.tagline],
-  ['location_on', 'Studio', BUSINESS_CONTACT.address],
 ]
 
 export default function ContactPage() {
@@ -74,14 +73,6 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-              <div className="pt-8 border-t border-outline-variant">
-                <h4 className="text-xs font-bold text-primary uppercase tracking-[0.18em] mb-4">Studio Hours</h4>
-                <div className="space-y-2 text-secondary font-light">
-                  <div className="flex justify-between max-w-xs"><span>Mon - Fri</span><span>09:00 - 18:00</span></div>
-                  <div className="flex justify-between max-w-xs"><span>Sat</span><span>10:00 - 14:00</span></div>
-                  <div className="flex justify-between max-w-xs opacity-50"><span>Sun</span><span>Closed</span></div>
-                </div>
-              </div>
             </div>
 
             {/* Right Column: Form */}
@@ -103,18 +94,6 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Full Width Image Section */}
-        <section className="w-full h-[420px] md:h-[600px] overflow-hidden relative group">
-          <img alt="Heritage Studio" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwj3V93qWiTrYH1WMP_RkYunQInrBR9kjUfeJzLYHx1rWmW4NRqosRztyVnDtKCI7YjlefIFeMkvHpByx85a_FXEM-60p87epLRuXyVjugPFRWiidTL8Qta5LbVL-dc0bgWhx3wjwV32H4GgAFwFUCaUifRGJELvMGIjvF34i2Kn8p20_H_r63JdgCcaHFLMmAg-CXApi-0OJg8Oqyi70bLKiyhJ63c6IyeYhgKvE_vNJHDcSTjHEOUz5OseyrN7aIWiQv4ybOACY" />
-          <div className="absolute inset-0 bg-primary/10 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
-          <div className="absolute inset-0 flex items-center justify-center px-6">
-            <div className="bg-surface/80 backdrop-blur-md p-6 md:p-10 max-w-md text-center shadow-2xl rounded-[22px] md:rounded-[28px] border border-white/20">
-              <span className="material-symbols-outlined text-4xl text-primary mb-4">restaurant</span>
-              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-2">Visit Our Studio</h2>
-              <p className="text-secondary font-light">Connect with our care team for product questions, wholesale inquiries, and order support.</p>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>

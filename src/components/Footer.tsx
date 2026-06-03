@@ -52,10 +52,14 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[#decdb8] pt-6 pb-8 flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs uppercase tracking-[0.16em] text-[#4B3621]">
-          <span className="font-bold">Social</span>
           {SOCIAL_LINKS.map((link) => (
             link.href ? (
-              <a key={link.label} className="text-stone-600 hover:text-[#8C7355] transition-colors" href={link.href} rel="noreferrer" target="_blank">
+              <a key={link.label} className="inline-flex items-center gap-2 text-stone-600 hover:text-[#8C7355] transition-colors" href={link.href} rel="noreferrer" target="_blank">
+                <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24">
+                  <rect height="18" rx="5" stroke="currentColor" strokeWidth="2" width="18" x="3" y="3" />
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="17.5" cy="6.5" fill="currentColor" r="1.25" />
+                </svg>
                 {link.label}
               </a>
             ) : (

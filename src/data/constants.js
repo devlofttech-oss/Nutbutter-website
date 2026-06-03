@@ -15,9 +15,7 @@ export const BUSINESS_CONTACT = {
 }
 
 export const SOCIAL_LINKS = [
-  { label: 'Instagram', href: '' },
-  { label: 'Facebook', href: '' },
-  { label: 'YouTube', href: '' },
+  { label: 'Instagram', href: 'https://www.instagram.com/satvegik' },
 ]
 
 export const PRODUCTS = [
