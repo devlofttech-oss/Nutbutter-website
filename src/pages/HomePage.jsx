@@ -43,17 +43,17 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 md:py-[150px] bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid md:grid-cols-2 items-center gap-10 md:gap-16">
-            <div className="space-y-6 md:space-y-8">
+            <div className="space-y-5 md:space-y-7">
               <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
                 <span className="italic font-normal">Stone-Ground Nut & Seed Butters.</span>
               </h1>
-              <div className="max-w-xl space-y-4">
-                <p className="font-serif text-[23px] md:text-[32px] leading-tight text-primary-container">
+              <div className="max-w-xl space-y-3 md:space-y-4">
+                <p className="w-fit border-l-2 border-tertiary/60 pl-3 text-[12px] md:text-[13px] font-bold uppercase leading-5 tracking-[0.22em] text-primary-container">
                   Crafted Clean. Made Mindfully.
                 </p>
                 <div className="relative">
-                  <div className={`${isHeroCopyExpanded ? 'max-h-[520px]' : 'max-h-[112px]'} overflow-hidden transition-[max-height] duration-500 ease-out md:max-h-none`}>
-                    <div className="space-y-4 text-on-surface-variant text-[15px] md:text-lg leading-7 md:leading-8">
+                  <div className={`${isHeroCopyExpanded ? 'max-h-[520px]' : 'max-h-[96px]'} overflow-hidden transition-[max-height] duration-500 ease-out md:max-h-none`}>
+                    <div className="space-y-3 text-on-surface-variant text-[14px] md:text-[16px] leading-7 md:leading-8">
                       <p>
                         At Satvegik, we believe healthy eating should feel indulgent, nourishing, and deeply satisfying.
                       </p>
@@ -70,7 +70,7 @@ export default function HomePage() {
                   )}
                 </div>
                 <button
-                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary-container md:hidden"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary-container md:hidden"
                   type="button"
                   aria-expanded={isHeroCopyExpanded}
                   onClick={() => setIsHeroCopyExpanded((isExpanded) => !isExpanded)}
