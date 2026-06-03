@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import ProductCard from '../components/ProductCard.tsx'
 import EcommerceFaqSection from '../components/EcommerceFaqSection.jsx'
 import { ProductPageSkeleton } from '../components/SkeletonLoader.jsx'
 import { fetchProductBySlugOrId, fetchProductReviews, fetchProducts, fetchRelatedProducts } from '../api/productApi.js'
-import { useCart } from '../providers/CartProvider.jsx'
+import { BUSINESS_CONTACT } from '../data/constants.js'
 
 const benefits = [
   ['eco', 'No Added Refined Sugar'],
@@ -23,16 +23,13 @@ const useIdeas = [
 
 export default function ProductPage() {
   const { slug } = useParams()
-  const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
   const [size] = useState('200g')
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [error, setError] = useState('')
-  const { addToCart } = useCart()
 
   useEffect(() => {
     let isMounted = true
@@ -96,16 +93,7 @@ export default function ProductPage() {
   const nutrition = product.nutrition ?? {}
   const ingredients = product.ingredients?.length ? product.ingredients.join(', ') : 'Slow-Roasted Heirloom Nuts, Himalayan Sea Salt.'
 
-  const handleAddToCart = async () => {
-    setIsAddingToCart(true)
-
-    try {
-      await addToCart(product, quantity, size)
-      navigate('/cart')
-    } finally {
-      setIsAddingToCart(false)
-    }
-  }
+  const whatsappOrderUrl = buildWhatsAppOrderUrl(product, quantity, size)
 
   return (
     <div className="bg-background text-on-background">
@@ -153,9 +141,15 @@ export default function ProductPage() {
                 </div>
               </div>
             </div>
-            <button className="w-full bg-primary text-on-primary py-4 md:py-5 rounded-full font-serif text-xl md:text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.12)] hover:bg-primary-container active:scale-[0.98] transition-all" type="button" onClick={handleAddToCart} disabled={isAddingToCart}>
-              {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
-            </button>
+            <a
+              className="w-full inline-flex items-center justify-center gap-3 bg-[#4B3621] text-white py-4 md:py-5 rounded-full font-serif text-xl md:text-2xl shadow-[0_20px_60px_rgba(111,88,60,0.16)] hover:bg-[#8C7355] active:scale-[0.98] transition-all"
+              href={whatsappOrderUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <WhatsAppIcon className="h-6 w-6 md:h-7 md:w-7" />
+              WhatsApp
+            </a>
             <div className="mt-4 flex flex-wrap gap-4">
               {['NO ADDED REFINED SUGAR', 'NO PALM OIL'].map((label) => (
                 <span key={label} className="inline-flex items-center gap-2 px-4 py-2 bg-tertiary/10 text-tertiary rounded-full text-xs font-bold uppercase tracking-[0.12em]">
@@ -273,6 +267,39 @@ export default function ProductPage() {
       <Footer />
     </div>
   )
+}
+
+function buildWhatsAppOrderUrl(product, quantity, size) {
+  const phone = BUSINESS_CONTACT.phone.replace(/\D/g, '')
+  const price = product.priceLabel ?? formatCurrency(product.price)
+  const message = [
+    'Hi Satvegik, I would like to place an order.',
+    '',
+    `Product: ${product.name}`,
+    `Size: ${size}`,
+    `Quantity: ${quantity}`,
+    `Price: ${price}`,
+  ].join('\n')
+
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+}
+
+function WhatsAppIcon({ className }) {
+  return (
+    <svg aria-hidden="true" className={className} fill="currentColor" viewBox="0 0 32 32">
+      <path d="M16.02 3.2A12.74 12.74 0 0 0 5.08 22.5L3.6 28.8l6.46-1.46A12.74 12.74 0 1 0 16.02 3.2Zm0 2.4a10.34 10.34 0 0 1 8.8 15.76 10.35 10.35 0 0 1-13.99 3.39l-.4-.24-3.6.81.82-3.49-.27-.42A10.34 10.34 0 0 1 16.02 5.6Zm-4.13 4.74c-.23 0-.58.09-.88.42-.3.33-1.16 1.13-1.16 2.76s1.19 3.21 1.35 3.43c.17.22 2.29 3.66 5.67 4.98 2.8 1.1 3.38.88 3.99.83.61-.06 1.98-.81 2.26-1.59.28-.78.28-1.45.19-1.59-.08-.14-.31-.22-.66-.39-.35-.17-2.05-1.01-2.37-1.12-.32-.12-.55-.17-.78.17-.23.35-.9 1.12-1.1 1.35-.2.23-.41.26-.76.09-.35-.17-1.46-.54-2.79-1.72-1.03-.92-1.73-2.05-1.93-2.4-.2-.35-.02-.54.15-.71.15-.15.35-.41.52-.61.17-.2.23-.35.35-.58.12-.23.06-.44-.03-.61-.09-.17-.77-1.91-1.08-2.6-.28-.66-.57-.67-.84-.68h-.66Z" />
+    </svg>
+  )
+}
+
+function formatCurrency(value) {
+  if (typeof value === 'string' && value.includes('₹')) return value
+
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(Number(value) || 0)
 }
 
 function ProductPageState({ message, isSkeleton = false }) {
