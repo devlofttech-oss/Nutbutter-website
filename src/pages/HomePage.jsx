@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
@@ -29,6 +30,8 @@ const testimonials = [
 ]
 
 export default function HomePage() {
+  const [isHeroCopyExpanded, setIsHeroCopyExpanded] = useState(false)
+
   return (
     <div className="bg-background text-on-surface">
       <div className="sticky top-0 z-[60] bg-surface-container-low text-on-surface-variant px-4 py-2 text-center text-[10px] md:text-[11px] font-bold uppercase tracking-[0.12em] md:tracking-[0.18em] border-b border-outline-variant/30">
@@ -44,9 +47,40 @@ export default function HomePage() {
               <h1 className="font-serif text-[40px] sm:text-[44px] md:text-[72px] leading-[1.08] md:leading-[1.04] text-on-surface">
                 <span className="italic font-normal">Stone-Ground Nut & Seed Butters.</span>
               </h1>
-              <p className="text-on-surface-variant text-base md:text-lg leading-7 md:leading-8 max-w-lg">
-                Home-grown ingredients, savoury craft, and patient stone-grinding come together in small-batch spreads with a naturally luxurious finish.
-              </p>
+              <div className="max-w-xl space-y-4">
+                <p className="font-serif text-[23px] md:text-[32px] leading-tight text-primary-container">
+                  Crafted Clean. Made Mindfully.
+                </p>
+                <div className="relative">
+                  <div className={`${isHeroCopyExpanded ? 'max-h-[520px]' : 'max-h-[112px]'} overflow-hidden transition-[max-height] duration-500 ease-out md:max-h-none`}>
+                    <div className="space-y-4 text-on-surface-variant text-[15px] md:text-lg leading-7 md:leading-8">
+                      <p>
+                        At Satvegik, we believe healthy eating should feel indulgent, nourishing, and deeply satisfying.
+                      </p>
+                      <p>
+                        Our handcrafted nut and seed butters are traditionally stone-ground in small batches, preserving the natural richness, texture, aroma, and nutrition of every ingredient.
+                      </p>
+                      <p>
+                        Unlike heavily processed spreads, stone grinding creates a smoother, more wholesome butter while retaining the authentic character of nuts and seeds — delivering flavour the way nature intended.
+                      </p>
+                    </div>
+                  </div>
+                  {!isHeroCopyExpanded && (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background to-background/0 md:hidden" />
+                  )}
+                </div>
+                <button
+                  className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-[0.16em] text-primary transition-colors hover:text-primary-container md:hidden"
+                  type="button"
+                  aria-expanded={isHeroCopyExpanded}
+                  onClick={() => setIsHeroCopyExpanded((isExpanded) => !isExpanded)}
+                >
+                  {isHeroCopyExpanded ? 'Show Less' : 'Read More'}
+                  <span className={`material-symbols-outlined text-lg transition-transform ${isHeroCopyExpanded ? 'rotate-180' : ''}`}>
+                    keyboard_arrow_down
+                  </span>
+                </button>
+              </div>
               <div className="relative flex justify-center md:hidden">
                 <div className="absolute -inset-10 bg-tertiary/5 rounded-full blur-3xl opacity-70" />
                 <HeroCarousel className="group aspect-[4/5]" />
