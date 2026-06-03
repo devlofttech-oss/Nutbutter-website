@@ -1,9 +1,8 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import AboutPage from './pages/AboutPage.jsx'
 import AccountPage from './pages/AccountPage.jsx'
 import BlogPage from './pages/BlogPage.jsx'
-import CartPage from './pages/CartPage.jsx'
 import CheckoutPage from './pages/CheckoutPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import FaqPage from './pages/FaqPage.jsx'
@@ -57,7 +56,7 @@ export default function App() {
           <Route path="/product" element={<ProductPage />} />
           <Route path="/product/:slug" element={<ProductPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart" element={<Navigate to="/shop" replace />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

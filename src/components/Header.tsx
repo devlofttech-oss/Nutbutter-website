@@ -2,15 +2,12 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINKS } from '../data/constants.js'
 import { useAuthSession } from '../providers/AuthSessionProvider.jsx'
-import { useCart } from '../providers/CartProvider.jsx'
 import logo from '../../assets/logo.png'
 
-export default function Header({ cartCount }) {
+export default function Header() {
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
-  const { itemCount } = useCart()
   const { isAuthenticated } = useAuthSession()
-  const displayedCartCount = cartCount ?? itemCount
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#eadfd2]/80 bg-white/85 shadow-[0_18px_45px_rgba(115,91,66,0.06)] backdrop-blur-xl">
@@ -46,16 +43,6 @@ export default function Header({ cartCount }) {
         </nav>
 
         <div className="flex items-center gap-3 sm:gap-5 md:gap-6">
-          <Link to="/cart" className="relative" aria-label="View cart">
-            <button className="material-symbols-outlined text-[#4B3621] active:scale-95 transition-transform p-1" type="button">
-              shopping_bag
-            </button>
-            {displayedCartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary-container text-on-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
-                {displayedCartCount}
-              </span>
-            )}
-          </Link>
           {isAuthenticated ? (
             <Link to="/account" aria-label="My account">
               <button

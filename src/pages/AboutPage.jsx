@@ -47,9 +47,9 @@ export default function AboutPage() {
         {/* Hero Section */}
         <header className="pt-20 md:pt-32 pb-16 md:pb-28 px-4 sm:px-6 md:px-12 text-center bg-[#FAF9F6]">
           <div className="max-w-[800px] mx-auto">
-            <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-primary mb-5 md:mb-6">Our Story</h1>
+            <h1 className="font-serif text-[38px] sm:text-[44px] md:text-[64px] leading-tight text-primary mb-5 md:mb-6">About</h1>
             <p className="text-base md:text-lg leading-7 md:leading-8 text-secondary max-w-2xl mx-auto">
-              Welcome to Satvegik: stone-ground nut and seed butters, crafted clean and made mindfully.
+              Redefining nut butters with bold savoury flavours, stone-ground craft, and a home-grown spirit.
             </p>
           </div>
         </header>
@@ -64,12 +64,48 @@ export default function AboutPage() {
               <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-tertiary-fixed rounded-full opacity-30 blur-3xl" />
             </div>
             <div className="space-y-6 md:space-y-8">
-              <div className="inline-block px-4 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-[0.18em]">Stone-Ground Nut & Seed Butters</div>
-              <h2 className="font-serif text-3xl md:text-4xl text-primary">Crafted Clean. Made Mindfully.</h2>
-              <div className="space-y-5 md:space-y-6 text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
-                <p>At Satvegik, we believe healthy eating should feel indulgent, nourishing, and deeply satisfying. Our handcrafted nut and seed butters are traditionally stone-ground in small batches, preserving the natural richness, texture, aroma, and nutrition of every ingredient.</p>
-                <p>Unlike heavily processed spreads, stone grinding creates a smoother, more wholesome butter while retaining the authentic character of nuts and seeds, delivering flavour the way nature intended.</p>
-                <p>From the fiery warmth of Masala Peanut to the decadent richness of Hazelnut Nutella and the nutrient-dense Omega Seed Butter, every jar is thoughtfully crafted for conscious living.</p>
+              <div className="inline-block px-4 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold uppercase tracking-[0.18em]">About Satvegik</div>
+              <div className="space-y-4">
+                <h2 className="font-serif text-3xl md:text-4xl text-primary">India's New-Age Savoury Nut Butter Brand</h2>
+                <p className="text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
+                  At Satvegik, we are redefining the world of nut butters with a bold, savoury twist.
+                </p>
+              </div>
+              <div className="space-y-5 text-base md:text-lg leading-7 md:leading-8 text-on-surface-variant">
+                <p>
+                  While most nut butters lean sweet, we proudly stand among the first home-grown brands to introduce a thoughtfully crafted range of stone-ground savoury nut and seed butters - created for Indian palates, mindful lifestyles, and adventurous food lovers.
+                </p>
+                <p>
+                  From spicy and herby to rich and indulgent, there is truly something for everybody.
+                </p>
+                <p>
+                  Satvegik was born from the idea that nut butters can be more than just sweet spreads. Our unique flavour combinations bring together global inspiration, Indian spices, and functional nutrition to create an entirely new snacking experience.
+                </p>
+                <p>
+                  Whether it is the fiery warmth of Masala Peanut, the richness of Herby Cashew, or the bold kick of Peri Peri Almond - every jar is crafted to surprise, nourish, and delight.
+                </p>
+              </div>
+              <div className="rounded-[22px] md:rounded-[28px] bg-surface-container-low border border-outline-variant p-5 md:p-6">
+                <h3 className="font-serif text-2xl text-primary mb-4">One of Its Kind</h3>
+                <p className="text-on-surface-variant leading-7 mb-5">
+                  We are proud to be among the early brands in the industry bringing a dedicated range of gourmet savoury nut butters to the market.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    'Unique and thoughtfully curated',
+                    'Crafted for both taste and nutrition',
+                    'Designed for everyday versatility',
+                    'Made to suit diverse flavour preferences',
+                  ].map((point) => (
+                    <div key={point} className="flex items-start gap-3 rounded-full bg-white/70 px-4 py-3 text-sm font-medium text-secondary">
+                      <span className="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-on-surface-variant leading-7">
+                  From savoury lovers to chocolate enthusiasts, from fitness-conscious eaters to mindful snackers - Satvegik has a jar for every palate.
+                </p>
               </div>
             </div>
           </div>

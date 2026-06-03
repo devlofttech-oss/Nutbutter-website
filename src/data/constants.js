@@ -126,7 +126,6 @@ export const FOOTER_LINKS = {
   Shop: [
     { label: 'All Products', href: '/shop' },
     { label: 'FAQ', href: '/faq' },
-    { label: 'My Cart', href: '/cart' },
   ],
   Company: [
     { label: 'Our Story', href: '/about' },
