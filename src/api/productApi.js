@@ -13,6 +13,8 @@ const PRODUCT_COLUMNS = `
   badge,
   badge_style,
   description,
+  ingredients,
+  nutrition,
   image_url,
   is_featured,
   is_active,

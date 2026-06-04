@@ -90,7 +90,7 @@ export default function ProductPage() {
     return <ProductPageState message="Product not found." />
   }
 
-  const nutrition = product.nutrition ?? {}
+  const nutritionRows = getNutritionRows(product.nutrition)
   const ingredients = product.ingredients?.length ? product.ingredients.join(', ') : 'Slow-Roasted Heirloom Nuts, Himalayan Sea Salt.'
 
   const whatsappOrderUrl = buildWhatsAppOrderUrl(product, quantity, size)
@@ -187,12 +187,7 @@ export default function ProductPage() {
           <div className="bg-surface-container rounded-[22px] md:rounded-[28px] p-5 md:p-8 shadow-[0_20px_60px_rgba(111,88,60,0.08)] self-start">
             <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-on-background mb-8">Nutrition Information</h3>
             <div className="flex flex-col gap-4">
-              {[
-                ['Protein', nutrition.protein ?? '6g'],
-                ['Healthy Fats', nutrition.healthy_fats ?? '14g'],
-                ['Fiber', nutrition.fiber ?? '4g'],
-                ['Calories', nutrition.calories ?? '190'],
-              ].map(([label, value]) => {
+              {nutritionRows.map(([label, value]) => {
                 return (
                   <div key={label} className="flex justify-between items-center border-b border-outline-variant pb-2">
                     <span className="text-on-surface-variant">{label}</span>
@@ -201,7 +196,7 @@ export default function ProductPage() {
                 )
               })}
             </div>
-            <p className="mt-6 text-xs text-on-surface-variant italic">Values per 32g serving.</p>
+            <p className="mt-6 text-xs text-on-surface-variant italic">Values {product.nutrition?.serving_size ?? 'per 100g'}.</p>
           </div>
         </div>
 
@@ -282,6 +277,40 @@ function buildWhatsAppOrderUrl(product, quantity, size) {
   ].join('\n')
 
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+}
+
+function getNutritionRows(nutrition = {}) {
+  const rows = [
+    ['Energy', nutrition.energy_kcal, 'kcal'],
+    ['Carbohydrates', nutrition.total_carbohydrates_g, 'g'],
+    ['Protein', nutrition.protein_g, 'g'],
+    ['Total Sugar', nutrition.total_sugar_g, 'g'],
+    ['Total Fat', nutrition.total_fat_g, 'g'],
+    ['Saturated Fat', nutrition.saturated_fat_g, 'g'],
+    ['PUFA', nutrition.pufa_g, 'g'],
+    ['MUFA', nutrition.mufa_g, 'g'],
+    ['Trans Fat', nutrition.trans_fat_g, 'g'],
+    ['Cholesterol', nutrition.cholesterol_g, 'g'],
+    ['Moisture', nutrition.moisture_g, 'g'],
+    ['Total Ash', nutrition.total_ash_g, 'g'],
+  ]
+    .filter(([, value]) => value !== undefined && value !== null && value !== '')
+    .map(([label, value, unit]) => [label, formatNutritionValue(value, unit)])
+
+  return rows.length ? rows : [
+    ['Protein', '6 g'],
+    ['Healthy Fats', '14 g'],
+    ['Fiber', '4 g'],
+    ['Calories', '190 kcal'],
+  ]
+}
+
+function formatNutritionValue(value, unit) {
+  if (typeof value === 'string') {
+    return value.toLowerCase().includes(unit) ? value : `${value} ${unit}`
+  }
+
+  return `${value} ${unit}`
 }
 
 function WhatsAppIcon({ className }) {
