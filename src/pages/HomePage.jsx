@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header.tsx'
 import Footer from '../components/Footer.tsx'
 import HeroCarousel from '../components/HeroCarousel.jsx'
-import popupVideo from '../../assets/popup.mp4'
+import popupImage from '../../assets/popup.jpeg'
 import breakfastImage from '../../img/breakfast.jpg'
 import dessertImage from '../../img/dessert.jpg'
 import gymImage from '../../img/gym.jpg'
@@ -117,21 +117,13 @@ export default function HomePage() {
         <section className="bg-surface-dim py-16 md:py-[120px] relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 text-center space-y-8 md:space-y-12">
             <h2 className="font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">See how we make it fresh</h2>
-            <div className="aspect-video bg-surface-container relative rounded-[22px] md:rounded-[28px] overflow-hidden group cursor-pointer shadow-2xl">
-              <video
-                aria-label="Satvegik churning process video"
-                autoPlay
-                className="h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
-                loop
-                muted
-                playsInline
-                src={popupVideo}
+            <div className="aspect-video bg-surface-container relative rounded-[22px] md:rounded-[28px] overflow-hidden group shadow-2xl">
+              <img
+                alt="Satvegik fresh churning process"
+                className="h-full w-full object-cover opacity-95 transition-transform duration-1000 group-hover:scale-105"
+                src={popupImage}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/45 via-primary/5 to-white/10" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-4 rounded-full border border-white/40 bg-white/20 px-4 py-3 text-left text-white shadow-lg backdrop-blur-md md:bottom-6 md:left-6 md:right-6 md:px-6">
-                <span className="text-xs font-bold uppercase tracking-[0.18em]">Fresh churning</span>
-                <span className="material-symbols-outlined text-3xl">play_circle</span>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-white/5" />
             </div>
           </div>
         </section>
