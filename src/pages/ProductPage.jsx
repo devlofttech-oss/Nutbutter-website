@@ -28,6 +28,7 @@ export default function ProductPage() {
   const [product, setProduct] = useState(null)
   const [relatedProducts, setRelatedProducts] = useState([])
   const [reviews, setReviews] = useState([])
+  const [selectedImage, setSelectedImage] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -36,6 +37,7 @@ export default function ProductPage() {
 
     setIsLoading(true)
     setError('')
+    setSelectedImage('')
 
     const productRequest = slug
       ? fetchProductBySlugOrId(slug)
@@ -49,10 +51,12 @@ export default function ProductPage() {
           setProduct(null)
           setRelatedProducts([])
           setReviews([])
+          setSelectedImage('')
           return
         }
 
         setProduct(productData)
+        setSelectedImage(productData.galleryImages?.[0] ?? productData.image ?? '')
         const [relatedResult, reviewData] = await Promise.all([
           fetchRelatedProducts(productData, 3),
           fetchProductReviews(productData.id),
@@ -68,6 +72,7 @@ export default function ProductPage() {
         setProduct(null)
         setRelatedProducts([])
         setReviews([])
+        setSelectedImage('')
       })
       .finally(() => {
         if (isMounted) setIsLoading(false)
@@ -92,6 +97,8 @@ export default function ProductPage() {
 
   const nutritionRows = getNutritionRows(product.nutrition)
   const ingredients = product.ingredients?.length ? product.ingredients.join(', ') : 'Slow-Roasted Heirloom Nuts, Himalayan Sea Salt.'
+  const galleryImages = product.galleryImages?.length ? product.galleryImages : [product.image].filter(Boolean)
+  const activeImage = galleryImages.includes(selectedImage) ? selectedImage : galleryImages[0]
 
   const whatsappOrderUrl = buildWhatsAppOrderUrl(product, quantity, size)
 
@@ -110,11 +117,12 @@ export default function ProductPage() {
 
         {/* Product Gallery & Details */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start mb-16 md:mb-[120px]">
-          <div className="relative group">
-            <div className="aspect-[4/5] bg-surface-container-low rounded-[22px] md:rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)]">
-              <img alt={`${product.name} Product Image`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={product.image} />
-            </div>
-          </div>
+          <ProductGallery
+            activeImage={activeImage}
+            images={galleryImages}
+            productName={product.name}
+            onSelectImage={setSelectedImage}
+          />
           <div className="flex flex-col gap-6 md:gap-8">
             <div className="border-b border-outline-variant pb-6 md:pb-8">
               <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em] mb-4 block">100% Natural Nut Butter</span>
@@ -260,6 +268,42 @@ export default function ProductPage() {
         <EcommerceFaqSection title="Product Questions" />
       </main>
       <Footer />
+    </div>
+  )
+}
+
+function ProductGallery({ activeImage, images, productName, onSelectImage }) {
+  return (
+    <div className="relative">
+      <div className="group aspect-[4/5] bg-surface-container-low rounded-[22px] md:rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(111,88,60,0.08)]">
+        {activeImage ? (
+          <img alt={`${productName} Product Image`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src={activeImage} />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-on-surface-variant">Image unavailable</div>
+        )}
+      </div>
+      {images.length > 1 && (
+        <div className="mt-4 grid grid-cols-4 sm:grid-cols-5 gap-3">
+          {images.map((image, index) => {
+            const isActive = image === activeImage
+
+            return (
+              <button
+                key={image}
+                aria-label={`View ${productName} image ${index + 1}`}
+                aria-pressed={isActive}
+                className={`aspect-square overflow-hidden rounded-xl border-2 bg-surface-container-low transition-all ${
+                  isActive ? 'border-primary shadow-[0_10px_28px_rgba(111,88,60,0.16)]' : 'border-transparent hover:border-outline-variant'
+                }`}
+                type="button"
+                onClick={() => onSelectImage(image)}
+              >
+                <img alt="" className="h-full w-full object-cover" src={image} />
+              </button>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }

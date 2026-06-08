@@ -14,6 +14,7 @@ const emptyProduct = {
   stock_quantity: 0,
   description: '',
   image_url: '',
+  gallery_urls: [],
   badge: '',
   is_featured: false,
   is_active: true,
@@ -60,15 +61,21 @@ export default function AdminProductsPage() {
   }
 
   const handleImageUpload = async (event) => {
-    const file = event.target.files?.[0]
-    if (!file) return
+    const files = Array.from(event.target.files ?? [])
+    if (!files.length) return
 
     try {
-      const url = await uploadProductImage(file)
-      updateField('image_url', url)
-      showToast('Image uploaded')
+      const urls = await Promise.all(files.map(uploadProductImage))
+      setForm((current) => ({
+        ...current,
+        image_url: current.image_url || urls[0] || '',
+        gallery_urls: mergeGalleryUrls(current.gallery_urls, urls),
+      }))
+      showToast(files.length > 1 ? 'Images uploaded' : 'Image uploaded')
     } catch (error) {
       showToast(error.message, 'error')
+    } finally {
+      event.target.value = ''
     }
   }
 
@@ -88,8 +95,15 @@ export default function AdminProductsPage() {
           <AdminInput label="Stock" type="number" value={form.stock_quantity} onChange={(value) => updateField('stock_quantity', value)} />
           <AdminInput label="Badge" value={form.badge ?? ''} onChange={(value) => updateField('badge', value)} />
           <textarea className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3" placeholder="Description" rows="4" value={form.description} onChange={(event) => updateField('description', event.target.value)} />
-          <input className="w-full text-sm" type="file" accept="image/*" onChange={handleImageUpload} />
+          <input className="w-full text-sm" type="file" accept="image/*" multiple onChange={handleImageUpload} />
           <AdminInput label="Image URL" value={form.image_url} onChange={(value) => updateField('image_url', value)} />
+          <textarea
+            className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3"
+            placeholder="Gallery URLs, one per line"
+            rows="4"
+            value={formatGalleryUrls(form.gallery_urls)}
+            onChange={(event) => updateField('gallery_urls', parseGalleryUrls(event.target.value))}
+          />
           <label className="flex items-center gap-3 text-sm font-semibold text-primary"><input type="checkbox" checked={form.is_featured} onChange={(event) => updateField('is_featured', event.target.checked)} /> Featured</label>
           <label className="flex items-center gap-3 text-sm font-semibold text-primary"><input type="checkbox" checked={form.is_active} onChange={(event) => updateField('is_active', event.target.checked)} /> Active</label>
           <button className="w-full bg-primary text-on-primary py-3 rounded-lg font-semibold disabled:opacity-60" disabled={isSaving} type="submit">{isSaving ? 'Saving...' : 'Save Product'}</button>
@@ -118,6 +132,27 @@ export default function AdminProductsPage() {
       </section>
     </AdminLayout>
   )
+}
+
+function parseGalleryUrls(value = '') {
+  return value
+    .split(/\r?\n|,/)
+    .map((url) => url.trim())
+    .filter(Boolean)
+    .filter((url, index, urls) => urls.indexOf(url) === index)
+}
+
+function formatGalleryUrls(galleryUrls = []) {
+  if (!galleryUrls) return ''
+
+  return Array.isArray(galleryUrls) ? galleryUrls.join('\n') : galleryUrls
+}
+
+function mergeGalleryUrls(currentUrls = [], nextUrls = []) {
+  return [...formatGalleryUrls(currentUrls).split(/\r?\n|,/), ...nextUrls]
+    .map((url) => url.trim())
+    .filter(Boolean)
+    .filter((url, index, urls) => urls.indexOf(url) === index)
 }
 
 function AdminInput({ label, value, onChange, type = 'text' }) {

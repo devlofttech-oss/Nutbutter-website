@@ -1,7 +1,7 @@
 import { requireSupabaseClient } from '../lib/supabaseClient.js'
 import { SUPABASE_TABLES } from '../lib/supabase/tables.js'
 
-const PRODUCT_COLUMNS = 'id, name, slug, sku, price, stock_quantity, is_featured, is_active, image_url, category_id, description, badge, rating, reviews_count, created_at, categories:category_id(id, name, slug)'
+const PRODUCT_COLUMNS = 'id, name, slug, sku, price, stock_quantity, is_featured, is_active, image_url, gallery_urls, category_id, description, badge, rating, reviews_count, created_at, categories:category_id(id, name, slug)'
 const ORDER_COLUMNS = 'id, order_number, customer_email, customer_phone, status, payment_status, total_amount, shipping_amount, shiprocket_courier_name, estimated_delivery_date, created_at, order_items(id, product_name, quantity, line_total), shipments(id, status, courier_name, awb_code, tracking_url, estimated_delivery_date, failure_reason, retry_count), order_timeline_events(id, status, label, description, occurred_at, metadata)'
 
 export async function isCurrentUserAdmin(userId) {
@@ -71,6 +71,7 @@ export async function saveAdminProduct(product) {
     stock_quantity: Number(product.stock_quantity ?? 0),
     description: product.description,
     image_url: product.image_url,
+    gallery_urls: normalizeGalleryUrls(product.gallery_urls),
     badge: product.badge || null,
     is_featured: Boolean(product.is_featured),
     is_active: Boolean(product.is_active),
@@ -83,6 +84,20 @@ export async function saveAdminProduct(product) {
   if (error) throw error
 
   return data
+}
+
+function normalizeGalleryUrls(galleryUrls = []) {
+  if (!galleryUrls) return []
+
+  const urls = Array.isArray(galleryUrls)
+    ? galleryUrls
+    : String(galleryUrls)
+      .split(/\r?\n|,/)
+
+  return urls
+    .map((url) => url.trim())
+    .filter(Boolean)
+    .filter((url, index, allUrls) => allUrls.indexOf(url) === index)
 }
 
 export async function deleteAdminProduct(productId) {

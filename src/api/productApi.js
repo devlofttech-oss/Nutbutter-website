@@ -16,6 +16,7 @@ const PRODUCT_COLUMNS = `
   ingredients,
   nutrition,
   image_url,
+  gallery_urls,
   is_featured,
   is_active,
   stock_quantity,
@@ -61,6 +62,7 @@ export function normalizeProduct(product) {
 
   const price = Number(product.sale_price ?? product.price ?? 0)
   const categoryRecord = Array.isArray(product.categories) ? product.categories[0] : product.categories
+  const galleryImages = normalizeGalleryImages(product.image_url, product.gallery_urls)
 
   return {
     ...product,
@@ -68,7 +70,8 @@ export function normalizeProduct(product) {
     categoryRecord,
     categoryName: categoryRecord?.name ?? 'Nut Butter',
     categorySlug: categoryRecord?.slug ?? '',
-    image: product.image_url,
+    image: galleryImages[0] ?? product.image_url,
+    galleryImages,
     price,
     priceLabel: formatCurrency(price),
     originalPrice: product.sale_price ? Number(product.price) : null,
@@ -76,6 +79,15 @@ export function normalizeProduct(product) {
     reviews: product.reviews_count ?? 0,
     badgeStyle: product.badge_style,
   }
+}
+
+function normalizeGalleryImages(primaryImage, galleryUrls = []) {
+  const secondaryImages = Array.isArray(galleryUrls) ? galleryUrls : []
+
+  return [primaryImage, ...secondaryImages]
+    .map((url) => (typeof url === 'string' ? url.trim() : ''))
+    .filter(Boolean)
+    .filter((url, index, urls) => urls.indexOf(url) === index)
 }
 
 function normalizeProducts(products = []) {
