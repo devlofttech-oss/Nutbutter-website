@@ -24,9 +24,24 @@ const useCases = [
 ]
 
 const testimonials = [
-  ['Sarah J.', 'Verified Buyer', '"The smoothest almond butter I have ever tasted. It is like silk in a jar."'],
-  ['Michael R.', 'Nutritionist', '"Finally, a brand that does not hide behind palm oil and added refined sugar."'],
-  ['Emma L.', 'Home Chef', '"The Cacao Hazelnut is dangerous. It is way better than the usual chocolate spreads."'],
+  {
+    name: 'Vidya',
+    location: 'Bengaluru',
+    title: 'A refreshing change from sugary spreads!',
+    body: "I've tried the Peri Peri Almond Butter and Minty Pumpkin Butter, and both are incredibly unique. The savoury flavors are bold, delicious, and perfect for sandwiches, wraps, and salads. It's great to finally find a healthy spread that doesn't rely on added sugar.",
+  },
+  {
+    name: 'Smitha',
+    location: 'Bangalore',
+    title: 'You can actually taste the quality.',
+    body: 'The stone-ground texture and rich nutty flavor make Satvegik stand out from other nut butters. The ingredients are clean, the taste is authentic, and every jar feels thoughtfully crafted. My son loves it on toast and as a dip.',
+  },
+  {
+    name: 'Sandya',
+    location: 'Bangalore',
+    title: 'Healthy, versatile, and absolutely delicious.',
+    body: "Satvegik has become a staple in my kitchen. Whether I'm making smoothies, spreading it on sourdough, or adding it to salad dressings, the flavors elevate every meal. The savoury variants are especially innovative and addictive.",
+  },
 ]
 
 export default function HomePage() {
@@ -152,17 +167,20 @@ export default function HomePage() {
         <section className="bg-surface-container-low py-16 md:py-[120px]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
             <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-              {testimonials.map(([name, role, quote]) => (
-                <div key={name} className="space-y-6">
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.name} className="space-y-6">
                   <div className="flex gap-1 text-primary">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <span key={index} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                     ))}
                   </div>
-                  <p className="font-serif text-xl md:text-2xl text-on-surface italic">{quote}</p>
+                  <div className="space-y-3">
+                    <h3 className="font-serif text-xl md:text-2xl text-on-surface">"{testimonial.title}"</h3>
+                    <p className="text-sm md:text-base leading-7 text-on-surface-variant">{testimonial.body}</p>
+                  </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-on-surface">{name}</p>
-                    <p className="text-xs text-on-surface-variant">{role}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-on-surface">{testimonial.name}</p>
+                    <p className="text-xs text-on-surface-variant">{testimonial.location}</p>
                   </div>
                 </div>
               ))}

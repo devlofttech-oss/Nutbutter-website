@@ -178,10 +178,13 @@ on conflict (slug) do update set
   search_keywords = excluded.search_keywords,
   is_active = true;
 
+delete from public.reviews
+where customer_name in ('Elena R.', 'Marcus Thorne', 'Sarah Jenkins', 'Vidya', 'Smitha', 'Sandya');
+
 insert into public.reviews (product_id, customer_name, title, body, rating, is_verified_purchase, is_published)
 values
-  ((select id from public.products where slug = 'almond-butter'), 'Elena R.', 'Stone-ground difference', 'The stone-ground difference is real. Rich, smooth, and beautifully roasted.', 5, true, true),
-  ((select id from public.products where slug = 'almond-butter'), 'Marcus Thorne', 'Pure ingredients', 'Pure ingredients and an incredible roast profile. You can taste the almond quality.', 5, true, true),
-  ((select id from public.products where slug = 'cashew-butter'), 'Sarah Jenkins', 'So creamy', 'Finally a cashew butter that stays creamy without palm oil.', 5, true, true)
+  ((select id from public.products where slug = 'almond-butter'), 'Vidya', 'A refreshing change from sugary spreads!', 'I''ve tried the Peri Peri Almond Butter and Minty Pumpkin Butter, and both are incredibly unique. The savoury flavors are bold, delicious, and perfect for sandwiches, wraps, and salads. It''s great to finally find a healthy spread that doesn''t rely on added sugar.', 5, true, true),
+  ((select id from public.products where slug = 'almond-butter'), 'Smitha', 'You can actually taste the quality.', 'The stone-ground texture and rich nutty flavor make Satvegik stand out from other nut butters. The ingredients are clean, the taste is authentic, and every jar feels thoughtfully crafted. My son loves it on toast and as a dip.', 5, true, true),
+  ((select id from public.products where slug = 'cashew-butter'), 'Sandya', 'Healthy, versatile, and absolutely delicious.', 'Satvegik has become a staple in my kitchen. Whether I''m making smoothies, spreading it on sourdough, or adding it to salad dressings, the flavors elevate every meal. The savoury variants are especially innovative and addictive.', 5, true, true)
 on conflict do nothing;
 
