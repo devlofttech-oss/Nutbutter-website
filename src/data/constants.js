@@ -123,6 +123,27 @@ export const TESTIMONIALS = [
     role: 'Bangalore',
     avatarBg: 'bg-tertiary-fixed',
   },
+  {
+    id: 4,
+    text: 'We made a cucumber salad with the pumpkin and mint butter. It was very refreshing! We were surprised to see how the butter paired perfectly in salads.',
+    name: 'Apoorva',
+    role: 'Customer',
+    avatarBg: 'bg-primary-fixed',
+  },
+  {
+    id: 5,
+    text: 'I integrated the peri peri almond nut butter with boiled sprouts. It made my meal very tasty.',
+    name: 'Pavan',
+    role: 'Customer',
+    avatarBg: 'bg-secondary-fixed',
+  },
+  {
+    id: 6,
+    text: 'We whipped up a quick dessert with seeds paired with the hazelnut cacao butter and it was splendid.',
+    name: 'Shankar',
+    role: 'Customer',
+    avatarBg: 'bg-tertiary-fixed',
+  },
 ]
 
 export const FOOTER_LINKS = {

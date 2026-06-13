@@ -42,7 +42,21 @@ const testimonials = [
     title: 'Healthy, versatile, and absolutely delicious.',
     body: "Satvegik has become a staple in my kitchen. Whether I'm making smoothies, spreading it on sourdough, or adding it to salad dressings, the flavors elevate every meal. The savoury variants are especially innovative and addictive.",
   },
+  {
+    name: 'Apoorva',
+    body: 'We made a cucumber salad with the pumpkin and mint butter. It was very refreshing! We were surprised to see how the butter paired perfectly in salads.',
+  },
+  {
+    name: 'Pavan',
+    body: 'I integrated the peri peri almond nut butter with boiled sprouts. It made my meal very tasty.',
+  },
+  {
+    name: 'Shankar',
+    body: 'We whipped up a quick dessert with seeds paired with the hazelnut cacao butter and it was splendid.',
+  },
 ]
+
+const carouselTestimonials = [...testimonials, ...testimonials]
 
 export default function HomePage() {
   const [isHeroCopyExpanded, setIsHeroCopyExpanded] = useState(false)
@@ -163,26 +177,35 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* Reviews Carousel */}
         <section className="bg-surface-container-low py-16 md:py-[120px]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-            <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.name} className="space-y-6">
-                  <div className="flex gap-1 text-primary">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <span key={index} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                    ))}
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+            <div className="mb-10 md:mb-14">
+              <span className="text-tertiary text-xs font-bold uppercase tracking-[0.22em]">Customer reviews</span>
+              <h2 className="mt-3 font-serif text-[34px] md:text-[56px] leading-tight text-on-surface">Loved in everyday rituals</h2>
+            </div>
+          </div>
+          <div className="reviews-carousel" aria-label="Customer reviews carousel">
+            <div className="reviews-loop-track">
+              {carouselTestimonials.map((testimonial, index) => (
+                <article
+                  key={`${testimonial.name}-${index}`}
+                  className="review-orbit-card"
+                  aria-hidden={index >= testimonials.length}
+                >
+                  <div className="review-orbit-inner">
+                    <div className="text-primary text-base md:text-lg leading-none" aria-label="5 out of 5 stars">★★★★★</div>
+                    {testimonial.title ? (
+                      <h3 className="font-serif text-[17px] md:text-xl leading-tight text-on-surface">"{testimonial.title}"</h3>
+                    ) : null}
+                    <p className="text-[11px] sm:text-xs md:text-sm leading-5 text-on-surface-variant">
+                      <strong className="font-bold text-on-surface">{testimonial.name}</strong> - {testimonial.body}
+                    </p>
+                    {testimonial.location ? (
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary-container">{testimonial.location}</p>
+                    ) : null}
                   </div>
-                  <div className="space-y-3">
-                    <h3 className="font-serif text-xl md:text-2xl text-on-surface">"{testimonial.title}"</h3>
-                    <p className="text-sm md:text-base leading-7 text-on-surface-variant">{testimonial.body}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-on-surface">{testimonial.name}</p>
-                    <p className="text-xs text-on-surface-variant">{testimonial.location}</p>
-                  </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
