@@ -32,26 +32,29 @@ const testimonials = [
   },
   {
     name: 'Smitha',
-    location: 'Bangalore',
+    location: 'Bengaluru',
     title: 'You can actually taste the quality.',
     body: 'The stone-ground texture and rich nutty flavor make Satvegik stand out from other nut butters. The ingredients are clean, the taste is authentic, and every jar feels thoughtfully crafted. My son loves it on toast and as a dip.',
   },
   {
     name: 'Sandya',
-    location: 'Bangalore',
+    location: 'Bengaluru',
     title: 'Healthy, versatile, and absolutely delicious.',
     body: "Satvegik has become a staple in my kitchen. Whether I'm making smoothies, spreading it on sourdough, or adding it to salad dressings, the flavors elevate every meal. The savoury variants are especially innovative and addictive.",
   },
   {
     name: 'Apoorva',
+    location: 'Bengaluru',
     body: 'We made a cucumber salad with the pumpkin and mint butter. It was very refreshing! We were surprised to see how the butter paired perfectly in salads.',
   },
   {
     name: 'Pavan',
+    location: 'Bengaluru',
     body: 'I integrated the peri peri almond nut butter with boiled sprouts. It made my meal very tasty.',
   },
   {
     name: 'Shankar',
+    location: 'Bengaluru',
     body: 'We whipped up a quick dessert with seeds paired with the hazelnut cacao butter and it was splendid.',
   },
 ]
@@ -190,19 +193,11 @@ export default function HomePage() {
                     {testimonial.title ? (
                       <h3 className="font-serif text-xl md:text-2xl text-on-surface">"{testimonial.title}"</h3>
                     ) : null}
-                    <p className="text-sm md:text-base leading-7 text-on-surface-variant">
-                      {testimonial.title ? testimonial.body : (
-                        <>
-                          <strong className="font-bold text-on-surface">{testimonial.name}</strong> - {testimonial.body}
-                        </>
-                      )}
-                    </p>
+                    <p className="text-sm md:text-base leading-7 text-on-surface-variant">{testimonial.body}</p>
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.18em] text-on-surface">{testimonial.name}</p>
-                    {testimonial.location ? (
-                      <p className="text-xs text-on-surface-variant">{testimonial.location}</p>
-                    ) : null}
+                    <p className="text-xs text-on-surface-variant">{testimonial.location}</p>
                   </div>
                 </div>
               ))}
