@@ -72,9 +72,19 @@ export default function Footer() {
           <p className="text-[#4B3621] text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em] opacity-80">
             &copy; {new Date().getFullYear()} Satvegik. All rights reserved.
           </p>
-          <p className="text-stone-500 text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em]">
-            Secure online payments. Freshly packed orders.
-          </p>
+          <div className="space-y-2 md:text-right">
+            <p className="text-stone-500 text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em]">
+              Secure online payments. Freshly packed orders.
+            </p>
+            <a
+              className="inline-block text-[#4B3621] text-[11px] md:text-xs uppercase tracking-[0.14em] md:tracking-[0.2em] opacity-80 transition-colors hover:text-[#8C7355]"
+              href="https://www.devlofttech.com"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Developed &amp; Designed by Devloft Techmologies
+            </a>
+          </div>
         </div>
       </div>
     </footer>
